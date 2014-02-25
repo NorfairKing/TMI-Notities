@@ -1,6 +1,28 @@
 \documentclass[tmi_notities.tex]{subfiles}
 \begin{document}
 \chapter{Inleiding}
+\section{De affiene ruimte}
+Een affiene ruimte is een tupel $(A,V)$ van een verzameling $A$ en een vectorruimte $V$. Op $A$ is een optelling met $V$ gedefinie\"erd.
+\[
+l: V \times A \rightarrow A: \vec{v}+a
+\]
+Een affiene ruimte heeft de volgende eigenschappen.
+\begin{enumerate}
+\item Linker Identiteit
+\[
+\forall a \in A: \vec{0} + a = a
+\]
+\item Associativiteit
+\[
+\forall v, w \in V, \forall a \in A,\; v + (w + a) = (v + w) + a
+\]
+\item Uniciteit
+\[
+\forall a \in A,\; V \to A\colon v \mapsto v + a \text{ is een bijectie}\]
+\end{enumerate}
+Vanwege de uniciteitseigenschap is de aftrekking van twee elementen $a_1$ en $a_2$ gedefini\"eerd. In de rest van deze notities zal de verzameling $A$ een verzameling punten zijn en $V$ een verzameling verschilvectoren.
+
+
 \section{Combinaties van punten}
 Punten kunnen niet bij elkaar opgeteld worden, en niet gescaleerd worden omdat er geen oorsprong is en geen assenstelsel in een affiene ruimte.
 Het verschil van twee punten is wel gedefinieerd, namelijk als een vector. Bovendien is de som van een punt en een vector ook gedefinieerd.
@@ -38,7 +60,7 @@ Een convexe combinatie van punten behoort tot de convex omhullende van deze punt
 \begin{proof}
 Bewijs door inductie op het aantal punten ($n$).\\
 Voor $n=1$ is de convex omhullende enkel dat punt en elke convexe combinatie van een punt is dat punt.\\
-Veronderstel dat de bewering geldt voor een bepaalde $n=k$. We bewijzen nu daaruit volgt dat de bewering geldt voor $n=k+1$.\\
+Veronderstel dat de bewering geldt voor een bepaalde $n=k$. We bewijzen nu dat daaruit volgt dat de bewering geldt voor $n=k+1$.\\
 Zij $x$ de convexe combinatie van de punten $p_1,...,p_k,p_{k+1}$.
 \[
 x = \sum_{i=1}^{k+1}\alpha_ip_i
@@ -62,5 +84,89 @@ x = Sy + (1-S)p_{k+1}
 \]
 Dit is opnieuw een convexe combinatie, van twee punten binnen de convex omhullende. $x$ behoort dus tot de convex omhullende van $p_1,...,p_k,p_{k+1}$. 
 \end{proof}
-\end{document}
 
+\subsection{Interpollerende veeltermen}
+\subsubsection{Lagrange veelterm}
+Bij $n+1$ punten $p_i$ horen de volgende $n$ Lagrange veeltermen $L_i$.
+\[
+L_{i}^{n}(x) = \prod_{j=0, j \neq i}^{n} \frac{x-x_{j}}{x_{i}-x_{j}}
+\]
+Lagrange veeltermen hebben een aantal handige eigenschappen.
+\begin{enumerate}
+\item Voor elke $i$ geldt volgende formule geldt:
+\[
+L_{i}^{n}(x_i) = 1
+\]
+\begin{proof}
+\[
+L_{i}^{n}(x_i)
+= \prod_{j=0, j \neq i}^{n} \frac{x_i-x_{j}}{x_{i}-x_{j}}
+= \prod_{j=0, j \neq i}^{n} 1
+= 1
+\]
+\end{proof}
+\item Voor elk ander punt $k$ geldt bovendien dit: ($i\neq k$)
+\[
+L_i^{n}(x_k) = 0
+\]
+\begin{proof}
+\[
+L_{i}^{n}(x_k)
+= \prod_{j=0, j \neq i}^{n} \frac{x_k-x_{j}}{x_{i}-x_{j}}
+= \frac{x_k-x_{1}}{x_{i}-x_{1}}\cdot \ldots \cdot 0 \cdot \ldots \cdot \frac{x_k-x_{n}}{x_{i}-x_{n}}
+= 0
+\]
+\end{proof}
+\item De som van alle $n+1$ lagrange veeltermen is steeds $1$.
+\[
+\forall t: \sum_{i=0}^{n}L_i^{n}(t) = 1
+\]
+\begin{proof}
+Bewijs door inductie op $n$.\\
+Voor $n=0$:
+\[
+\sum_{i=0}^{n}L_i^{n}(t) = L_0^{n}(t) +L_1^{n}(t) 
+\]
+\[
+= \frac{t-x_{0}}{x_{1}-x_{0}} + \frac{t-x_{1}}{x_{0}-x_{1}}
+= \frac{t-x_{0}}{x_{1}-x_{0}} - \frac{t-x_{1}}{x_{1}-x_{0}}
+\]
+\[
+= \frac{t-x_{0} - t+x_{1}}{x_{1}-x_{0}} = \frac{x_{1}-x_{0}}{x_{1}-x_{0}} = 1
+\]\\
+Veronderstel dat de bewering geldt voor een bepaalde $n=k$. We bewijzen nu dat daaruit volgt dat de bewering geldt voor $n=k+1$.\\
+\[
+\sum_{i=0}^{k+1}L_i^{k+1}(t)
+= \sum_{i=0}^{k+1} \prod_{j=0, j \neq i}^{k+1} \frac{t-x_{j}}{x_{i}-x_{j}}
+\]
+\[
+=
+\begin{array}{l l}
+& \prod_{j=0, j \neq 0}^{k+1} \frac{t-x_{j}}{x_{0}-x_{j}}\\
++ & \prod_{j=0, j \neq 1}^{k+1} \frac{t-x_{j}}{x_{1}-x_{j}}\\
++ & \vdots\\
++ & \prod_{j=0, j \neq k}^{k+1} \frac{t-x_{j}}{x_{k}-x_{j}}\\
++ & \prod_{j=0, j \neq k+1}^{k+1} \frac{t-x_{j}}{x_{k+1}-x_{j}}
+\end{array}
+\]
+\[
+=
+\begin{array}{l l}
+& \cdot \frac{t-x_{1}}{x_{0}-x_{1}} \frac{t-x_{2}}{x_{0}-x_{2}}\cdots \frac{t-x_{k}}{x_{0}-x_{k}} \frac{t-x_{k+1}}{x_{0}-x_{k+1}}\\
++ &  \frac{t-x_{0}}{x_{1}-x_{0}} \cdot\frac{t-x_{2}}{x_{1}-x_{2}}\cdots \frac{t-x_{k}}{x_{1}-x_{k}} \frac{t-x_{k+1}}{x_{1}-x_{k+1}}\\
++ &  \frac{t-x_{0}}{x_{2}-x_{0}} \frac{t-x_{1}}{x_{2}-x_{1}}\cdot \cdots \frac{t-x_{k}}{x_{2}-x_{k}} \frac{t-x_{k+1}}{x_{2}-x_{k+1}}\\
++ &  \frac{t-x_{0}}{x_{3}-x_{0}} \frac{t-x_{1}}{x_{3}-x_{1}} \cdots \frac{t-x_{k}}{x_{3}-x_{k}} \frac{t-x_{k+1}}{x_{3}-x_{k+1}}\\
++ & \vdots\\
++ & \frac{t-x_{0}}{x_{k}-x_{0}} \frac{t-x_{1}}{x_{k}-x_{1}}\cdots \frac{t-x_{k-1}}{x_{k}-x_{k-1}} \cdot \frac{t-x_{k+1}}{x_{k}-x_{k+1}}\\
++ & \frac{t-x_{0}}{x_{k+1}-x_{0}} \frac{t-x_{1}}{x_{k+1}-x_{1}}\cdots \frac{t-x_{k-1}}{x_{k+1}-x_{k-1}} \cdot \frac{t-x_{k}}{x_{k+1}-x_{k}}\cdot
+\end{array}
+\]
+TODO
+%TODO wtf is this?
+
+\end{proof}
+\end{enumerate}
+
+%TODO stelling 2 wanneer die gezien is bij NW
+
+\end{document}
