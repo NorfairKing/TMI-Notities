@@ -1,7 +1,128 @@
 \documentclass[tmi_notities.tex]{subfiles}
 \begin{document}
 \chapter{B\'ezier-curven}
+\section{Definities}
+$i$ Bernstein-veelterm van graad $n$:
+\[
+B_{i}^{n} = \binom{n}{i}(1-t)^{n-i}t^{i}
+\]
+$B_{i}^{n} = 0$ als $i < 0$ of $i > n$.\\\\
+B\'ezier curve met $n+1$ controlepunten:
+\[
+\vec{x}(g) = \sum_{i=0}^n\vec{b_{i}}B_{i}^{n}(t)
+\]
 
+\section{Eigenschappen}
+\begin{enumerate}
+\item
+\[
+\sum_{i=0}^nB_{i}^{n}(t) = 1
+\]
+\begin{proof}
+\[
+\sum_{i=0}^nB_{i}^{n}(t)
+= \sum_{i=0}^{n}\binom{n}{i}(1-t)^{n-i}t^i
+= ((1-t)+t)^n
+= 1
+\]
+\end{proof}
+
+\item
+Voor $0 \le t \le 1$:
+\[
+B_{i}^{n}(t) \ge 0
+\]
+\begin{proof}
+\[
+\binom{n}{i}(1-t)^{n-i}t^{i}
+\]
+$\binom{n}{i}$ is positief, $(1-t)$ is positief want $0 \le t \le 1$ en $t$ is ook positief.
+\end{proof}
+
+\item Zij $n>0$.
+\begin{itemize}
+\item $B_{i}^{n}(0) = B_{i}^{n}(1) = 0$ als $i\neq$, $i\neq n$.
+\item $B_{0}^{n}(0) = 1$
+\item $B_{0}^{n}(1) = 0$
+\item $B_{n}^{n}(0) = 0$
+\item $B_{n}^{n}(1) = 1$
+\end{itemize}
+\begin{proof}
+Vul eenvoudigweg alles in.
+\begin{itemize}
+\item $B_{i}^{n}(0) = B_{i}^{n}\binom{n}{i}1^{n-i}0^{i} = 0$ en $B_{i}^{n}(1) = B_{i}^{n}\binom{n}{i}0^{n-i}1^{i} = 0$
+\item $B_{0}^{n}(0) = 1^{n} = 1$
+\item $B_{0}^{n}(1) = 0^{n} = 0$
+
+\item $B_{n}^{n}(0) = 0^{n} = 0$
+\item $B_{n}^{n}(1) = 1^{n} = 1$
+\end{itemize}
+\end{proof}
+
+\item Symmetrie
+\[
+B_{i}^{n}(t) = B_{n-i}^{n}(1-t)
+\]
+\begin{proof}
+\[
+\binom{n}{n-i}(1-1+t)^{n-n+i}(1-t)^{n-i}
+= \binom{n}{i}t^{i}(1-t)^{n-i}
+= \binom{n}{i}(1-t)^{n-i}t^{i} 
+\]
+\end{proof}
+
+\item Afgeleide
+\[
+\frac{d}{dt}B_{i}^{n}(t) = n(B_{i-1}^{n-1}(t) - B_{i}^{n-1}(t))
+\]
+\begin{proof}
+\[
+\frac{d}{dt}B_{i}^{n}(t) = \frac{d}{dt}\binom{n}{i}(1-t)^{n-i}t^{i}
+\]
+\[
+\binom{n}{i}\frac{d}{dt}\left((1-t)^{n-i}t^{i}\right)
+= \binom{n}{i}
+\left(
+t^{i}\frac{d}{dt}(1-t)^{n-i}
++ (1-t)^{n-i}\frac{d}{dt}t^{i}
+\right)
+\]
+\[
+\binom{n}{i}\frac{d}{dt}\left((1-t)^{n-i}t^{i}\right)
+= \binom{n}{i}
+\left(
+(1-t)^{n-i}it^{i-1}
+-t^{i}(n-i)(1-t)^{n-i-1}
+\right)
+\]
+\[
+= 
+\left(
+\frac{n!}{i!(n-i)!}
+(1-t)^{n-i}it^{i-1}
+-
+\frac{n!}{i!(n-i)!}
+t^{i}(n-i)(1-t)^{n-i-1}
+\right)
+\]
+\[
+= 
+n
+\left(
+\frac{(n-1)!}{(i-1)!(n-i)!}
+(1-t)^{n-i}t^{i-1}
+-
+\frac{(n-1)!}{i!(n-i-1)!}
+t^{i}(1-t)^{n-i-1}
+\right)
+\]
+\[
+ = n(B_{i-1}^{n-1}(t) - B_{i}^{n-1}(t))
+\]
+\end{proof}
+
+
+\end{enumerate}
 
 \end{document}
 

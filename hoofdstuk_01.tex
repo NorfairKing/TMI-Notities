@@ -85,7 +85,7 @@ x = Sy + (1-S)p_{k+1}
 Dit is opnieuw een convexe combinatie, van twee punten binnen de convex omhullende. $x$ behoort dus tot de convex omhullende van $p_1,...,p_k,p_{k+1}$. 
 \end{proof}
 
-\subsection{Interpollerende veeltermen}
+\subsection{Interpolerende veeltermen}
 \subsubsection{Lagrange veelterm}
 Bij $n+1$ punten $p_i$ horen de volgende $n$ Lagrange veeltermen $L_i$.
 \[
@@ -98,6 +98,7 @@ Lagrange veeltermen hebben een aantal handige eigenschappen.
 L_{i}^{n}(x_i) = 1
 \]
 \begin{proof}
+
 \[
 L_{i}^{n}(x_i)
 = \prod_{j=0, j \neq i}^{n} \frac{x_i-x_{j}}{x_{i}-x_{j}}
@@ -119,9 +120,55 @@ L_{i}^{n}(x_k)
 \end{proof}
 \item De som van alle $n+1$ lagrange veeltermen is steeds $1$.
 \[
-\forall t: \sum_{i=0}^{n}L_i^{n}(t) = 1
+\forall t: \sum_{i=0}^{n}L_i^{n}(t) = \sum_{i=0}^{n}\prod_{j=0, j \neq i}^{n} \frac{t-x_{j}}{x_{i}-x_{j}} = 1
 \]
-\begin{proof}
+
+\iffalse
+Om de som te kunnen uitwerken, hebben we een zelfde noemer nodig. Definieer $S=\{(i,j)\in R_n\times R_n |j<i\}$, and $S_k=\{(i,j)\in S | i=k\text{ or }j=k\}$.
+\[
+\prod_{j=0,j\neq i}^{n}\frac{1}{x_{i}-x_{j}}
+= \prod_{j=0,j < i}^{n}\frac{1}{x_{i}-x_{j}}
+  \prod_{j=0,j > i}^{n}\frac{1}{-(x_{j}-x_{i})}
+\]
+\[
+= \prod_{j=0}^{i-1}\frac{1}{x_{i}-x_{j}}
+  \prod_{j=i+1}^{n}\frac{1}{-(x_{j}-x_{i})}
+= (-1)^{n-i}\prod_{(a,b)\in S_{i}}\frac{1}{x_{a}-x_{b}}
+\]
+We kunnen dus elke teller vermenigvuldigen met de volgende factor om de sum op gelijke noemer te brengen.
+\[
+\frac{\prod_{(a,b)\in S\diagdown S_{i}}x_a-x_b}{\prod_{(a,b)\in S\diagdown S_{i}}x_a-x_b}
+\]
+Nu is kunnen we bij elke term de volgende factor afzonderen.
+\[
+\prod_{i > j}\frac{1}{x_i-x_j}
+\]
+De originele som wordt nu de volgende.
+\[
+\prod_{i > j}\frac{1}{x_i-x_j}
+= \sum_{i=0}^n
+\left(
+(-1)^{n-i}\prod_{j=0,j\neq i}^n(t-x_i)\prod_{(a,b)\in S\diagdown S_{i}}x_a-x_b
+\right)
+\]
+Om verder te gaan beschouwen we de determinant van de Vandermonde matrix $D(x_0,x_1,...,x_n)$.
+\[
+D(x_0,x_1,...,x_n)
+=
+\begin{vmatrix}
+1 & x_0 & x_0^2 & \dots & x_0^{n-1}\\
+1 & x_1 & x_1^2 & \dots & x_1^{n-1}\\
+1 & x_2 & x_2^2 & \dots & x_2^{n-1}\\
+\vdots & \vdots & \vdots & \ddots &\vdots \\
+1 & x_n & x_n^2 & \dots & x_n^{n-1}
+\end{vmatrix}
+= \prod_{0 \leq i< j \leq n} (x_i-x_j)
+\]
+Merk op dat we elke variabele in deze determinant met dezelfde hoeveelheid kunnen verschuiven zonder dat de determinant verandert.
+\[
+D(x_0+x,x_1+x,...,x_n+x) = D(x_0,x_1,...,x_n)
+\]
+
 Bewijs door inductie op $n$.\\
 Voor $n=0$:
 \[
@@ -139,6 +186,7 @@ Veronderstel dat de bewering geldt voor een bepaalde $n=k$. We bewijzen nu dat d
 \sum_{i=0}^{k+1}L_i^{k+1}(t)
 = \sum_{i=0}^{k+1} \prod_{j=0, j \neq i}^{k+1} \frac{t-x_{j}}{x_{i}-x_{j}}
 \]
+
 \[
 =
 \begin{array}{l l}
@@ -161,10 +209,11 @@ Veronderstel dat de bewering geldt voor een bepaalde $n=k$. We bewijzen nu dat d
 + & \frac{t-x_{0}}{x_{k+1}-x_{0}} \frac{t-x_{1}}{x_{k+1}-x_{1}}\cdots \frac{t-x_{k-1}}{x_{k+1}-x_{k-1}} \cdot \frac{t-x_{k}}{x_{k+1}-x_{k}}\cdot
 \end{array}
 \]
+\fi
+
+
 TODO
 %TODO wtf is this?
-
-\end{proof}
 \end{enumerate}
 
 %TODO stelling 2 wanneer die gezien is bij NW
