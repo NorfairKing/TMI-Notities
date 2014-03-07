@@ -121,7 +121,7 @@ t^{i}(1-t)^{n-i-1}
 \]
 \end{proof}
 
-\item
+\item Extrema
 \[
 \frac{d}{dt}B_{i}^{n}(t) = 0 \Leftrightarrow t = \frac{i}{n} \text{ voor } n > 0 \text{ en } 0 < i < n
 \]
@@ -334,6 +334,123 @@ B^{0}_{0}(t)
 Deze bewering geeft een algoritme om een punt op de B\'ezier-curve recursief te berekenen. De index in superscript tussen vierkante haakjes heeft betrekking tot de iteratie waarin dit punt zich bevindt.
 
 \section{Afgeleide van een B\'ezier-curve}
+\subsection{Afgeleide van enkelvoudige B\'ezier-curve}
+\[
+\frac{d}{dt}\vec{x}(t) = n\sum_{i=0}^{n-1}\Delta\vec{b_i}B_{i}^{n-1}(t)
+\]
+
+\begin{proof}
+\[
+\frac{d}{dt}\vec{x}(t)
+= \frac{d}{dt}\sum_{i=0}^{n}\vec{b_i}B_{i}^{n}(t)
+= \sum_{i=0}^{n}\vec{b_i}\frac{d}{dt}B_{i}^{n}(t)
+\]
+\[
+= \sum_{i=0}^{n}\vec{b_i} n(B_{i-1}^{n-1}(t) - B_{i}^{n-1}(t))
+= n\sum_{i=0}^{n}\vec{b_i} (B_{i-1}^{n-1}(t) - B_{i}^{n-1}(t))
+\]
+\[
+= n\sum_{i=0}^{n}\vec{b_i} B_{i-1}^{n-1}(t)
+- n\sum_{i=0}^{n}\vec{b_i} B_{i}^{n-1}(t)
+\]
+\[
+= n\sum_{i=1}^{n}\vec{b_i} B_{i-1}^{n-1}(t)
+- n\sum_{i=0}^{n-1}\vec{b_i} B_{i}^{n-1}(t)
+\]
+\[
+= n\sum_{i=0}^{n-1}\vec{b_{i+1}} B_{i}^{n-1}(t)
+- n\sum_{i=0}^{n-1}\vec{b_i} B_{i}^{n-1}(t)
+\]
+\[
+= n\sum_{i=0}^{n-1}B_{i}^{n-1}(t) (\vec{b_{i+1}}- \vec{b_i})
+\]
+\[
+= n\sum_{i=0}^{n-1}\Delta\vec{b_i}B_{i}^{n-1}(t)
+\]
+\end{proof}
+
+\subsection{Afgeleide van meervoudige B\'ezier-curve}
+Zij $t$ in het segment $[u_i,u_{i+1}]$:
+\[
+\frac{d}{du}\vec{x}(t(u))
+= \frac{n}{\Delta u}\sum_{i=0}^{n-1}\Delta\vec{b_i}B_{i}^{n-1}(t)
+\]
+\begin{proof}
+\[
+t = \frac{u-u_i}{u_{i+1}-u} \text{ zodat } \frac{dt}{du} = \frac{1}{u_{i+1}-u}
+\]
+\[
+\frac{d}{du}\vec{x}(t(u))
+= \frac{d}{dt} \vec{x}(t) \frac{dt}{du}
+= \frac{n}{u_{i+1}-u}\sum_{i=0}^{n-1}\Delta\vec{b_i}B_{i}^{n-1}(t)
+\]
+\end{proof}
+
+\subsection{Interpolatie in begin- en eindpunten}
+Te bewijzen:\\
+Een B\'ezier curve raakt in het eerste en laatste controlepunt (waar die interpoleert) aan de controleveelhoek.
+\[
+\left.\frac{d}{dt}\vec{x}(t)\right|_{t=0} = a(\vec{b_1}-\vec{b_{0}})
+\text{ en }
+\left.\frac{d}{dt}\vec{x}(t)\right|_{t=1} = b(\vec{b_n}-\vec{b_{n-1}})
+\]
+\[
+\]
+of voor meervoudige B\'ezier curven:
+\[
+\left.\frac{d}{du}\vec{x}(t(u))\right|_{t=0} = a'(\vec{b_1}-\vec{b_{0}})
+\text{ en }
+\left.\frac{d}{du}\vec{x}(t(u))\right|_{t=1} = b'(\vec{b_n}-\vec{b_{n-1}})
+\]
+($a$, $a'$, $b$, $b'$ zijn hier bepaalde scalars.) 
+
+\begin{proof}
+We bewijzen elk deel appart.
+\begin{itemize}
+\item
+\begin{itemize}
+\item
+\[
+\frac{d}{dt}\vec{x}(t)|_{t=0}
+= \left.n\sum_{i=0}^{n-1}\Delta\vec{b_i}B_{i}^{n-1}(t)\right|_{t=0}
+\]
+\[
+= \sum_{i=0}^{n-1}\Delta\vec{b_i}B_{i}^{n-1}(0)
+= n\Delta\vec{b_0}
+\]
+\item
+\[
+\left.\frac{d}{dt}\vec{x}(t)\right|_{t=1}
+= \left.n\sum_{i=0}^{n-1}\Delta\vec{b_i}B_{i}^{n-1}(t)\right|_{t=1}
+\]
+\[
+= \sum_{i=0}^{n-1}\Delta\vec{b_i}B_{i}^{n-1}(1)
+= n\Delta\vec{b_{n-1}}
+\]
+\end{itemize}
+\item
+\begin{itemize}
+\item
+\[
+\left.\frac{d}{du}\vec{x}(t(u))\right|_{t=0} = a'(\vec{b_1}-\vec{b_{0}})
+\]
+\[
+\frac{n}{\Delta u}\sum_{i=0}^{n-1}\Delta\vec{b_i}B_{i}^{n-1}(0)
+= \frac{n}{\Delta u}\vec{b_{0}}
+\]
+\item
+\[
+\left.\frac{d}{du}\vec{x}(t(u))\right|_{t=1} = b'(\vec{b_n}-\vec{b_{n-1}})
+\]
+\[
+\frac{n}{\Delta u}\sum_{i=0}^{n-1}\Delta\vec{b_i}B_{i}^{n-1}(1)
+= \frac{n}{\Delta u}\vec{b_{n-1}}
+\]
+\end{itemize}
+\end{itemize}
+\end{proof}
+
+\subsection{Hogere afgeleiden}
 
 
 \end{document}
