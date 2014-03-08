@@ -451,7 +451,67 @@ We bewijzen elk deel appart.
 \end{proof}
 
 \subsection{Hogere afgeleiden}
+Tweede afgeleide:
+\[
+\frac{d^2}{dt}\vec{x}(t) = n(n-1) \sum_{i=0}^{n-2}\Delta^2\vec{b_i}B_{i}^{n-2}(t)
+\]
+$j$-de afgeleide:
+\[
+\frac{d^j}{dt}\vec{x}(t) = \frac{n!}{(n-j)!}\sum_{i=0}^{n-j}\Delta^{j}\vec{b_i}B_{i}^{n-j}(t)
+\]
+%TODO bewijs
+
+\section{Graadverhoging}
+\[
+\sum_{i=0}^{n}\vec{b_i}B_{i}^{n}(t) = \sum_{i=0}^{n+1}\vec{b_i^*}B_{i}^{n+1}(t)
+\]
+De nieuwe controlepunten $\vec{b_i^*}$ kunnen berekend worden uit de originele controlepunten.
+\[
+\vec{b_i} = \frac{i}{n+1}\vec{b}_{i-1} + \left(1-\frac{1}{n+1}\right)\vec{b}_i
+\]
+\begin{proof}
+Let op: niet vanzelfsprekend.
+\[
+\vec{x}(t)
+= \sum_{i=0}^{n}\vec{b_i}\binom{n}{i}(1-t)^{n-i}t^{i}
+= \left(\sum_{i=0}^{n}\vec{b_i}\binom{n}{i}(1-t)^{n-i}t^{i}\right) (t+(1-t))
+\]
+\[
+= \left(\sum_{i=0}^{n}\vec{b_i}\binom{n}{i}(1-t)^{n-i}t^{i+1}\right)
++ \left(\sum_{i=0}^{n}\vec{b_i}\binom{n}{i}(1-t)^{n-i+1}t^{i}\right)
+\]
+Verander de index van de eerste term.
+\[
+= \left(\sum_{i=1}^{n+1}\vec{b_{i-1}}\binom{n}{i-1}(1-t)^{n-i+1}t^{i}\right)
++ \left(\sum_{i=0}^{n}\vec{b_i}\binom{n}{i}(1-t)^{n-i+1}t^{i}\right)
+\]
+Neem beide sommaties samen.
+\[
+= \sum_{i=0}^{n+1}(1-t)^{n-i+1}t^{i} \left(\binom{n}{i-1}\vec{b_{i-1}} + \binom{n}{i}\vec{b_i}\right)
+\]
+(Beschouw hier $\binom{n}{-1} = 0 = \binom{n}{n+1}$. )
+We halen hier de nieuwe controlepunten uit.
+\[
+\binom{n+1}{i}\vec{b_{i}^{*}}
+= \binom{n}{i-1}\vec{b_{i-1}}
++ \binom{n}{i}\vec{b_i}
+\]
+\[
+\frac{(n+1)!}{i!(n-i+1)!}\vec{b_{i}^{*}} 
+= \frac{n!}{(i-1)!(n-i+1)!} \vec{b_{i-1}}
++ \frac{n!}{i!(n-i)!}\vec{b_i}
+\]
+\[
+\vec{b_{i}^{*}} 
+= \frac{i}{n+1} \vec{b_{i-1}}
++ \left(1-\frac{1}{n+1}\right)\vec{b_i}
+\]
+
+\section{Opsplitsing}
+
+\end{proof}
+
+
 
 
 \end{document}
-

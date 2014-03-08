@@ -151,7 +151,6 @@ Verander de index van de eerste sommatie (hoog ze met 1 op)
 n(n-1)
 \sum_{i=0}^{n-2}\Delta\vec{b_{i}}B^{n-2}_{i}(t)
 \]
-TODO bewijs dat de curve raakt aan de veelhoek in $t=0$ en $t=1$
 
 \subsection*{(c)}
 X
@@ -205,24 +204,35 @@ Zij $n=3$:
 \]
 
 \subsection*{(b)}
+\begin{proof}
+Stel dat de bewering geldt voor een bepaalde $n=k$, dan bewijzen we nu dat de bewering dan ook geldt voor $n=k+1$.
+\[
+\sum_{i=0}^{n}\vec{b_{i}}B^{n}_{i}(t)
+\]
+TODO wtf?
+\end{proof}
 
 \section{Vraag 4}
-X
+HOE??
 
 \section{Vraag 5}
 Maak de controlepunte lineair.
+\begin{proof}
+Stel dat er een derdegraads B\'ezier curve zou bestaan die een lijnstuk is, maar waarvan de controlepunten niet colineaire zijn. De curve moet raken aan de controle-veelhoek in $t=0$ en $t=1$. Deze controleveelhoek is geen lijnstuk, dus de curve moet ergens een bocht maken, maar dan stelt de curve geen lijnstuk meer voor. Contradictie.
+\end{proof}
 
 \section{Vraag 6}
 \subsection*{(a)}
-Een bernstein-veelterm evalueren kost $3n+4$ Vermenigvuldigingen en $1$ optelling. Dit gebeurt nog $n$ keer. X
+$O(n^3)$
 
 \subsection*{(b)}
-$\frac{n(n-1)}{2} \rightarrow O(n^2)$.
+$O(n^2)$.
 
 \subsection*{(c)}
-Bijna lineair.
+$O(n^2)$ voorbereiding, maar $O(n)$ voor elk punt.
 
 \section{Vraag 7}
+TODO
 
 \includepdf[pages=-]{opgave.pdf}
 
