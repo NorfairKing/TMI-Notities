@@ -5,6 +5,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{tikz}
 \usepackage{pdfpages}
 
 \title{Oefenzitting 2}
@@ -14,33 +15,103 @@
 \begin{document}
 \maketitle
 
+\noindent\textbf{Spline:}\\
+Stuksgewijze veelterm met continu\"iteitsvereisten. Voor een spline van graad $n$ eisen we $C^{n-1}$ continu\"iteit.\\
+\noindent\textbf{B-spline:}\\
+$n$: graad van veeltermfuncties. $p$: aantal deelintervallen.\\
+$p+n$ controlepunten $\vec{b}_i$ met $n+p$ B-splines $N_{i}^{n}(u)$:
+$p+2n$ knooppunten.
+\[
+\vec{s}(u) = \sum_{i=-n}^{p-1}\vec{d}_iN_{i}^{n}(u)
+\]
+
+\begin{itemize}
+\item Lokaal verschillend van nul:
+\[
+N_{i}^{n}(u) = 0 \text{ als } u \not\in [u_i, u_{i+n+1})
+\]
+
+\item Positiviteit:
+\[
+N_{i}^{n}(u) \ge 0
+\]
+
+\item Eenheidspartitie:
+\[
+\sum_{i=-n}^{p-1}N_{i}^{n}(u) = 1 \text{ voor } u\in [u_0,u_p)
+\]
+Wat we doen is dus enigzins zinvol
+
+\item $C_{n-1}$
+
+\end{itemize}
+
+In 2D: $d_{ij}$ controlepunten vormen het controle net.
+\[
+s(u,v) = \sum_{i=-n}^{p-1}\sum_{i=-m}^{q-1}\vec{d}_{ij}N_{i}^{n}(u)N_{j}^{m}(v)
+\]
+Tensorproduct: product van meerdere \'e\'endimensionale functies met een verschillende veranderlijke. De uitkomst is dan een tweedimensionale functie.
+\[
+N_{i,j}^{n,m}(u,v) = N_{i}^{n}(u)N_{j}^{m}(v)
+\]
+\[
+N^{n_1,n_2,...,n_j}_{i_1,i_2,...,i_j}(u_1,u_2,...,u_v) = \prod_{a=1}^jN_{i_a}^{n_a}
+\]
+.\\\\
+Makkelijke evaluatie van meerdere dimensies.
+\[
+\vec{d_i}^* = \sum_{j=m}^{q-1}\vec{d}_{ij}N_{j}^{m}(u)
+\]
+\[
+s = \sum_{i=-n}^{p-1} \vec{d_{i}}^*N_{i}^{n}(u)
+\]
+Is gelijk aan
+\[
+\vec{e_j}^* = \sum_{i=-n}^{p-1}\vec{d}_{ij}N_{i}^{n}(u)
+\]
+\[
+s = \sum_{j=-m}^{q-1} \vec{e_{j}}^*N_{j}^{m}(u)
+\]
+Maar heeft een verschillende complexiteit.
+\[
+(n+p)O(q) + O(p) \rightarrow O(p)O(q) + O(p)
+\]
+tov.
+\[
+(m+q)O(p) + O(q) \rightarrow O(structureq)O(p) + O(q)
+\]structure
+
+
+
+Pos maximum: inwendige knooppunten vb: $u_1$ en $u_2$. Neem gemiddelde ervan. $u_1u_2/2$
 \section{Vraag 1}
 \subsection*{(a)}
 \begin{itemize}
 \item
+VRAGEN AAN HELENA
 
 \end{itemize}
 \subsection*{(b)}
 \subsection*{(c)}
 \subsection*{(d)}
 \[
-N_{0}^{1} + N_{1}^{1} + N_{2}^{1} + N_{3}^{1}
-=
+N_{0}^{n}(u) =
+\left\{
+\begin{array}{r l}
+0 &\text{ als } u < u_0\\
+  \frac{u-u_0}{u_2-u_0}\frac{u-u_0}{u_1-u_0} &\text{ als } u \in [u_0,u_1)\\
+  \frac{u-u_0}{u_2-u_0}\frac{u_2-u}{u_2-u_1} + \frac{u_3-u}{u_3-u_2}\frac{u-u_1}{u_2-u_3} &\text{ als } u \in [u_1,u_2)\\
+  \frac{u_3-u}{u_3-u_1}\frac{u_3-u}{u_3-u_2} &\text{ als } u \in [u_2,u_3)\\
+0 &\text{ als } u > u_3\\
+\end{array}
+\right.
 \]
-\[ 
- \frac{u-u_0}{u_1-u_0}N_{0}^{0}(u)
-+\frac{u_2-u}{u_2-u_1}N_{1}^{0}(u)
-+\frac{u-u_1}{u_2-u_1}N_{1}^{0}(u)
-+\frac{u_3-u}{u_3-u_2}N_{2}^{0}(u)
-\]
-\[
-+\frac{u-u_2}{u_3-u_2}N_{2}^{0}(u)
-+\frac{u_4-u}{u_4-u_3}N_{3}^{0}(u)
-+\frac{u-u_3}{u_4-u_3}N_{3}^{0}(u)
-+\frac{u_5-u}{u_5-u_4}N_{4}^{0}(u)
-\]
-WUT
 \subsection*{(e)}
+\begin{proof}
+wut
+\end{proof}
+
+
 
 \includepdf[pages=-]{opgave.pdf}
 
