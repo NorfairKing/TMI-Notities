@@ -85,16 +85,69 @@ tov.
 Pos maximum: inwendige knooppunten vb: $u_1$ en $u_2$. Neem gemiddelde ervan. $u_1u_2/2$
 \section{Vraag 1}
 \subsection*{(a)}
-\begin{itemize}
-\item
-VRAGEN AAN HELENA
+%DON'T LOOK AT THIS CODE
+Basisfuncties:\\
+\newcommand{\grid}[2]{
+  % horizontal axis
+\draw[->] (0,0) -- (5,0) node[anchor=north] {$u$};
+% vertical axis
+\draw[->] (0,0) -- (0,1.5) node[anchor=east] {$N_{#1}^{#2}(u)$};
 
-\end{itemize}
-\subsection*{(b)}
-\subsection*{(c)}
-\subsection*{(d)}
+\draw	(1,0) node[anchor=north] {$u_0$}
+		(2,0) node[anchor=north] {$u_1$}
+		(3,0) node[anchor=north] {$u_2$}
+		(4,0) node[anchor=north] {$u_3$};
+\draw	(0,0)   node[anchor=east] {$0$}
+		(0,0.5) node[anchor=east] {$0.5$}
+		(0,1)   node[anchor=east] {$1$};
+}
+\newcommand{\nzero}[1]{
+\draw[thick] (0,0) -- (1+#1,0);
+\draw[thick] (1+#1,1) -- (2+#1,1);
+\draw[thick] (2+#1,0) -- (5,0);
+
+\draw[fill=black] (1+#1,1) circle (0.5mm);
+\draw[fill=black] (2+#1,1) circle (0.5mm);
+\draw[fill=white] (1+#1,0) circle (0.5mm);
+\draw[fill=white] (2+#1,0) circle (0.5mm);
+}
+\newcommand{\none}[1]{
+\draw[thick] (0,0) -- (1+#1,0);
+\draw[thick] (1+#1,0) -- (2+#1,1) -- (3+#1,0);
+\draw[thick] (3+#1,0) -- (5,0);
+}
+\newcommand{\ntwo}{
+%FYI, the curve had to be moved to the right by one. This was done by shifting the domains AND changing u to u-1.
+\draw[scale=1,domain=1:2,smooth,variable=\u, thick] plot( {\u},{0.5*(\u-1)*(\u-1)});
+\draw[scale=1,domain=2:3,smooth,variable=\u, thick] plot( {\u},{0.5*(-3+6*(\u-1)- 2*(\u-1)*(\u-1)))});
+\draw[scale=1,domain=3:4,smooth,variable=\u, thick] plot( {\u},{0.5*(4-\u)*(4-\u)});
+}
+\begin{tikzpicture}
+\grid{0}{0}
+\nzero{0}
+\end{tikzpicture}
+\begin{tikzpicture}
+\grid{1}{0}
+\nzero{1}
+\end{tikzpicture}
+\begin{tikzpicture}
+\grid{2}{0}
+\nzero{2}
+\end{tikzpicture}
+\begin{tikzpicture}
+\grid{0}{1}
+\none{0}
+\end{tikzpicture}
+\begin{tikzpicture}
+\grid{1}{1}
+\none{1}
+\end{tikzpicture}
+\begin{tikzpicture}
+\grid{0}{2}
+\ntwo
+\end{tikzpicture}
 \[
-N_{0}^{n}(u) =
+N_{0}^{2}(u) =
 \left\{
 \begin{array}{r l}
 0 &\text{ als } u < u_0\\
@@ -105,56 +158,40 @@ N_{0}^{n}(u) =
 \end{array}
 \right.
 \]
+\subsection*{(b)}
+\begin{itemize}
+\item Lokaliteit is makkelijk te zien. Elke curve is nul buiten $[u_i,u_{i+n+1}]$
+\item Positiviteit is makkelijk te zien. Elke curve light boven de $u$-as.
+\end{itemize}
+
+\subsection*{(c)}
+Voor $n=0$ is er geen continu\'iteit. Voor $n=1$ is er $C^{0}$ continu\'iteit. Inderdaad, de curve sluit aan (dus minstens $C^0$) maar is niet afleidbaar (dus hoogstens $C^0$).
+
+\subsection*{(d)}
+Sommatie tot \'e\'en is minder makkelijk te zien. Teken alle curven van een bepaalde graad op dezelfde grafiek en je zal zien dat ze sommeren tot $1$.
+Expliciet voor graad $n=1$ TODO
+\[
+\sum_{i=-1}^{p-1}N_{i}^{1}(u) = 1 \text{ voor } u\in [u_0,u_p)
+\]
+\[
+=\sum_{i=-1}^{p-1}
+\frac{u-u_i}{u_{i+1}-u_i}\frac{u_2-u}{u_2-u_i} 
+\]
+Een B-spline curve van graag $n$ is maar op $n+1$ deelintervallen niet nul. 
+\[
+= \frac{u_1-u}{u_1-u_0}
++ \frac{u-u_{0}}{u_{1}-u_{0}}
+=
+\frac{u_1-u_0}{u_1-u_0}
+= 1
+\]
+
 \subsection*{(e)}
 \begin{proof}
-wut...
+%TODO, this will probably take an hour. prepare on paper!
 \end{proof}
 
 
-wooptiedoo\\
-
-
-\newcommand\grid{
-  % horizontal axis
-\draw[->] (0,0) -- (5,0) node[anchor=north] {$u$};
-% vertical axis
-\draw[->] (0,0) -- (0,4) node[anchor=east] {$N_{i}^{n}(u)$};
-
-% u_i's
-\draw	(1,0) node[anchor=north] {$u_0$}
-		(2,0) node[anchor=north] {$u_1$}
-		(3,0) node[anchor=north] {$u_2$}
-		(4,0) node[anchor=north] {$u_3$};
-
-% 
-\draw	(0,0)   node[anchor=east] {$0$}
-		(0,1.5) node[anchor=east] {$0.5$}
-		(0,3)   node[anchor=east] {$1$};
-}
-\newcommand{\n}[1]{
-\draw[thick] (1+#1,3) -- (2+#1,3);
-\draw[thick] (0,0) -- (1+#1,0);
-\draw[thick] (2+#1,0) -- (5,0);
-
-\node[shape=circle, scale=0.5, fill=black, color=black] at (1+#1,3) {};
-\node[shape=circle, scale=0.5, fill=black, color=black] at (2+#1,3) {};
-\node[shape=circle, scale=0.5, fill=white, color=black] at (1+#1,0) {};
-\node[shape=circle, scale=0.5, fill=white] at (2+#1,0) {};
-}
-%TODO wtf
-\begin{tikzpicture}
-\grid
-\n{0}
-\end{tikzpicture}
-\begin{tikzpicture}
-\grid
-\n{1}
-\end{tikzpicture}
-\begin{tikzpicture}
-\grid
-\n{2}
-\end{tikzpicture}
-
-\includepdf[pages=-]{opgave.pdf}
+\includepdf[pages=-,landscape=true]{opgave.pdf}
 
 \end{document}
