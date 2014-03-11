@@ -7,7 +7,6 @@
 \usepackage{amsthm}
 \usepackage{tikz}
 \usepackage{pdfpages}
-
 \title{Oefenzitting 2}
 \author{Tom Sydney Kerckhove}
 \date{10 maart 2014}
@@ -108,10 +107,53 @@ N_{0}^{n}(u) =
 \]
 \subsection*{(e)}
 \begin{proof}
-wut
+wut...
 \end{proof}
 
 
+wooptiedoo\\
+
+
+\newcommand\grid{
+  % horizontal axis
+\draw[->] (0,0) -- (5,0) node[anchor=north] {$u$};
+% vertical axis
+\draw[->] (0,0) -- (0,4) node[anchor=east] {$N_{i}^{n}(u)$};
+
+% u_i's
+\draw	(1,0) node[anchor=north] {$u_0$}
+		(2,0) node[anchor=north] {$u_1$}
+		(3,0) node[anchor=north] {$u_2$}
+		(4,0) node[anchor=north] {$u_3$};
+
+% 
+\draw	(0,0)   node[anchor=east] {$0$}
+		(0,1.5) node[anchor=east] {$0.5$}
+		(0,3)   node[anchor=east] {$1$};
+}
+\newcommand{\n}[1]{
+\draw[thick] (1+#1,3) -- (2+#1,3);
+\draw[thick] (0,0) -- (1+#1,0);
+\draw[thick] (2+#1,0) -- (5,0);
+
+\node[shape=circle, scale=0.5, fill=black, color=black] at (1+#1,3) {};
+\node[shape=circle, scale=0.5, fill=black, color=black] at (2+#1,3) {};
+\node[shape=circle, scale=0.5, fill=white, color=black] at (1+#1,0) {};
+\node[shape=circle, scale=0.5, fill=white] at (2+#1,0) {};
+}
+%TODO wtf
+\begin{tikzpicture}
+\grid
+\n{0}
+\end{tikzpicture}
+\begin{tikzpicture}
+\grid
+\n{1}
+\end{tikzpicture}
+\begin{tikzpicture}
+\grid
+\n{2}
+\end{tikzpicture}
 
 \includepdf[pages=-]{opgave.pdf}
 
