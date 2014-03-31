@@ -17,9 +17,9 @@
 \noindent\textbf{Spline:}\\
 Stuksgewijze veelterm met continu\"iteitsvereisten. Voor een spline van graad $n$ eisen we $C^{n-1}$ continu\"iteit.\\
 \noindent\textbf{B-spline:}\\
-$n$: graad van veeltermfuncties. $p$: aantal deelintervallen.\\
+$n$: graad van veeltermfuncties. $p$: aantal deelintervallen. ($p+1$: aantal knooppunten.)\\
 $p+n$ controlepunten $\vec{b}_i$ met $n+p$ B-splines $N_{i}^{n}(u)$:
-$p+2n$ knooppunten.
+$p+2n+1$ knooppunten omdat er aan beide kanten nog $n$ extra knooppunten nodig zijn.
 \[
 \vec{s}(u) = \sum_{i=-n}^{p-1}\vec{d}_iN_{i}^{n}(u)
 \]
@@ -188,7 +188,7 @@ Een B-spline curve van graag $n$ is maar op $n+1$ deelintervallen niet nul.
 
 \subsection*{(e)}
 \begin{proof}
-%TODO, this will probably take an hour. prepare on paper!
+I have no freaking clue
 \end{proof}
 
 

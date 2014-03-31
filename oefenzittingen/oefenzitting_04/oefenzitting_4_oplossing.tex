@@ -1,0 +1,72 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[dutch]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{tikz}
+\usepackage{pdfpages}
+\title{Oefenzitting 2}
+\author{Tom Sydney Kerckhove}
+\date{24 maart 2014}
+
+\begin{document}
+\maketitle
+
+
+\section*{Oefening 1}
+Te bewijzen:
+\[
+\vec{p_1}\times\vec{p_2}
+= \Vert\vec{p_1}\Vert\Vert\vec{p_2}\Vert\sin\alpha
+\]
+Met de $p$'s voldoende aan:
+\[
+\vec{p_1} = \begin{pmatrix}
+p_{11}\\p_{12}\\0
+\end{pmatrix}
+\text{ en }
+\vec{p_2} = \begin{pmatrix}
+p_{21}\\p_{22}\\0
+\end{pmatrix}
+\]
+
+\begin{proof}
+De grootte van het vectorproduct is gelijk aan de oppervlakte van het opgespannen parallellogram. Dit parallellogram heeft zijden $\Vert \vec{p_1}\Vert$ en $\sin\alpha\Vert \vec{p_2}\Vert$.
+\end{proof}
+
+
+\noindent Te bewijzen: Als $\vec{p_1}\times\vec{p_2} <0$  dan ligt $\vec{p_1}$ in tegenwijzerzin ten opzichte van $\vec{p_2}$.
+\begin{proof}
+Omdat een norm altijd positief is, hangt het teken van $\vec{p_1}\times\vec{p_2}$ af van $\alpha$. Als deze hoek negatief is $\sin\alpha$ negatief, en ligt $\vec{p_1}$ dus in tegenwijzerzin ten opzichte van $\vec{p_2}$.
+\end{proof}
+
+\section*{Oefening 2}
+Heb het op moeten zoeken:
+\[
+d = \frac{|(x_0-x_1)\times(x_0-x_2)|}{|x_2-x_1|}
+\]
+
+\section*{Oefening 3}
+Om de punten te sorteren volgens poolhoek ten opzichte van $\vec{p_0}$ gebruiken we een $O(n\log n)$ sorteeralgoritme met de volgende `kleiner dan' functie.
+\[
+lt(\vec{p_1},\vec{p_2}) = \vec{p_1}\times\vec{p_2}
+\]
+
+In het algemene geval: splits alle punten eerst in de punten boven en onder $p_0$, sorteer ze appart, en voeg ze samen.
+
+\section*{Oefening 4}
+Tegenvoorbeeld: neem enkel stijgende poolhoeken zoals een vijfpuntige ster. Alle punten moeten bovendien langs \'e\'en kan van de zijde $p_0p_1$ liggen.
+
+\section*{Oefening 5}
+Neem de som van de helft van alle opeenvolgende vectorproducten.
+\[
+Opp = \sum_{i=0}^{n}\frac{1}{2}\Vert\vec{p}_{i\ mod\ n}\times\vec{p}_{(i+1)\ mod\ n}\Vert
+\]
+Dit zal just zijn, zelfs voor niet-convexe veelhoeken, omdat het vectorproduct daar niet steeds positief is.
+
+
+\includepdf[pages=-]{opgave.pdf}
+
+\end{document}
