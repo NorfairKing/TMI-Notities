@@ -1,0 +1,54 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[dutch]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{tikz}
+\usepackage{pdfpages}
+\usepackage[]{algorithm2e}
+\title{Oefenzitting 5}
+\author{Tom Sydney Kerckhove}
+\date{31 maart 2014}
+
+\begin{document}
+\maketitle
+
+
+\section*{Oefening 1}
+\begin{enumerate}
+\item Kies een willekeurige rechte door het punt. (Kies bijvoorbeeld de verticale rechte.)
+\item Vindt de punten met de maximum $y$ co\"ordinaat in $log(n)$ tijd via binary search.
+\item Vindt de lijnstukken van de veelhoek die snijden met de gekozen rechte in $log(n)$ tijd via binary search (volgens het teken van het vectorproduct tussen een vector op de gekozen rechte en de vector van het punt tot een hoekpunt).
+\item Bepaal of $q$ tussen deze twee lijnstukken ligt, of ernaast. Dit kan in constante tijd via een vectorproduct.
+\end{enumerate}
+
+\section*{Oefening 2}
+We veranderen de 'return true', zodat het snijpunt wordt toegevoegd. De gegevensstructuur hoeft niet te wijzigen.\\
+\begin{algorithm}[H]
+ $T,R \leftarrow \emptyset$\\
+ \For{ each point $p$ in the sorted list of endpoints}{
+ 	\If{p is the left endpoint of a segment $s$}{
+		$Insert(T,s)$\\
+		\If{ $s' = Above(T,s)$ exists and $s$ intersects $s'$ in $p'$}{
+			$Insert(R,p')$\\
+		}
+		\If{ $s' = Below(T,s)$ exists and $s$ intersects $s'$ in $p'$}{
+			$Insert(R,p')$\\
+		}
+ 	}
+ 	\If{p is the right endpoint of a segment $s$}{
+ 		\If{$s' = Above(T,s)$ and $s'' = Above(T,s)$ both exist\\
+ 			and $s'$ intersects with $s''$ in $p'$}{
+			$Insert(R,p')$\\		
+ 		}
+ 	}
+ }
+ \Return{$R$}
+ \caption{Sweepline algorithm for line intersections}
+\end{algorithm}
+
+\includepdf[pages=-]{opgave.pdf}
+
+\end{document}
