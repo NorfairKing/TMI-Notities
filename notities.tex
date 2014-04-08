@@ -18,70 +18,10 @@
 \subfile{inleiding}
 
 \part{Computergestuurd ontwerp van curven en oppervlakten}
-\chapter{Inleiding}
-\section{Combinaties van punten}
-Punten kunnen niet bij elkaar opgeteld worden, en niet gescaleerd worden omdat er geen oorsprong is en geen assenstelsel in een affiene ruimte.
-Het verschil van twee punten is wel gedefinieerd, namelijk als een vector. Bovendien is de som van een punt en een vector ook gedefinieerd.
-\subsection{Affiene combinatie}
-Een affiene combinatie van punten is een lineaire combinatie van punten waarvan de gewichten sommeren tot $1$.\\\\
-Zij $p_1,...p_n$ $n$ punten en $\sum_{i=1}^n\alpha_i=1$.\\\\
-\textit{Te Bewijzen}\\
-\label{affiene_combinatie}
-Er bestaan $v_i$ zodat volgende bewering geldt.
-\[
-x = \sum_{i=1}^n\alpha_ip_i = p_0 + \sum_{i=2}^n\vec{v_i}
-\]
+\subfile{hoofdstuk_01}
+\subfile{hoofdstuk_02}
 
-\begin{proof}
-We zullen dit bewijzen door de $v_i$ te construeren.
-\[
-\sum_{i=1}^n\alpha_ip_i
-= \left(1-\sum_{i=2}^n\alpha_i\right)p_1 + \sum_{i=2}^n\alpha_ip_i
-= p_1 - \sum_{i=2}^n\alpha_ip_1 + \sum_{i=2}^n\alpha_ip_i
-\]
-\[
-=
-p_1 + \sum_{i=2}^n\alpha_i(p_i-p_1)
-\]
-We weten dat $p_i-p_1$ een vector is. Sterker nog, het zijn de $v_i$.
-\end{proof}
- 
-\subsection{Lineaire combinatie}
-In \ref{affiene_combinatie} is nu eenvoudig te zien dat een lineaire combinatie van punten niet bepaald is.
-Opdat de combinatie te herschijven zou vallen als de sum van een punt en een aantal vectoren moeten de gewichten van de lineaire combinatie sommeren tot $1$. 
 
-\subsection{Convexe combinatie}
-\textit{Te Bewijzen}\\
-Een convexe combinatie van punten behoort tot de convex omhullende van deze punten.
-\begin{proof}
-Bewijs door inductie op het aantal punten ($n$).\\
-Voor $n=1$ is de convex omhullende enkel dat punt en elke convexe combinatie van een punt is dat punt.\\
-Veronderstel dat de bewering geldt voor een bepaalde $n=k$. We bewijzen nu daaruit volgt dat de bewering geldt voor $n=k+1$.\\
-Zij $x$ de convexe combinatie van de punten $p_1,...,p_k,p_{k+1}$.
-\[
-x = \sum_{i=1}^{k+1}\alpha_ip_i
-\]
-Als $\alpha_{k+1} = 1$ geldt dan is de bewering triviaal. In wat volgt gaan we ervan uit dat $\alpha_{k+1} \neq 1$ geldt.
-We weten nu dat volgende bewering geldt, omdat het om een convexe combinatie gaat.
-\[
-\sum_{i=1}^{k}\alpha_i = S \rightarrow 0 \le S \le 1
-\]
-Beschouw nu een punt $y$ dat als volgt gedefinieerd is met $\beta_i = \frac{\alpha_i}{S}$.
-\[
-y = \sum_{i=1}^k\beta_{i}p_{i}
-\]
-We sommeren nu de $\beta_i$ om te zien dat $y$ ook een convexe combinatie is.
-\[
-\sum_{i=1}^k\beta_{i} = \sum_{i=1}^k \frac{\alpha_i}{S} = \frac{1}{S}\sum_{i=1}^k \alpha_i = \frac{\sum_{i=1}^{k}\alpha_i}{\sum_{i=1}^{k}\alpha_i} = 1
-\]
-Volgens de inductiehypothese ligt $y$ in de convex omhullende van $p_1,...,p_k$. $y$ ligt dus zeker in de convex omhullende van $p_1,...,p_k,p_{k+1}$. Nu geldt het volgende over $x$ met $1-S = \alpha_{k+1}$.
-\[
-x = Sy + (1-S)p_{k+1}
-\]
-Dit is opnieuw een convexe combinatie, van twee punten binnen de convex omhullende. $x$ behoort dus tot de convex omhullende van $p_1,...,p_k,p_{k+1}$. 
-\end{proof}
-
-\chapter{B\'ezier-curven}
 \chapter{Splinecurven}
 \chapter{Modellering van oppervlakten}
 
