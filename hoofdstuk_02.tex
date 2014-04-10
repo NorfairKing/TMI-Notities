@@ -2,14 +2,23 @@
 \begin{document}
 \chapter{B\'ezier-curven}
 \section{Definities}
+\subsection{Bernstein-veelterm}
 $i$-de Bernstein-veelterm van graad $n$:
 \[
 B_{i}^{n} = \binom{n}{i}(1-t)^{n-i}t^{i}
 \]
-$B_{i}^{n} = 0$ als $i < 0$ of $i > n$.\\\\
+$B_{i}^{n} = 0$ als $i < 0$ of $i > n$.
+
+\subsection{B\'ezier curve}
 B\'ezier curve met $n+1$ controlepunten:
 \[
 \vec{x}(t) = \sum_{i=0}^n\vec{b_{i}}B_{i}^{n}(t)
+\]
+
+\subsection{Samengestelde Be\'ezier-curven}
+Een samengestelde B\'ezier-curve over een parameterinterval $[u_0,u_p]$ is een stuksgewijze veeltermcurve, waarbij ieder segment een B\'ezier-curve is.
+\[
+\vec{x}(u) = \vec{x_i}(t(u))
 \]
 
 \section{Eigenschappen van Bernstein-veeltermen}
@@ -232,10 +241,7 @@ In $t=0$ interpoleert de B\'ezier curve in het eerste controlepunt. In $t=1$ int
 \end{proof}
 
 \item Variatie-verminderingseigenschap\\
-Het aantal snijpunten van een willekeurige rechte (in 2D) of vlak (in 3D) met de B\'ezier-curve is kleiner dan of gelijk aan het aantal snijpunten van die rechte (of vlak) met de B\'ezier-veelhoek.
-\begin{proof}
-TODO
-\end{proof}
+Het aantal snijpunten van een willekeurige rechte (in 2D) of vlak (in 3D) met de B\'ezier-curve is kleiner dan of gelijk aan het aantal snijpunten van die rechte (of vlak) met de B\'ezier-veelhoek. In mensentaal: de curve zal minder wiebelen dan de controleveelhoek.
 
 \end{enumerate}
 
@@ -459,7 +465,6 @@ $j$-de afgeleide:
 \[
 \frac{d^j}{dt}\vec{x}(t) = \frac{n!}{(n-j)!}\sum_{i=0}^{n-j}\Delta^{j}\vec{b_i}B_{i}^{n-j}(t)
 \]
-%TODO bewijs
 
 \section{Graadverhoging}
 \[
@@ -467,7 +472,7 @@ $j$-de afgeleide:
 \]
 De nieuwe controlepunten $\vec{b_i^*}$ kunnen berekend worden uit de originele controlepunten.
 \[
-\vec{b_i} = \frac{i}{n+1}\vec{b}_{i-1} + \left(1-\frac{1}{n+1}\right)\vec{b}_i
+\vec{b^*_i} = \frac{i}{n+1}\vec{b}_{i-1} + \left(1-\frac{1}{n+1}\right)\vec{b}_i
 \]
 \begin{proof}
 Let op: niet vanzelfsprekend.
@@ -506,12 +511,86 @@ We halen hier de nieuwe controlepunten uit.
 = \frac{i}{n+1} \vec{b_{i-1}}
 + \left(1-\frac{1}{n+1}\right)\vec{b_i}
 \]
-
-\section{Opsplitsing}
-
 \end{proof}
 
+\section{Opsplitsing}
+We zoeken een nieuwe curve $v$ met controlepunten $\vec{d_i}$ van graad $n$. $t$ is een globale parameter voor de nieuwe curve en zit in het interval $[0,c]$.
+$s$ is de locale parameter voor de nieuwe curve en is gedefini\"eerd als $s(t) = \frac{t}{c}$.
+$\vec{v}(s(t))$ ziet er dan als volgt uit.
+\[
+\vec{v}(s(t)) = \sum_{i=0}^{n}\vec{d_i}B^{n}_{i}(s)
+\]
+De $\vec{d_i}$ uit deze formule bekomen we als volgt.
+Voer het algoritme van de Casteljau uit voor de evaluatie van $\vec{x}(c)$.
+De $i$-de elementen op de diagonaal van de tabel zijn precies de gezochte $\vec{d_i}$.
+\begin{proof}
+$\vec{v}(s(t))$ en $\vec{x}(t)$ maken deel uit van dezelfde unieke veeltermcurve van graad $n$.
+Elke afgeleide van naar $t$ van deze curven zijn dus gelijk voor $t=0$.
+Hieruit kunnen de $\vec{d_i}$ berekend worden.
+\[
+\forall r:\ \frac{d^{r}}{dt^{r}}\vec{v}(s(0)) = \frac{d^{r}}{dt^{r}}\vec{x}(0)
+\]
+\begin{itemize}
+\item $r=0$:
+\[
+\vec{d_0} = \vec{b_0} = \vec{b_0}^{[0]}
+\]
 
+\item $r=1$:
+\[
+\frac{d}{dt}\vec{v}(s(0)) = \frac{d}{dt}\vec{x}(0)
+\]
+\[
+\frac{ds}{dt}n\Delta\vec{d_0} = n\Delta\vec{b_0}
+\]
+\[
+\frac{n}{c}(\vec{d_1}-\vec{d_0}) = n(\vec{b_1}-\vec{b_0})
+\]
+\[
+\frac{1}{c}(\vec{d_1}-\vec{b_0}) = \vec{b_1}-\vec{b_0}
+\]
+\[
+\vec{d_1} = (1-c)\vec{b_0}+c\vec{b_1} = \vec{b_1}^{[1]}
+\]
 
+\item $r=j$:
+\[
+\frac{d^{j}}{dt^{j}}\vec{v}(s(0)) = \frac{d^{j}}{dt^{j}}\vec{x}(0)
+\]
+\[
+\frac{d^{j}s}{dt^{j}}\frac{n!}{c^j(n-j)!}\Delta^{j}\vec{d_i}
+= \frac{n!}{(n-j)!}\Delta^{j}\vec{b_i}
+\]
+\[
+\vec{d_{j}} = \sum_{k=0}^j{j \choose k}(1-c)^{j-k}c^k\vec{b_k} = \vec{b_j}^{[j]}
+\]
+\end{itemize}
+\end{proof}
+
+\section{Samengestelde B\'ezier-curven}
+We willen de afzonderlijke B\'ezier-curven laten aansluiten op een continu\"e manier.
+Om deze sectie eenvoudig te houden gebruiken we telkens een voorbeeld van de samenstelling van twee kubische spline curves.
+
+\subsection{$C^{0}$ continu\"iteit}
+$C^{0}$ continu\"iteit verkrijgen we wanneer het laatste punt van de eerste curve gelijk is aan het eerste punt van de tweede curve.
+\[
+\vec{b_3} = \vec{b_0^*}
+\]
+
+\subsection{$C^{1}$ continu\"iteit}
+$C^{1}$ continu\"iteit verkrijgen we als de rechte door de laatste twee punten van de eerste curve gelijk is aan de rechte door de eerste twee punten van de tweede curve.
+\[
+\frac{3}{u_1-u_0}(\vec{b_3}-\vec{b_2}) = \frac{3}{u_2-u_1}(\vec{b_1^{*}}-\vec{b_0^{*}})
+\]
+
+\subsection{$G^{1}$ continu\"iteit}
+Eerste orde geometrische continu\"iteit verkrijgen we als de drie punten op de scheiding collineair zijn. De verhoudingen van de onderlinge afstanden spelen dan geen rol.
+
+\subsection{$C^{2}$ continu\"iteit}
+$C_{2}$ continu\"iteit verkrijgen we als de samengestelde curve $C^{1}$-continu is en ook de tweede afgeleiden gelijk zijn in het knooppunt.
+\[
+\frac{6}{(u_1-u_0)^2}(\vec{b_3}-2\vec{b_2}+\vec{b_1})
+= \frac{6}{(u_1-u_0)^2}(\vec{b_2^*}-2\vec{b_1^*}+\vec{b_0^*})
+\]
 
 \end{document}
