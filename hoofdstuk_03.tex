@@ -1,11 +1,193 @@
-\documentclass[tmi_notities.tex]{subfiles}
+\documentclass[notities.tex]{subfiles}
 \begin{document}
 \chapter{Splinecurven}
-\section{Definitie}
+\section{Definities}
+\subsection{Splinecurve}
 \[
 \vec{s}(u) = \sum_{i=-n}^{p-1}\vec{d_i}N_{i}^{n}(u)
 \]
+Hierbij zijn de $\vec{d_i}$ de `de Boor' punten.
+
+\subsection{B-Spline}
+\[
+N_{i}^{n}(u)
+= \frac{u-u_i}{u_{i+n}-u_i}					N_{i}^{n-1}(u)
++ \frac{u_{i+n+1}-u}{u_{i+n+1}-u_{i+1}}		N_{i+1}^{n-1}(u)
+\]
+met
+\[
+u \in [u_i,u_{i+1}) \Rightarrow N_{i}^{0}(u) = 1
+\]
+\[
+u \not\in [u_i,u_{i+1}) \Rightarrow N_{i}^{0}(u) = 0
+\]
+
+\section{Eigenschappen van B-Splines}
+\begin{enumerate}
+\item Lokaliteit
+\[
+u \not\in [u_i,u_{i+n+1}] \Rightarrow N_{i}^{n}(u) = 0
+\]
+
+\begin{proof} Bewijs door inductie.\\
+De bewering geldt voor $n=0$.
+\[
+u \in [u_i,u_{i+1}) \Rightarrow N_{i}^{0}(u) = 1
+\]
+\[
+u \not\in [u_i,u_{i+1}) \Rightarrow N_{i}^{0}(u) = 0
+\]
+We bewijzen nu dat als de bewering geldt voor een bepaalde $n=k$, de bewering dan ook geldt voor $n=k+1$.
+Te bewijzen is nu het volgende.
+\[
+u \not\in [u_i,u_{i+k+2}] \Rightarrow N_{i}^{k+1}(u) = 0
+\]
+We weten het volgende over $N_{i}^{k+1}(u)$.
+\[
+N_{i}^{k+1}(u)
+= \frac{u-u_i}{u_{i+k+1}-u_i}					N_{i}^{k}(u)
++ \frac{u_{i+k+2}-u}{u_{i+k+2}-u_{i+1}}			N_{i+1}^{k}(u)
+\]
+Deze uitdrukking is nul wanneer $N_{i}^{k}(u)$ en $N_{i+1}^{k}(u)$ beide nul zijn.
+Vanwege de inductiehypothese is dit zo omdat de volgende beweringen gelden.
+\[
+[u_i,u_{i+k+1}] \subset [u_i,u_{i+k+2}]
+\text{ en }
+[u_{i+1},u_{i+k+2}] \subset [u_i,u_{i+k+2}]
+\]
+\end{proof}
+
+\item Positiviteit
+\[
+N_{i}^{n} \ge 0
+\]
+\begin{proof} Bewijs door inductie.\\
+De bewering geldt voor $n=0$ omdat $N_{i}^{0}$ enkel nul of \'e\'en kan zijn.
+We bewijzen nu dat als de bewering geldt voor een bepaalde $n=k$, de bewering dan ook geldt voor $n=k+1$.
+We bekijken de uitdrukking voor $N_{i}^{k+1}(u)$.
+\[
+N_{i}^{k+1}(u)
+= \frac{u-u_i}{u_{i+k+1}-u_i}					N_{i}^{k}(u)
++ \frac{u_{i+k+2}-u}{u_{i+k+2}-u_{i+1}}			N_{i+1}^{k}(u)
+\]
+Deze uitdrukking zou enkel negatief kunnen zijn als $u < u_i$ of $u_{i+n+1} < u$ geldt. (uit de inductiehypothese volgt dat $N_{i}^{k}(u)$ en $N_{i+1}^{k}(u)$ positief zijn.)
+$N_{i}^{k+1}(u)$ is echter steeds nul wanneer $u \not\in [u_i,u_{i+k+2}]$ en binnen $[u_i,u_{i+k+2}]$ is $u$ nooit kleiner dan $u_i$ of groter dan $u_{i+k+2}$.
+\end{proof}
+
+\item Eenheidspartitie (Sommatie tot $1$)
+\[
+\forall u \in [u_0,u_p)\ :\
+\sum_{i=-\infty}^{\infty}N_{i}^{n}(u)
+= \sum_{i=-n}^{p-1}N_{i}^{n}(u)
+= 1
+\]
+
+\begin{proof}Bewijs door inductie.\\
+De bewering geldt voor $n=0$ want voor elk interval $u_j,u_{j+1}$ is er precies \'e\'en $N_{i}^{0}$ die gelijk is aan \'e\'en terwijl de andere nul zijn.
+\[
+u \in [u_0,u_p) \Rightarrow
+\sum_{i=0}^{p-1}N_{i}^{0}(u)
+= 1
+\]
+We bewijzen nu dat als de bewering geldt voor een bepaalde $n=k$, de bewering dan ook geldt voor $n=k+1$. We stellen dus dat volgende bewering geldt.
+\[
+\forall u \in [u_0,u_p) \Rightarrow
+\sum_{i=-k}^{p-1}N_{i}^{k}(u)
+= 1
+\]
+Nu bewijzen we dat de volgende bewering daaruit volgt.
+\[
+\forall u \in [u_0,u_p) \Rightarrow
+\sum_{i=-k-1}^{p-1}N_{i}^{k+1}(u)
+= 1
+\]
+\[
+\sum_{i=-k-1}^{p-1}N_{i}^{k+1}(u)
+= \sum_{i=-k-1}^{p-1}
+\left(
+\frac{u-u_i}{u_{i+k+1}-u_i}					N_{i}^{k}(u)
++ \frac{u_{i+k+2}-u}{u_{i+k+2}-u_{i+1}}			N_{i+1}^{k}(u)
+\right)
+\]
+\[
+=
+\sum_{i=-k-1}^{p-1}
+\frac{u-u_i}{u_{i+k+1}-u_i}					N_{i}^{k}(u)
++ 
+\sum_{i=-k-1}^{p-1}
+\frac{u_{i+k+2}-u}{u_{i+k+2}-u_{i+1}}			N_{i+1}^{k}(u)
+\]
+In deze uitdrukking zijn de eerste en de laatste term beide nul vanwege de lokaliteitseigenschap.
+\[
+=
+\sum_{i=-k}^{p-1}
+\frac{u-u_i}{u_{i+k+1}-u_i}					N_{i}^{k}(u)
++ 
+\sum_{i=-k-1}^{p-2}
+\frac{u_{i+k+2}-u}{u_{i+k+2}-u_{i+1}}			N_{i+1}^{k}(u)
+\]
+De tweede som kan herschreven worden door de index aan te passen als volgt.
+\[
+\sum_{i=-k-1}^{p-2}
+\frac{u_{i+k+2}-u}{u_{i+k+2}-u_{i+1}}			N_{i+1}^{k}(u)
+=
+\sum_{i=-k}^{p-1}
+\frac{u_{i+k+1}-u}{u_{i+k+1}-u_{i}}			N_{i}^{k}(u)
+\]
+We vervangen dit nu zodat we verder gaan met de volgende uitdrukking.
+\[
+=
+\sum_{i=-k}^{p-1}
+\frac{u-u_i}{u_{i+k+1}-u_i}					N_{i}^{k}(u)
++ 
+\sum_{i=-k}^{p-1}
+\frac{u_{i+k+1}-u}{u_{i+k+1}-u_{i}}			N_{i}^{k}(u)
+\]
+\[
+=
+\sum_{i=-k}^{p-1}
+\left(
+\frac{u-u_i}{u_{i+k+1}-u_i}					N_{i}^{k}(u)
++ 
+\frac{u_{i+k+1}-u}{u_{i+k+1}-u_{i}}			N_{i}^{k}(u)
+\right)
+\]
+\[
+=
+\sum_{i=-k}^{p-1}
+\frac{u-u_i + u_{i+k+1}-u}{u_{i+k+1}-u_{i}} N_{i}^{k}(u)
+=
+\sum_{i=-k}^{p-1}
+N_{i}^{k}(u)
+\]
+Uit de inductiehypothese volgt precies dat deze uitdrukking gelijk is aan \'e\'en. Hiermee is de stelling bewezen.
+\end{proof}
+
+\item Continu\"iteit.\\
+$N_{i}^{n}(u)$ is een $C_{n-1}$ continue functie indien er geen meervoudige knooppunten voorkomen. \footnote{De continu\"iteitseigenschap kan niet bewezen worden via de recursiebetrekking. Wanneer we B-splines op een andere manier (equivalent) defini\"eren valt dit wel te bewijzen.}
+\end{enumerate}
+
+\section{Eigenschappen van B-spline curven}
+\begin{enumerate}
+\item Spline curves zijn invariant onder affiene transformaties.
+\begin{proof}
+Dit volgt uit de eenheidspartitie eigenschap van B-splines. Een B-spline curve is een affiene combinatie van de `de Boor' punten $\vec{d_i}$. Bijgevolg is een spline curve invariant onder een affiene transformatie (Zie \ref{affiene_transformatie}.).
+\end{proof}
+
+\item Bij wijziging van \'e\'en `de Boor' punt $\vec{d_i}$ zal niet heel de curve veranderen. Enkel het deel dat overeenstemt met $u \in [u_i,u_{i+n+1})$.
+\begin{proof}
+Dit volgt uit de lokaliteitseigenschap van B-splines. $B$ splines buiten het interval $[u_i,u_{i+n+1})$ zijn namelijk steeds nul. De invloed van $\vec{d_i}$ in buiten $[u_i,u_{i+n+1})$ is dus onbestaande.
+\end{proof}
+
+\item
+Spline curves liggen binnen de convex omhullende van de `de Boor' punten. Sterker nog, de curve ligt steeds binnen de convex omhullende van de $n+1$ omliggende `de Boor' punten ligt.
+
+\begin{proof}
+In het deel van de curve dat overeenstemt met $u \in [u_j,u_{j+1})$ zijn enkel de B-splines $N_{j-n}^{n},..., N_{j}^{n}$ niet nul. Vanwege de positiviteitseigenschap zijn deze B-splines allemaal positief en vanwege de eenheidspartitieeigenschap sommeren ze tot \'e\'en. Een punt op de curve is dus een convexe combinatie van $n+1$ omliggende `de Boor' punten. Bovendien ligt elke convexe combinatie van punten binnen de convex omhullende van die punten (Zie \ref{convexe_combinatie}.).
+\end{proof}
+\end{enumerate}
+
+
 
 
 \end{document}
-

@@ -1,4 +1,4 @@
-\documentclass[tmi_notities.tex]{subfiles}
+\documentclass[notities.tex]{subfiles}
 \begin{document}
 \chapter{Inleiding}
 \section{De affiene ruimte}
@@ -27,10 +27,12 @@ Vanwege de uniciteitseigenschap is de aftrekking van twee elementen $a_1$ en $a_
 Punten kunnen niet bij elkaar opgeteld worden, en niet gescaleerd worden omdat er geen oorsprong is en geen assenstelsel in een affiene ruimte.
 Het verschil van twee punten is wel gedefinieerd, namelijk als een vector. Bovendien is de som van een punt en een vector ook gedefinieerd.
 \subsection{Affiene combinatie}
-Een affiene combinatie van punten is een lineaire combinatie van punten waarvan de gewichten sommeren tot $1$.\\\\
-Zij $p_1,...p_n$ $n$ punten en $\sum_{i=1}^n\alpha_i=1$.\\\\
+Een affiene combinatie van punten is een lineaire combinatie van punten waarvan de gewichten sommeren tot $1$.
+\subsubsection{Een cruciaal inzicht}
+Zij $p_1,...p_n$ $n$ punten en $\alpha_i$, scalars zodat $\sum_{i=1}^n\alpha_i=1$ geldt.\\\\
 \textit{Te Bewijzen}\\
 \label{affiene_combinatie}
+De affiene combinatie van de $p_i$ kan gezien worden als de optelling van $n-1$ vectoren bij het eerste punt.
 Er bestaan $v_i$ zodat volgende bewering geldt.
 \[
 x = \sum_{i=1}^n\alpha_ip_i = p_0 + \sum_{i=2}^n\vec{v_i}
@@ -49,12 +51,25 @@ p_1 + \sum_{i=2}^n\alpha_i(p_i-p_1)
 \]
 We weten dat $p_i-p_1$ een vector is. Sterker nog, het zijn de $v_i$.
 \end{proof}
+
+\subsection{Affiene transformatie}
+\label{affiene_transformatie}
+Een affiene transformatie is een transformatie die elke affiene combinatie van punten afbeeldt op diezelfde affiene combinatie van punten.\\
+In symbolen: Zij $T$ een affiene transformatie en $x$ een punt gedefinieerd als een affiene combinatie.
+\[
+x = \sum_{i=1}^{n}\alpha_ip_i
+\]
+Voor $T$ geldt dan de volgende bewering.
+\[
+T(x) = \sum_{i=1}^{n}\alpha_iT(p_i)
+\]
  
 \subsection{Lineaire combinatie}
 In \ref{affiene_combinatie} is nu eenvoudig te zien dat een lineaire combinatie van punten niet bepaald is.
 Opdat de combinatie te herschijven zou vallen als de sum van een punt en een aantal vectoren moeten de gewichten van de lineaire combinatie sommeren tot $1$. 
 
 \subsection{Convexe combinatie}
+\label{convexe_combinatie}
 \textit{Te Bewijzen}\\
 Een convexe combinatie van punten behoort tot de convex omhullende van deze punten.
 \begin{proof}

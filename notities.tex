@@ -6,6 +6,7 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{subfiles}
+\usepackage{todonotes}
 
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 
@@ -22,9 +23,9 @@
 \part{Computergestuurd ontwerp van curven en oppervlakten}
 \subfile{hoofdstuk_01}
 \subfile{hoofdstuk_02}
+\subfile{hoofdstuk_03}
 
-
-\chapter{Splinecurven}
+\iffalse
 \chapter{Modellering van oppervlakten}
 
 \part{Algoritmen voor discrete meetkundige problemen}
@@ -35,5 +36,8 @@
 \chapter{Het Voronoi-diagram van een puntenverzameling}
 \chapter{Nabijheidsproblemen}
 \chapter{Berekenen van het Voronoi-diagram}
+\fi
+
+\listoftodos
 
 \end{document}
