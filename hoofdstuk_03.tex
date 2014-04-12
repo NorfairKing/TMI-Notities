@@ -187,7 +187,84 @@ In het deel van de curve dat overeenstemt met $u \in [u_j,u_{j+1})$ zijn enkel d
 \end{proof}
 \end{enumerate}
 
+\section{Evaluatie van een punt op een B-Spline curve (de Boor)}
+Gegeven een curve $s(u)$ gedefinie\"erd over een interval $u_0,u_p$. 
+\[
+s(u) = \sum_{i=-n}^{p-1}\vec{d_i}N_{i}^{n}(u)
+\]
+Gevraagd is het punt op $s$ dat overeen komt met $u\in [u_l,u_{l+1})$.
+Door de lokaliteitseigenschap weten we dat het punt afhangt van de `de Boor' punten $\vec{d^{l-n}},...,\vec{d_{l}}$, de andere `de Boor' punten spelen geen rol.\\
+Definieer $\vec{d_{i}^{[k]}}$ als volgt.
+\[
+\vec{d_{i}^{[k]}}
+= (1-\alpha_{k,i})\vec{d_{i-1}^{[k-1]}}
++ \alpha_{k,i}\vec{d_{i}^{[k-1]}}
+\text{ met }
+\alpha_{k,i} = \frac{u-u_i}{u_{i+n+1-k}-u_{i}}
+\]
+$s(u)$ is nu precies $\vec{d_{l}^{[k]}}$.
+\begin{proof}
+\[
+s(u)
+= \sum_{i=-n}^{p-1}\vec{d_i}N_{i}^{n}(u)
+\underset{u \in [u_l,u_{l+1})}{=}
+\sum_{i=l-n}^{l}\vec{d_i}N_{i}^{n}(u)
+\]
+\[
+=
+\sum_{i=l-n}^{l}\vec{d_i}
+\left(
+\frac{u-u_i}{u_{i+n}-u_i}N_i^{n-1}(u) + 
+\frac{u_{i+n+1}-u}{u_{i+n+1}-u_{i+1}}N_{i+1}^{n-1}(u)
+\right)
+\]
+\[
+=
+\sum_{i=l-n}^{l}\vec{d_i}
+\frac{u-u_i}{u_{i+n}-u_i}N_i^{n-1}(u) + 
+\sum_{i=l-n}^{l}\vec{d_i}
+\frac{u_{i+n+1}-u}{u_{i+n+1}-u_{i+1}}N_{i+1}^{n-1}(u)
+\]
+Bovendien geldt $N_{l-n}^{n-1}(u) = 0$ en $N_{l+1}^{n-1}(u) = 0$
+\[
+=
+\sum_{i=l-n+1}^{l}\vec{d_i}
+\frac{u-u_i}{u_{i+n}-u_i}N_i^{n-1}(u) + 
+\sum_{i=l-n}^{l-1}\vec{d_i}
+\frac{u_{i+n+1}-u}{u_{i+n+1}-u_{i+1}}N_{i+1}^{n-1}(u)
+\]
+De tweede som in bovenstaande uitdrukking valt te herschrijven als volgt.
+\[
+\sum_{i=l-n}^{l-1}\vec{d_i}
+\frac{u_{i+n+1}-u}{u_{i+n+1}-u_{i+1}}N_{i+1}^{n-1}(u)
+=
+\sum_{i=l-n+1}^{l}\vec{d_{i-1}}
+\frac{u_{i+n}-u}{u_{i+n}-u_{i}}N_{i}^{n-1}(u)
+\]
+We kunnen dit dus vervangen.
+\[
+s(u)
+=
+\sum_{i=l-n+1}^{l}
+N_i^{n-1}(u)
+\left(
+\vec{d_{i-1}}
+\frac{u-u_i}{u_{i+n}-u_i} +
+\vec{d_i}
+\frac{u_{i+n}-u}{u_{i+n}-u_{i}}
+\right)
+\]
+\[
+s(u)
+= \sum_{i=l-n+1}^{l}
+\vec{d_{i}^{[1]}}
+N_i^{n-1}(u)
+\]
+Dit proces kunnen we nog $n-1$ maal herhalen, tot we volgende uitdrukking bekomen.
+\[
+s(u) = \sum_{i=l}^{l}\vec{d}_{i}^{[n]}N_{i}^{0}(u) = \vec{d}_{i}^{[n]}
+\]
 
-
+\end{proof}
 
 \end{document}
