@@ -264,7 +264,27 @@ Dit proces kunnen we nog $n-1$ maal herhalen, tot we volgende uitdrukking bekome
 \[
 s(u) = \sum_{i=l}^{l}\vec{d}_{i}^{[n]}N_{i}^{0}(u) = \vec{d}_{i}^{[n]}
 \]
-
 \end{proof}
+
+\subsection{Toevoegen van knooppunten en `de Boor' punten}
+Wanneer we \'e'en knooppunt en \'e\'en `de Boor' punt toevoegen (en we willen dat de curve hetzelfde blijft,) voeren we volgend proces uit.\\
+We willen een splinecurve met knooppunten $u_0,...,u_p$ en `de Boor' punten $\vec{d_{-n}},...,\vec{d_{p-1}}$ te schrijven als een splinecurve met knooppunten $u^{*}_0,...,u^{*}_{p^{*}}$ en `de Boor' punten $\vec{d}_{-n}^{*},...,\vec{d}_{p^{*}-1}^{*}$.
+\[
+s(u) = \sum_{-n}^{p-1}\vec{d}_iN_{i}^{n}(u) \text{ en } s^{*}(u) = \sum_{-n}^{p^{*}-1}\vec{d}^{*}_iN_{i}^{*n}(u) 
+\]
+\todo{Volledig uitwerken, dit is redelijk vaag.}
+De nieuwe knooppunten zien er dan als volgt uit.
+\[
+\{u_{-n},...,u_{p}\}
+= \{u_{-n},...,u_{l},u_{l+1},...,u_{p^{*}}\} 
+\]
+De nieuwe `de Boor' punten zien er dan als volgt uit.
+\[
+\vec{d}_{l-n}^{*} = \vec{d}_{l-n} \text{, } \vec{d}_{l+1}^{*} = \vec{d}_{l}\text{ en } \vec{d}_{i}^{*} = \vec{d}_{i}^{[1]} \text{ voor } i\ge l-n+1
+\]
+\todo{Betere uitleg hier!!}
+
+\section{NURBS: rationale splinecurven}
+\todo{schrijf hier iets zinnings over}
 
 \end{document}
