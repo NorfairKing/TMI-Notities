@@ -5,6 +5,17 @@
 
 \input{packages}
 
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[chapter] % reset theorem numbering for each chapter
+
+\theoremstyle{definition}
+\newmdtheoremenv{de}[thm]{Definitie} % Definitie met frame
+\newtheorem{ei}[thm]{Eigenschap}
+\newtheorem{st}[thm]{Stelling}
+\newtheorem{gev}[thm]{Gevolg}
+
+
 \begin{document}
 \input{titelpagina}
 \tableofcontents
