@@ -1,0 +1,5 @@
+* TMI-Notities
+Notities voor Toepassingen van meetkunde in informatica
+** Inhoud
+   - Computergestuurd ontwerp van curven en oppervlakten
+   - Oefenzittingen 2014
