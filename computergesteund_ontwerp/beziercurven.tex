@@ -202,6 +202,7 @@ x(t) = \sum_{i=0}^nb_{i}B_{i}^{n}(t)
 \end{de}
 
 \begin{ei}
+\label{bezier_veelterm}
 Een B\'ezier-curve is een veeltermcurve van graad $n$.
 \begin{proof}
 \[ng voor bernstein-veeltermen.
@@ -398,31 +399,8 @@ Schuif het linkse sommatie teken \'e\'en index op.
 \end{proof}
 \end{st}
 
-\section{Samengestelde Be\'ezier-curven}
-Een samengestelde B\'ezier-curve over een parameterinterval $[u_0,u_p]$ is een stuksgewijze veeltermcurve, waarbij ieder segment een B\'ezier-curve is.
-\[
-x(u) = x_i(t(u))
-\]
-
-\subsection{Afgeleide van meervoudige B\'ezier-curve}
-Zij $t$ in het segment $[u_i,u_{i+1}]$:
-\[
-\frac{d}{du}x(t(u))
-= \frac{n}{\Delta u}\sum_{i=0}^{n-1}\Delta b_iB_{i}^{n-1}(t)
-\]
-\begin{proof}
-\[
-t = \frac{u-u_i}{u_{i+1}-u} \text{ zodat } \frac{dt}{du} = \frac{1}{u_{i+1}-u}
-\]
-\[
-\frac{d}{du}x(t(u))
-= \frac{d}{dt} x(t) \frac{dt}{du}
-= \frac{n}{u_{i+1}-u}\sum_{i=0}^{n-1}\Delta b_iB_{i}^{n-1}(t)
-\]
-\end{proof}
-
-\subsection{Interpolatie in begin- en eindpunten}
-Te bewijzen:\\
+\subsection{Interpolatie in de eindpunten}
+\begin{ei}\textbf{Interpolatie in de eindpunten}\\
 Een B\'ezier curve raakt in het eerste en laatste controlepunt (waar die interpoleert) aan de controleveelhoek.
 \[
 \left.\frac{d}{dt} x(t)\right|_{t=0} = a(b_1-b_{0})
@@ -471,7 +449,7 @@ We bewijzen elk deel appart.
 \]
 \[
 \frac{n}{\Delta u}\sum_{i=0}^{n-1}\Delta b_iB_{i}^{n-1}(0)
-= \frac{n}{\Delta u}b_{0}
+= \frac{n}{\Delta u}\Delta b_{0}
 \]
 \item
 \[
@@ -479,11 +457,16 @@ We bewijzen elk deel appart.
 \]
 \[
 \frac{n}{\Delta u}\sum_{i=0}^{n-1}\Delta b_iB_{i}^{n-1}(1)
-= \frac{n}{\Delta u}b_{n-1}
+= \frac{n}{\Delta u}\Delta b_{n-1}
 \]
 \end{itemize}
 \end{itemize}
 \end{proof}
+\end{ei}
+
+
+
+
 
 \subsection{Hogere afgeleiden}
 Tweede afgeleide:
@@ -496,9 +479,11 @@ $j$-de afgeleide:
 \]
 
 \section{Graadverhoging}
+Elke veelterm van graad $n$ kan geschreven worden als een veelterm van graad $n+1$. Er moet dus ook een manier zijn om een B\'eziercurve van graad $n$ te schrijven als een B\'eziercurve van graad $n+1$.\footnote{Inderdaad! Zie eigenschap \ref{bezier_veelterm} van B\'eziercurven.} 
 \[
 \sum_{i=0}^{n}b_iB_{i}^{n}(t) = \sum_{i=0}^{n+1}b_i^*B_{i}^{n+1}(t)
 \]
+\begin{st}
 De nieuwe controlepunten $b_i^*$ kunnen berekend worden uit de originele controlepunten.
 \[
 b^*_i= \frac{i}{n+1}b_{i-1} + \left(1-\frac{1}{n+1}\right)b_i
@@ -519,11 +504,10 @@ Verander de index van de eerste term.
 = \left(\sum_{i=1}^{n+1}b_{i-1}\binom{n}{i-1}(1-t)^{n-i+1}t^{i}\right)
 + \left(\sum_{i=0}^{n}b_i\binom{n}{i}(1-t)^{n-i+1}t^{i}\right)
 \]
-Neem beide sommaties samen.
+Neem beide sommaties samen. Dit kan omdat we $\binom{n}{-1}$ en $\binom{n}{n+1}$ als nul defini\"eren.
 \[
 = \sum_{i=0}^{n+1}(1-t)^{n-i+1}t^{i} \left(\binom{n}{i-1}b_{i-1} + \binom{n}{i}b_i\right)
 \]
-(Beschouw hier $\binom{n}{-1} = 0 = \binom{n}{n+1}$. )
 We halen hier de nieuwe controlepunten uit.
 \[
 \binom{n+1}{i}b_{i}^{*}
@@ -541,34 +525,56 @@ b_{i}^{*}
 + \left(1-\frac{1}{n+1}\right)b_i
 \]
 \end{proof}
+\end{st}
 
 \section{Opsplitsing}
-We zoeken een nieuwe curve $v$ met controlepunten $d_i$ van graad $n$. $t$ is een globale parameter voor de nieuwe curve en zit in het interval $[0,c]$.
-$s$ is de locale parameter voor de nieuwe curve en is gedefini\"eerd als $s(t) = \frac{t}{c}$.
-$v(s(t))$ ziet er dan als volgt uit.
+Gegeven een B\'ezier curve van graad $n$, willen we deze opsplitsen in twee nieuwe curven van graad $n$ met elk $n+1$ controlepunten $d_i$ en $e_i$ respectievelijk. Zij $t$ de parameter voor de originele curve met $t \in [0,1]$. Noem $c$ het punt in het parameter interval van $t$ waar we de curve splitsen. We krijgen dan twee curven met parameter $s$ en $r$, respectievelijk . $s$ en $r$ zitten dan in de intervallen $[0,c]$ en $[c,1]$ respectievelijk.
+Gegeven $t$ kunnen we nu $s$ en $r$ bepalen.
 \[
-v(s(t)) = \sum_{i=0}^{n}d_iB^{n}_{i}(s)
+\left\{
+\begin{array}{c l}
+s(t) &= \frac{t}{c}\\
+r(t) &= c + \frac{(1-t)}{c}\\
+\end{array}
+\right.
 \]
-De $d_i$ uit deze formule bekomen we als volgt.
-Voer het algoritme van de Casteljau uit voor de evaluatie van $x(c)$.
-De $i$-de elementen op de diagonaal van de tabel zijn precies de gezochte $d_i$.
+We zoeken nu de nieuwe controlepunten $d_i$ en $e_i$ voor de twee nieuwe curven. $v(s(t))$ en $w(r(t))$ zien er dan als volgt uit.
+\[
+\left\{
+\begin{array}{c c}
+v(s(t)) &= \sum_{i=0}^{n}d_iB^{n}_{i}(s)\\
+w(r(t)) &= \sum_{i=0}^{n}e_iB^{n}_{i}(r)
+\end{array}
+\right.
+\]
+\begin{st}
+We kunnen de $d_i$ en $e_i$ eenvoudig berekenen uit het algoritme van de Casteljau voor evaluatie van $x(c)$ als volgt.
+\[
+\forall i: d_i = b_{i}^{[i]}\ \text{ en }\ \forall i: e_i = b_{n-i}^{[n-i]}
+\]
 \begin{proof}
-$v(s(t))$ en $x(t)$ maken deel uit van dezelfde unieke veeltermcurve van graad $n$.
-Elke afgeleide van naar $t$ van deze curven zijn dus gelijk voor $t=0$.
-Hieruit kunnen de $d_i$ berekend worden.
+Vermist $v(s(t))$ (en $w(r(t))$) deel uitmaken van dezelfde unieke veeltermcurve van graad $n$, zijn alle afgeleiden van $v(s(t))$ en $x(t)$ naar $t$ aan elkaar gelijk in $t=0$. Bovendien zijn alle afgeleiden van $w(r(t))$ en $x(t)$ naar $t$ gelijk aan elkaar in $t=1$.
 \[
-\forall r:\ \frac{d^{r}}{dt^{r}}v(s(0)) = \frac{d^{r}}{dt^{r}}x(0)
-\]
+k = 0,\cdots,n:\
+\left.\ \frac{d^{k}}{dt^{k}}v(s(t))\ \right|_{t=0} = \left.\  \frac{d^{k}}{dt^{k}}x(t)\ \right|_{t=0} 
+\] 
+\[
+k = 0,\cdots,n:\
+\left.\ \frac{d^{k}}{dt^{k}}w(r(t))\ \right|_{t=1} = \left.\  \frac{d^{k}}{dt^{k}}x(t)\ \right|_{t=1} 
+\] 
+
 \begin{itemize}
-\item $r=0$:
+\item $k=0$:
 \[
-d_0 = b_0 =b_0^{[0]}
+d_0 = b_0 =b_0^{[0]} \text{ en } e_n = b_n = b_{n}^{n}
 \]
 
-\item $r=1$:
+\item $k=1$:
 \[
-\frac{d}{dt}v(s(0)) = \frac{d}{dt}x(0)
+\frac{d}{dt}v(s(0)) = \frac{d}{dt}x(0) \text{ en } \frac{d}{dt}w(r(1)) = \frac{d}{dt}x(1)
 \]
+\begin{itemize}
+\item
 \[
 \frac{ds}{dt}n\Delta d_0 = n\Delta b_0
 \]
@@ -582,7 +588,25 @@ d_0 = b_0 =b_0^{[0]}
 d_1 = (1-c)b_0+cb_1 = b_1^{[1]}
 \]
 
-\item $r=j$:
+\item
+\[
+\frac{dr}{dt}n\Delta d_{n-1} = n\Delta b_{n-1}
+\]
+\[
+-\frac{n}{c}(e_n-e_{n-1}) = n(b_{n}-b_{n-1})
+\]
+\[
+-\frac{1}{c}(b_{n}-e_{n-1}) = b_{n} - b_{n-1}
+\]
+\[
+e_{n-1} = (c-1)b_{n} - b_{n-1} = b_{n-1}^{n-1}
+\]
+
+\end{itemize}
+
+\item $k=j$:
+\begin{itemize}
+\item
 \[
 \frac{d^{j}}{dt^{j}}v(s(0)) = \frac{d^{j}}{dt^{j}}x(0)
 \]
@@ -591,31 +615,78 @@ d_1 = (1-c)b_0+cb_1 = b_1^{[1]}
 = \frac{n!}{(n-j)!}\Delta^{j}b_i
 \]
 \[
-d_{j} = \sum_{k=0}^j{j \choose k}(1-c)^{j-k}c^kb_k= b_j^{[j]}
+d_{j} = \sum_{i=0}^j{j \choose i}(1-c)^{j-i}c^ib_i= b_j^{[j]}
+\]
+
+\item
+\[
+\frac{d^{j}}{dt^{j}}w(r(1)) = \frac{d^{j}}{dt^{j}}x(1)
+\]
+\[
+\frac{d^{j}r}{dt^{j}}\frac{n!}{c^j(n-j)!}\Delta^{j}e_i
+= \frac{n!}{(n-j)!}\Delta^{j}b_i
+\]
+\[
+e_{j} = -\sum_{i=0}^j{j \choose i}(c-1)^{j-i}c^ib_k= b_{n-j}^{[n-j]}
 \]
 \end{itemize}
+\end{itemize}
 \end{proof}
+\end{st}
+\section{Samengestelde Be\'ezier-curven}
+Een samengestelde B\'ezier-curve over een parameterinterval $[u_0,u_p]$ is een stuksgewijze veeltermcurve, waarbij ieder segment een B\'ezier-curve is, gedefinieerd over \'e\'en van de intervallen $[u_0,u_1],[u_1,u_2],\cdots,[u_{p-1},u_{p}]$, bepaald door de knooppunten $u_0<u_1<u_2<\cdots u_p$
+\[
+x(u) = x_i(t(u))
+\]
+De samengestelde B\'ezier-curve bestaat dus uit $p$ segmenten $x_i(t(u))$ die elk veeltermcurven zijn. Elk segment $x_i$ wordt bepaald door haar eigen parameterinterval $[u_i,u_{i+1}]$ en heeft zodoende een locale parameter $t$.
+\[
+t = \frac{u-u_i}{u_{i+1}-u_i}
+\]
 
-\section{Samengestelde B\'ezier-curven}
+\subsection{Afgeleide van meervoudige B\'ezier-curve}
+\begin{ei}
+Zij $t$ in het segment $[u_i,u_{i+1}]$:
+\[
+\frac{d}{du}x(t(u))
+= \frac{n}{\Delta u}\sum_{i=0}^{n-1}\Delta b_iB_{i}^{n-1}(t)
+\]
+\begin{proof}
+\[
+t = \frac{u-u_i}{u_{i+1}-u} \text{ zodat } \frac{dt}{du} = \frac{1}{u_{i+1}-u}
+\]
+\[
+\frac{d}{du}x(t(u))
+= \frac{d}{dt} x(t) \frac{dt}{du}
+= \frac{n}{u_{i+1}-u_i}\sum_{i=0}^{n-1}\Delta b_iB_{i}^{n-1}(t)
+\]
+\[
+= \frac{n}{\Delta u_i}\sum_{i=0}^{n-1}\Delta b_iB_{i}^{n-1}(t)
+\]
+\end{proof}
+\end{ei}
+
+\subsection{Continu\"iteit}
 We willen de afzonderlijke B\'ezier-curven laten aansluiten op een continu\"e manier.
+
 Om deze sectie eenvoudig te houden gebruiken we telkens een voorbeeld van de samenstelling van twee kubische spline curves.
 
-\subsection{$C^{0}$ continu\"iteit}
+\subsubsection{$C^{0}$ continu\"iteit}
 $C^{0}$ continu\"iteit verkrijgen we wanneer het laatste punt van de eerste curve gelijk is aan het eerste punt van de tweede curve.
 \[
 b_3 = b_0^*
 \]
+De opeenvolgende segmenten hebben dus de eindpunten gemeen.
 
-\subsection{$C^{1}$ continu\"iteit}
+\subsubsection{$C^{1}$ continu\"iteit}
 $C^{1}$ continu\"iteit verkrijgen we als de rechte door de laatste twee punten van de eerste curve gelijk is aan de rechte door de eerste twee punten van de tweede curve.
 \[
 \frac{3}{u_1-u_0}(b_3-b_2) = \frac{3}{u_2-u_1}(b_1^{*}-b_0^{*})
 \]
 
-\subsection{$G^{1}$ continu\"iteit}
+\subsubsection{$G^{1}$ continu\"iteit}
 Eerste orde geometrische continu\"iteit verkrijgen we als de drie punten op de scheiding collineair zijn. De verhoudingen van de onderlinge afstanden spelen dan geen rol.
 
-\subsection{$C^{2}$ continu\"iteit}
+\subsubsection{$C^{2}$ continu\"iteit}
 $C_{2}$ continu\"iteit verkrijgen we als de samengestelde curve $C^{1}$-continu is en ook de tweede afgeleiden gelijk zijn in het knooppunt.
 \[
 \frac{6}{(u_1-u_0)^2}(b_3-2b_2+b_1)
