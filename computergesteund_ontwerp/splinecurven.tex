@@ -2,14 +2,20 @@
 \begin{document}
 
 \chapter{Splinecurven}
-\section{Definities}
-\subsection{Splinecurve}
-\[
-\vec{s}(u) = \sum_{i=-n}^{p-1}\vec{d_i}N_{i}^{n}(u)
-\]
-Hierbij zijn de $\vec{d_i}$ de `de Boor' punten.
 
-\subsection{B-Spline}
+\section{Knooppunten en `de Boor-punten'}
+\begin{de}
+\label{knooppunten}
+We beschouwen een parameter-interval $[u_0,u_p]$ met $p+1$ \textbf{knooppunten} $u_0<u_1<\cdots<u_p$.
+\end{de}
+\begin{de}
+\label{deboorpunten}
+Controlepunten voor een splinecurve noemt men \textbf{`de Boor-punten'}.
+\end{de}
+\section{B-Splines}
+\begin{de}
+\label{bspline}
+Een \textbf{B-spline} functie is een basis functie. Het is een stuksgewijze veelterm die enkel lokaal niet nul is. Een B-spline heeft een index $i$ die bij een knooppunt $u_i$ hoort en een graad $n$.
 \[
 N_{i}^{n}(u)
 = \frac{u-u_i}{u_{i+n}-u_i}					N_{i}^{n-1}(u)
@@ -22,22 +28,29 @@ u \in [u_i,u_{i+1}) \Rightarrow N_{i}^{0}(u) = 1
 \[
 u \not\in [u_i,u_{i+1}) \Rightarrow N_{i}^{0}(u) = 0
 \]
+\end{de}
 
-\section{Eigenschappen van B-Splines}
-\begin{enumerate}
-\item Lokaliteit
+\begin{ei}\textbf{Lokaliteit}
+\label{bspline_lokaliteit}
 \[
 u \not\in [u_i,u_{i+n+1}] \Rightarrow N_{i}^{n}(u) = 0
 \]
+Een B-spline is nul buiten haar lokaal interval $[u_i,u_{i+n+1}]$.
 
-\begin{proof} Bewijs door inductie.\\
-De bewering geldt voor $n=0$.
+\begin{proof} door inductie.\\
+\begin{enumerate}
+\item De bewering geldt voor $n=0$. (Basis)
 \[
 u \in [u_i,u_{i+1}) \Rightarrow N_{i}^{0}(u) = 1
 \]
 \[
 u \not\in [u_i,u_{i+1}) \Rightarrow N_{i}^{0}(u) = 0
 \]
+\item De bewering geldt voor $n=k$. (Inductiehyposhese)
+\[
+u \not\in [u_i,u_{i+k+1}] \Rightarrow N_{i}^{k}(u) = 0
+\]
+\item De bewering geldt voor $n=k+1$. (Inductiestap)\\
 We bewijzen nu dat als de bewering geldt voor een bepaalde $n=k$, de bewering dan ook geldt voor $n=k+1$.
 Te bewijzen is nu het volgende.
 \[
@@ -49,21 +62,30 @@ N_{i}^{k+1}(u)
 = \frac{u-u_i}{u_{i+k+1}-u_i}					N_{i}^{k}(u)
 + \frac{u_{i+k+2}-u}{u_{i+k+2}-u_{i+1}}			N_{i+1}^{k}(u)
 \]
-Deze uitdrukking is nul wanneer $N_{i}^{k}(u)$ en $N_{i+1}^{k}(u)$ beide nul zijn.
-Vanwege de inductiehypothese is dit zo omdat de volgende beweringen gelden.
+Deze uitdrukking is nul wanneer $N_{i}^{k}(u)$ en $N_{i+1}^{k}(u)$ beide nul zijn. Inderdaad, buiten $[u_i,u_{i+k+1}]$ is $N_{i}^{k}(u)$ nul en buiten $[u_{i+1},u_{i+k+2}]$ is $N_{i+1}^{k}(u)$ nul.
 \[
 [u_i,u_{i+k+1}] \subset [u_i,u_{i+k+2}]
 \text{ en }
 [u_{i+1},u_{i+k+2}] \subset [u_i,u_{i+k+2}]
 \]
+\end{enumerate}
 \end{proof}
+\end{ei}
 
-\item Positiviteit
+\begin{ei}\textbf{Positiviteit}
+\label{bspline_positiviteit}
 \[
-N_{i}^{n} \ge 0
+N_{i}^{n}(u) \ge 0
 \]
-\begin{proof} Bewijs door inductie.\\
-De bewering geldt voor $n=0$ omdat $N_{i}^{0}$ enkel nul of \'e\'en kan zijn.
+\begin{proof} door inductie.\\
+\begin{enumerate}
+\item De bewering geldt voor $n=0$. (Basis)\\
+Inderdaad, $N_{i}^{0}$ kan enkel $0$ of $1$ zijn.
+\item De bewering geldt voor $n=k$. (Inductiehyposhese)
+\[
+N_{i}^{k}(u) \ge 0
+\]
+\item De bewering geldt voor $n=k+1$. (Inductiestap)\\
 We bewijzen nu dat als de bewering geldt voor een bepaalde $n=k$, de bewering dan ook geldt voor $n=k+1$.
 We bekijken de uitdrukking voor $N_{i}^{k+1}(u)$.
 \[
@@ -71,11 +93,15 @@ N_{i}^{k+1}(u)
 = \frac{u-u_i}{u_{i+k+1}-u_i}					N_{i}^{k}(u)
 + \frac{u_{i+k+2}-u}{u_{i+k+2}-u_{i+1}}			N_{i+1}^{k}(u)
 \]
-Deze uitdrukking zou enkel negatief kunnen zijn als $u < u_i$ of $u_{i+n+1} < u$ geldt. (uit de inductiehypothese volgt dat $N_{i}^{k}(u)$ en $N_{i+1}^{k}(u)$ positief zijn.)
-$N_{i}^{k+1}(u)$ is echter steeds nul wanneer $u \not\in [u_i,u_{i+k+2}]$ en binnen $[u_i,u_{i+k+2}]$ is $u$ nooit kleiner dan $u_i$ of groter dan $u_{i+k+2}$.
+Deze uitdrukking zou enkel negatief kunnen zijn als $u < u_i$ of $u_{i+n+1} < u$ geldt. (uit de inductiehypothese volgt dat $N_{i}^{k}(u)$ en $N_{i+1}^{k}(u)$ positief zijn.).
+$N_{i}^{k+1}(u)$ is echter steeds nul wanneer $u \not\in [u_i,u_{i+k+2}]$\footnote{Zie eigenschap \ref{bspline_positiviteit} van B-splines.} en binnen $[u_i,u_{i+k+2}]$ is $u$ nooit kleiner dan $u_i$ of groter dan $u_{i+k+2}$.
+\end{enumerate}
 \end{proof}
+\end{ei}
 
-\item Eenheidspartitie (Sommatie tot $1$)
+\begin{ei}
+\textbf{Eenheidspartitie} (Sommatie tot $1$)
+\label{bspline_eenheidspartitie}
 \[
 \forall u \in [u_0,u_p)\ :\
 \sum_{i=-\infty}^{\infty}N_{i}^{n}(u)
@@ -84,24 +110,29 @@ $N_{i}^{k+1}(u)$ is echter steeds nul wanneer $u \not\in [u_i,u_{i+k+2}]$ en bin
 \]
 
 \begin{proof}Bewijs door inductie.\\
-De bewering geldt voor $n=0$ want voor elk interval $u_j,u_{j+1}$ is er precies \'e\'en $N_{i}^{0}$ die gelijk is aan \'e\'en terwijl de andere nul zijn.
+\begin{enumerate}
+\item De bewering geldt voor $n=0$. (Basis)\\
+Inderdaad, voor elk interval $u_j,u_{j+1}$ is er precies \'e\'en $N_{i}^{0}$ die gelijk is aan \'e\'en terwijl de andere nul zijn.
 \[
 u \in [u_0,u_p) \Rightarrow
 \sum_{i=0}^{p-1}N_{i}^{0}(u)
 = 1
 \]
-We bewijzen nu dat als de bewering geldt voor een bepaalde $n=k$, de bewering dan ook geldt voor $n=k+1$. We stellen dus dat volgende bewering geldt.
+\item De bewering geldt voor $n=k$. (Inductiehyposhese)
 \[
-\forall u \in [u_0,u_p) \Rightarrow
+\forall u \in [u_0,u_p)\ :\
 \sum_{i=-k}^{p-1}N_{i}^{k}(u)
 = 1
 \]
-Nu bewijzen we dat de volgende bewering daaruit volgt.
+\item De bewering geldt voor $n=k+1$. (Inductiestap)\\
+We bewijzen nu dat als de bewering geldt voor een bepaalde $n=k$, de bewering dan ook geldt voor $n=k+1$.
+We bewijzen dus dat uit de inductiehypothese volgt dat de volgende bewering geldt.
 \[
 \forall u \in [u_0,u_p) \Rightarrow
 \sum_{i=-k-1}^{p-1}N_{i}^{k+1}(u)
 = 1
 \]
+Schrijf het rechter lid uit met behulp van de recursiebetrekking voor B-splines\footnote{Zie definitie \ref{bspline}.}.
 \[
 \sum_{i=-k-1}^{p-1}N_{i}^{k+1}(u)
 = \sum_{i=-k-1}^{p-1}
@@ -110,6 +141,7 @@ Nu bewijzen we dat de volgende bewering daaruit volgt.
 + \frac{u_{i+k+2}-u}{u_{i+k+2}-u_{i+1}}			N_{i+1}^{k}(u)
 \right)
 \]
+Splits de sommatie
 \[
 =
 \sum_{i=-k-1}^{p-1}
@@ -118,7 +150,7 @@ Nu bewijzen we dat de volgende bewering daaruit volgt.
 \sum_{i=-k-1}^{p-1}
 \frac{u_{i+k+2}-u}{u_{i+k+2}-u_{i+1}}			N_{i+1}^{k}(u)
 \]
-In deze uitdrukking zijn de eerste en de laatste term beide nul vanwege de lokaliteitseigenschap.
+In deze uitdrukking zijn de eerste en de laatste term beide nul.\footnote{Zie eigenschap \ref{bspline_lokaliteit} van B-splines.}
 \[
 =
 \sum_{i=-k}^{p-1}
@@ -162,130 +194,224 @@ We vervangen dit nu zodat we verder gaan met de volgende uitdrukking.
 N_{i}^{k}(u)
 \]
 Uit de inductiehypothese volgt precies dat deze uitdrukking gelijk is aan \'e\'en. Hiermee is de stelling bewezen.
+\end{enumerate}
 \end{proof}
+\end{ei}
 
-\item Continu\"iteit.\\
+\begin{ei}
+\textbf{Continu\"iteit}\\
 $N_{i}^{n}(u)$ is een $C_{n-1}$ continue functie indien er geen meervoudige knooppunten voorkomen. \footnote{De continu\"iteitseigenschap kan niet bewezen worden via de recursiebetrekking. Wanneer we B-splines op een andere manier (equivalent) defini\"eren valt dit wel te bewijzen.}
-\end{enumerate}
+\end{ei}
 
-\section{Eigenschappen van B-spline curven}
-\begin{enumerate}
-\item Spline curves zijn invariant onder affiene transformaties.
+\section{Splinecurve}
+\begin{de}
+\[
+s(u) = \sum_{i=-n}^{p-1}d_iN_{i}^{n}(u)
+\]
+Bij een $n$-de graads \textbf{B-splinecurve} met $p+1$ knooppunten $u_i$ met $i = 0,\cdots ,p$ horen dus $p+n$ `de Boor-punten' $d_i$ met $i = -n, -n+1, \cdots, 0, \cdots , p-1$. Er zijn dan nog $2n$ extra knooppunten nodig: $u_{-n},\cdots,u_{-1}$ en $u_{p+1},\cdots,u_{p+n}$.
+\end{de}
+
+
+\begin{ei}
+Spline curves zijn invariant onder affiene transformaties.
 \begin{proof}
-Dit volgt uit de eenheidspartitie eigenschap van B-splines. Een B-spline curve is een affiene combinatie van de `de Boor' punten $\vec{d_i}$. Bijgevolg is een spline curve invariant onder een affiene transformatie (Zie \ref{affiene_transformatie}.).
+Een punt op een B-spline curve is een affiene (zelfs convexe) combinatie van de `de Boor-punten'. \footnote{Zie eigenschap \ref{bspline_eenheidspartitie} (en eigenschap \ref{bspline_positiviteit}) van B-splines.}
+Een affiene combinatie is invariant onder affiene transformaties.\footnote{Zie definitie \ref{affiene_transformatie}.}
 \end{proof}
+\end{ei}
 
-\item Bij wijziging van \'e\'en `de Boor' punt $\vec{d_i}$ zal niet heel de curve veranderen. Enkel het deel dat overeenstemt met $u \in [u_i,u_{i+n+1})$.
+\begin{ei}
+Bij wijziging van \'e\'en `de Boor' punt $d_i$ zal niet heel de curve veranderen. Enkel het deel dat overeenstemt met $u \in [u_i,u_{i+n+1})$.
 \begin{proof}
-Dit volgt uit de lokaliteitseigenschap van B-splines. $B$ splines buiten het interval $[u_i,u_{i+n+1})$ zijn namelijk steeds nul. De invloed van $\vec{d_i}$ in buiten $[u_i,u_{i+n+1})$ is dus onbestaande.
+B-splines buiten het interval $[u_i,u_{i+n+1})$ zijn steeds nul.\footnote{Zie eigenschap \ref{bspline_lokaliteit} van B-splines.}
+De invloed van een verandering in $d_i$ in buiten $[u_i,u_{i+n+1})$ is dus onbestaande.
 \end{proof}
+\end{ei}
 
-\item
-Spline curves liggen binnen de convex omhullende van de `de Boor' punten. Sterker nog, de curve ligt steeds binnen de convex omhullende van de $n+1$ omliggende `de Boor' punten ligt.
+\begin{ei}
+Spline curves liggen binnen de convex omhullende van de `de Boor' punten. Sterker nog, de curve ligt steeds binnen de convex omhullende van de $n+1$ omliggende `de Boor punten'.
 
 \begin{proof}
-In het deel van de curve dat overeenstemt met $u \in [u_j,u_{j+1})$ zijn enkel de B-splines $N_{j-n}^{n},..., N_{j}^{n}$ niet nul. Vanwege de positiviteitseigenschap zijn deze B-splines allemaal positief en vanwege de eenheidspartitieeigenschap sommeren ze tot \'e\'en. Een punt op de curve is dus een convexe combinatie van $n+1$ omliggende `de Boor' punten. Bovendien ligt elke convexe combinatie van punten binnen de convex omhullende van die punten (Zie \ref{convexe_combinatie}.).
+In het deel van de curve dat overeenstemt met $u \in [u_j,u_{j+1})$ zijn enkel de B-splines $N_{j-n}^{n},..., N_{j}^{n}$ niet nul.\footnote{Zie eigenschap \ref{bspline_lokaliteit} van B-splines.} Een punt op de B-splinecurve is een affiene\footnote{Zie eigenschap \ref{bspline_eenheidspartitie} van B-splines.} en zelfs convexe\footnote{Zie eigenschap \ref{bspline_positiviteit} van B-splines.} combinatie van $n+1$ `de Boor punten'. Van een convexe combinatie weten we bovendien dat ze binnen de convex omhullende ligt.\footnote{Zie eigenschap \ref{combinatie_in_omhullende} van convexe combinaties.}
 \end{proof}
-\end{enumerate}
+\end{ei}
+
+
+
 
 \section{Evaluatie van een punt op een B-Spline curve (de Boor)}
 Gegeven een curve $s(u)$ gedefinie\"erd over een interval $u_0,u_p$. 
 \[
-s(u) = \sum_{i=-n}^{p-1}\vec{d_i}N_{i}^{n}(u)
+s(u) = \sum_{i=-n}^{p-1}d_iN_{i}^{n}(u)
 \]
-Gevraagd is het punt op $s$ dat overeen komt met $u\in [u_l,u_{l+1})$.
-Door de lokaliteitseigenschap weten we dat het punt afhangt van de `de Boor' punten $\vec{d^{l-n}},...,\vec{d_{l}}$, de andere `de Boor' punten spelen geen rol.\\
-Definieer $\vec{d_{i}^{[k]}}$ als volgt.
+Gevraagd is het punt op $s$ dat overeen komt met $u\in [u_l,u_{l+1})$. Het punt $s(u)$ hangt af van $n$ `de Boor punten' $d_{l-n},\cdots,d_{l}$. De andere `de Boor punten' spelen geen rol.\footnote{Zie eigenschap \ref{bspline_lokaliteit} van B-splines.}
 \[
-\vec{d_{i}^{[k]}}
-= (1-\alpha_{k,i})\vec{d_{i-1}^{[k-1]}}
-+ \alpha_{k,i}\vec{d_{i}^{[k-1]}}
+s(u) = \sum_{i=l-n}^{l}d_{i}N_{i}^{n}(u)
+\]
+\begin{st}
+$s(u)$ is $d_{l}^{[k]}$ waarbij $d_{l}^{[k]}$ als volgt gedefinieerd is.
+\[
+d_{i}^{[k]}
+= (1-\alpha_{k,i})d_{i-1}^{[k-1]}
++ \alpha_{k,i}d_{i}^{[k-1]}
 \text{ met }
 \alpha_{k,i} = \frac{u-u_i}{u_{i+n+1-k}-u_{i}}
 \]
-$s(u)$ is nu precies $\vec{d_{l}^{[k]}}$.
+
 \begin{proof}
 \[
 s(u)
-= \sum_{i=-n}^{p-1}\vec{d_i}N_{i}^{n}(u)
+= \sum_{i=-n}^{p-1}d_iN_{i}^{n}(u)
 \underset{u \in [u_l,u_{l+1})}{=}
-\sum_{i=l-n}^{l}\vec{d_i}N_{i}^{n}(u)
+\sum_{i=l-n}^{l}d_iN_{i}^{n}(u)
 \]
 \[
 =
-\sum_{i=l-n}^{l}\vec{d_i}
+\sum_{i=l-n}^{l}d_i
 \left(
 \frac{u-u_i}{u_{i+n}-u_i}N_i^{n-1}(u) + 
 \frac{u_{i+n+1}-u}{u_{i+n+1}-u_{i+1}}N_{i+1}^{n-1}(u)
 \right)
 \]
+Splits de sommatie.
 \[
 =
-\sum_{i=l-n}^{l}\vec{d_i}
+\sum_{i=l-n}^{l}d_i
 \frac{u-u_i}{u_{i+n}-u_i}N_i^{n-1}(u) + 
-\sum_{i=l-n}^{l}\vec{d_i}
+\sum_{i=l-n}^{l}d_i
 \frac{u_{i+n+1}-u}{u_{i+n+1}-u_{i+1}}N_{i+1}^{n-1}(u)
 \]
-Bovendien geldt $N_{l-n}^{n-1}(u) = 0$ en $N_{l+1}^{n-1}(u) = 0$
+De eerste en de laatste term in deze zijn nul.\footnote{Zie eigenschap \ref{bspline_lokaliteit} van B-splines.}
 \[
 =
-\sum_{i=l-n+1}^{l}\vec{d_i}
+\sum_{i=l-n+1}^{l}d_i
 \frac{u-u_i}{u_{i+n}-u_i}N_i^{n-1}(u) + 
-\sum_{i=l-n}^{l-1}\vec{d_i}
+\sum_{i=l-n}^{l-1}d_i
 \frac{u_{i+n+1}-u}{u_{i+n+1}-u_{i+1}}N_{i+1}^{n-1}(u)
 \]
 De tweede som in bovenstaande uitdrukking valt te herschrijven als volgt.
 \[
-\sum_{i=l-n}^{l-1}\vec{d_i}
+\sum_{i=l-n}^{l-1}d_i
 \frac{u_{i+n+1}-u}{u_{i+n+1}-u_{i+1}}N_{i+1}^{n-1}(u)
 =
-\sum_{i=l-n+1}^{l}\vec{d_{i-1}}
+\sum_{i=l-n+1}^{l}d_{i-1}
 \frac{u_{i+n}-u}{u_{i+n}-u_{i}}N_{i}^{n-1}(u)
 \]
-We kunnen dit dus vervangen.
+We kunnen dit dus vervangen in de originele vergelijking om verder te gaan.
+\[
+=
+\sum_{i=l-n+1}^{l}d_i
+\frac{u-u_i}{u_{i+n}-u_i}N_i^{n-1}(u) + 
+\sum_{i=l-n+1}^{l}d_{i-1}
+\frac{u_{i+n}-u}{u_{i+n}-u_{i}}N_{i}^{n-1}(u)
+\]
 \[
 s(u)
 =
 \sum_{i=l-n+1}^{l}
 N_i^{n-1}(u)
 \left(
-\vec{d_{i-1}}
+d_{i-1}
 \frac{u-u_i}{u_{i+n}-u_i} +
-\vec{d_i}
+d_i
 \frac{u_{i+n}-u}{u_{i+n}-u_{i}}
 \right)
 \]
 \[
 s(u)
 = \sum_{i=l-n+1}^{l}
-\vec{d_{i}^{[1]}}
+d_{i}^{[1]}
 N_i^{n-1}(u)
 \]
-Dit proces kunnen we nog $n-1$ maal herhalen, tot we volgende uitdrukking bekomen.
+Bovenstaan proces kunnen we herhalen om de volgende uitdrukking te krijgen.
 \[
-s(u) = \sum_{i=l}^{l}\vec{d}_{i}^{[n]}N_{i}^{0}(u) = \vec{d}_{i}^{[n]}
+s(u)
+= \sum_{i=l-n+2}^{l}
+d_{i}^{[2]}
+N_i^{n-2}(u)
+\]
+Na $j$ iteraties bekomen we dan volgende uitdrukking ($j\le n$)
+\[
+s(u)
+= \sum_{i=l-n+j}^{l}
+d_{i}^{[j]}
+N_i^{n-j}(u)
+\]
+Na $n$ iteraties bekomen we dan hetgeen te bewijzen viel.
+\[
+s(u) = \sum_{i=l}^{l}d_{i}^{[n]}N_{i}^{0}(u) = d_{i}^{[n]}
 \]
 \end{proof}
+\end{st}
 
 \subsection{Toevoegen van knooppunten en `de Boor' punten}
-Wanneer we \'e'en knooppunt en \'e\'en `de Boor' punt toevoegen (en we willen dat de curve hetzelfde blijft,) voeren we volgend proces uit.\\
-We willen een splinecurve met knooppunten $u_0,...,u_p$ en `de Boor' punten $\vec{d_{-n}},...,\vec{d_{p-1}}$ te schrijven als een splinecurve met knooppunten $u^{*}_0,...,u^{*}_{p^{*}}$ en `de Boor' punten $\vec{d}_{-n}^{*},...,\vec{d}_{p^{*}-1}^{*}$.
+Wanneer we aan een gegeven splinecurve een punt willen toevoegen, zonder dat de curve verandert, moeten we \'e\'en extra knooppunt $u_l$ voorzien en de nieuwe controlepunten $d_i$ zoeken. 
+
+\subsubsection*{Nieuwe knooppunten}
+We voegen \'e\'en (vrij te kiezen) knooppunt $u_{l+1}^*$ toe aan de oude knooppunten $u_i$. 
 \[
-s(u) = \sum_{-n}^{p-1}\vec{d}_iN_{i}^{n}(u) \text{ en } s^{*}(u) = \sum_{-n}^{p^{*}-1}\vec{d}^{*}_iN_{i}^{*n}(u) 
+\begin{array}{c||c|c|c|c|c|c|c|c|c||}
+\text{oud} & u_{l-n} & u_{l-n+1} & \cdots & u_l & & u_{l+1} & u_{l+2} & \cdots & u_{p+n}
+\\
+\text{nieuw} & u_{l-n}^* & u_{l-n+1}^* & \cdots & u_l^* & u_{l+1}^{*} & u_{l+2}^{*} & u_{l+3}^{*} & \cdots & u_{p+n+1}
+\end{array}
 \]
-\todo{Volledig uitwerken, dit is redelijk vaag.}
-De nieuwe knooppunten zien er dan als volgt uit.
+
+\subsubsection*{Nieuwe controlepunten}
+De nieuwe `de Boor punten' vinden we dan als volgt.
 \[
-\{u_{-n},...,u_{p}\}
-= \{u_{-n},...,u_{l},u_{l+1},...,u_{p^{*}}\} 
+d_{i}^{*}
+\left\{
+\begin{array}{c}
+d_{i} \text{ voor } i\le l\\
+d_{i}^{[1]} \text{ voor } l-n< i\le l\\
+d_{i-1} \text{ voor } i \ge l+1
+\end{array}
+\right.
 \]
-De nieuwe `de Boor' punten zien er dan als volgt uit.
+Schematisch ziet dat er als volgt uit. Merk op dat de onderste rij wel degelijk $1$ element meer bevat. Het extra element zit in de middenste "$\cdots$".
 \[
-\vec{d}_{l-n}^{*} = \vec{d}_{l-n} \text{, } \vec{d}_{l+1}^{*} = \vec{d}_{l}\text{ en } \vec{d}_{i}^{*} = \vec{d}_{i}^{[1]} \text{ voor } i\ge l-n+1
+\begin{array}{c||c|c|c|c|c|c|c|c|c|c|c|c|c||}
+\text{oud} & d_{-n} & \cdots & d_{l-n-1} & d_{l-n} & d_{l-n+1} & d_{l-n+2} & \cdots & \cdots& d_{l-1} & d_{l} & d_{l+1} & \cdots & d_{p+1}
+\\
+&&&&\searrow&\downarrow\searrow&\downarrow\searrow & & \searrow & \downarrow\searrow & \downarrow&&&
+\\
+\text{nieuw} & d_{-n} & \cdots & d_{l-n-1} & d_{l-n}& d_{l-n+1}^{[1]} & d_{l-n+2}^{[1]} & \cdots & \cdots & d_{l-1}^{[1]} & d_{l}^{[1]} & d_{l+1} & \cdots& d_{p+1}
+\end{array}
 \]
-\todo{Betere uitleg hier!!}
+De curve kunnen we dan in functie van de nieuwe `de Boor punten' en de nieuwe knooppunten schrijven.
+
+\[
+s(u) = \sum_{-n}^{p-1}d_iN_{i}^{n}(u) \text{ en } s^{*}(u) = \sum_{-n}^{p^{*}-1}d^{*}_iN_{i}^{*n}(u) 
+\]
+Merk op dat de $d_{\cdot}^{*}$, de nieuwe `de Boor punten' precies de punten zijn die we vinden in de eerste iteratie van het algoritme van de Boor.
 
 \section{NURBS: rationale splinecurven}
-\todo{schrijf hier iets zinnings over}
+\subsection{Rationale B\'ezier-curven}
+Geef elk controlepunt een bepaald belang $w_i$ en defini\"eer een rationale B\'ezier-curve als volgt.
+\begin{equation}
+x(t) = \cfrac{\sum_{i=0}^{n}w_ib_iB_{i}^{n}(t)}{\sum_{i=0}^{n}w_iB_{i}^{n}(t)}
+\end{equation}
 
+\subsection{Rationale Splinecurven}
+Geef elk controlepunt een bepaald belang $w_i$ en defini\"eer een rationale Splinecurve als volgt.
+\[
+x(u) = \cfrac{\sum_{i=-n}^{p-1}w_id_iN_{i}^{n}(u)}{\sum_{i=-n}^{p-1}w_iN_{i}^{n}(u)}
+\]
+
+\section{Samenvatting}
+Voor een B-splinecurve van graad $n$:
+\begin{itemize}
+\item $p+1+2n$ knooppunten $u_{-n},\cdots,u_{-1},u_{0},\cdots,u_{p},u_{p+1},\cdots,u_{p+n}$.
+\item $p+n$ `de Boor-punten' $d_{-n},\cdots,d_{0},\cdots,d_{p-1}$
+\end{itemize}
+
+\subsection{Verband tussen knooppunten, controlepunten en de splinecurve}
+\begin{itemize}
+\item $n+1$ knooppunten $u_{i},\cdots,u_{i+n+1}$ bepalen $N_{i}^{n}$.
+\item $d_i$ be\"invloedt $s(u)$ voor $u\in [u_i,u_{i+n+1}]$ (een interval met $n+1$ knooppunten).
+\item $s(u)$ hangt af van $n$ controlepunten $d_{j-n},\cdots,d_{j}$ als $u\in [u_{j},u_{j+1}]$.
+\end{itemize}
 \end{document}
+
+\todo{invloed van samenvallende knooppunten en controlepunten}
