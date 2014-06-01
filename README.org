@@ -8,3 +8,5 @@ Notities voor Toepassingen van meetkunde in informatica
    Bedankt, Jonas Devlieghere, voor de toegang!
 
    U kan de .pdf hier [[http://intexration.jonasdevlieghere.com:8000/pdf/NorfairKing/TMI-Notities/computergesteund_ontwerp_van_curven_en_oppervlakken][hier]] downloaden.
+** Verdere Informatie
+   Voor een samenvatting van _heel_ de cursus verwijzen we naar de [[http://www.scribd.com/doc/87272338/Samenvatting-Toepassingen-van-de-Meetkunde-in-de-Informatica][tekst van Willem van Onsem.]]
