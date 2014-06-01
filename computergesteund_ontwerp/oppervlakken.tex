@@ -27,8 +27,9 @@ r(u) = \frac{u-u_i}{\Delta u_i} \text{ en } s(v) = \frac{v-v_i}{\Delta v_i}
 \[
 \phi_{i}(r(u)) = B_{i}^{n}(r)
 \]
+We verkrijgen dan volgend B\'ezier-oppervlak.
 \begin{de}
-We verkrijgen dan volgend \textbf{B\'ezier-oppervlak}.
+\textbf{B\'ezier-oppervlak}
 \[
 x(r(u),s(v)) = \sum_{i=0}^{k}\sum_{j=0}^{m}b_{i,j}B_{i}^{n}(r)B_{j}^{m}(s)
 \]
@@ -97,6 +98,36 @@ $C^{1}$ continu\"iteit vereist dat de buitenste $2$ punten op het controlenet co
 \]
 Volledige $C^{1}$ continu\"iteit, in plaats van enkel \'e\'en richting, vereist dat de draaivectoren in de hoekpunten gelijk zijn. Dit betekent dat er, rond de hoekpunten, nog $8$ punten niet meer vrij gekozen kunnen worden.
 
+
 \section{Spline-oppervlakken}
+Tenslotte kunnen we evenzeer B-splines gebruiken als basisfuncties.
+\[
+\phi_{i}(u) = N_{i}^{n}(u)
+\]
+Op deze manier kunnen we een spline-oppervlak defini\"eren.
+\begin{de}
+\textbf{B-Spline-oppervlak}
+\[
+s(u,v) = \sum_{i=-n}^{p}\sum_{j=-m}^{q}p_{i,j}N_{i}^{n}(u)M_{j}^{m}(v)
+\]
+\end{de}
+\begin{ei}
+Het verband tussen de punten op het B-spline-oppervlak en de `de Boor punten' is affien invariant.
+\begin{proof}
+Deze eigenschap volgt rechtstreeks uit de overeenkomstige eigenschap van B-spline-curven.\footnote{Zie eigenschap \ref{spline_affien_invariant} van B-spline-curven.} Elk punt op het B-spline-oppervlak is namelijk nog steeds een affiene combinatie van punten.\footnote{Zie definitie \ref{affiene_combinatie}.}
+\end{proof}
+\end{ei}
+
+\begin{ei}
+Elk punt op het B-spline-oppervlak ligt binnen de convex omhullende veelhoek van het B-spline-controlenet.
+\begin{proof}
+Ook deze eigenschap volgt rechtstreeks uit de overeenkomstige eigenschap van B-spline-curven.\footnote{Zie eigenschap \ref{splinecurve_in_complex_omhullende} van B-spline-curven.}Elk punt op het B-spline-oppervlak is ook een convexe combinatie van controlepunten.\footnote{Zie eigenschap \ref{combinatie_in_omhullende} van convex omhullende.}
+\end{proof}
+\end{ei}
+
+\begin{ei}
+De verplaatsing van een controlepunt zal enkel een verandering teweeg brengen in $(n+1)\cdot(m+1)$ controlepunten.\footnote{Zie eigenschap \ref{bspline_lokaliteit} van B-splines.}
+\end{ei}
+
 
 \end{document}
