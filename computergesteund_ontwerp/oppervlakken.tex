@@ -2,8 +2,132 @@
 \begin{document}
 
 \chapter{Modellering van oppervlakken}
+We willen driedimensionale interpolerende \textbf{curven} voor \textbf{punten} uitbreiden naar interpolerende \textbf{oppervlakken} voor een \textbf{controlenet}.
+Wanneer we over basisfuncties $\phi$ beschikken voor een curve, kunnen we diezelfde basisfuncties gebruiken voor een oppervlak.
+\[
+x = \sum_{i=0}^{n}p_i\phi_{i}(u) \longrightarrow \sum_{i=0}^{n}\sum_{j=0}^{m}p_{i,j}\phi_{i}(u)\phi_{j}(u)
+\]
 
-\todo{Wtf is this shit!}
+\section{Interpolerende  tensorproduct-oppervlakken}
+Een eerste mogelijkheid bestaat erin de Lagrange veeltermen te gebruiken als basisfuncties. We breiden dan een interpolerende curve voor een reeks punten uit naar een interpolerend oppervlak voor een controlenet van punten.
+\[
+\phi_{i}(u) = L_{i}^{n}(u)
+\]
+We verkrijgen volgend interpolerend tensorproduct-oppervlak van graad $n$
+\[
+x(u,v) = \sum_{i=0}^{n}\sum_{j=0}^{m}p_{i,j}L_{i}^{n}(u)L_{j}^{m}
+\]
+
+\section{B\'ezier-oppervlakken}
+We kunnen er ook voor kiezen om Bernstein veeltermen te gebruiken als basisfuncties. 
+We moeten de parameters dan wel indelen in segmenten met lokale parameters in $[0,1]$.
+\[
+r(u) = \frac{u-u_i}{\Delta u_i} \text{ en } s(v) = \frac{v-v_i}{\Delta v_i}
+\]
+\[
+\phi_{i}(r(u)) = B_{i}^{n}(r)
+\]
+We verkrijgen dan volgend B\'ezier-oppervlak.
+\begin{de}
+\textbf{B\'ezier-oppervlak}
+\[
+x(r(u),s(v)) = \sum_{i=0}^{k}\sum_{j=0}^{m}b_{i,j}B_{i}^{n}(r)B_{j}^{m}(s)
+\]
+\end{de}
+
+\begin{ei}
+Het verband tussen een B\'ezier-oppervlak-segment en zijn B\'ezierpunten-net is affien invariant.
+\begin{proof}
+Dit volgt rechtstreeks uit de overeenkomstige eigenschap van B\'ezier-curven.\footnote{Zie eigenschap \ref{bezier_affien_invariant} van B\'ezier-curven.} Het is ook eenvoudig te zien als we het oppervlak zien als een combinatie van het B\'ezier-proces in twee richtingen. Een punt op een B\'ezier-oppervlak is namelijk nog steeds een affiene combinatie van punten.\footnote{Zie definitie \ref{affiene_combinatie}.}
+\end{proof}
+\end{ei}
+
+\begin{ei}
+Een B\'ezier-oppervlak-segment ligt binnen de convex omhullende van het B\'ezierpunten-net.
+\begin{proof}
+Deze eigenschap volgt eveneens rechtstreeks uit de overeenkomstige eigenschap van B\'ezier-curven.\footnote{Zie eigenschap \ref{bezier_in_convex_omhullende} van B\'ezier-curven.} Een punt op een B\'ezier-oppervlak is nameliljk nog steeds een convexe combinatie van punten.\footnote{Zie eigenschap \ref{combinatie_in_omhullende} van de convex omhullende.}
+\end{proof}
+\end{ei}
+
+\begin{ei}
+De afgeleiden van een B\'ezier-oppervlak zien er als volgt uit.
+\[
+\frac{d}{du}x(r(u),s(v)) = \frac{n}{\Delta u_0}\sum_{i=0}^{n-1}\sum_{j=0}^{m}(b_{i+1,k}-b_{i,k})B_{i}^{n-1}(r)B_{j}^{m}(s)
+\]
+\[
+\frac{d}{dv}x(r(u),s(v)) = \frac{m}{\Delta v_0}\sum_{i=0}^{n}\sum_{j=0}^{m-1}(b_{i,k+1}-b_{i,k})B_{i}^{n}(r)B_{j}^{m-1}(s)
+\]
+\[
+\frac{d^2}{dudv}x(r(u),s(v)) = \frac{nm}{\Delta u_0\Delta v_0}\sum_{i=0}^{n-1}\sum_{j=0}^{m-1}\left((b_{i+1,k+1}-b_{i,k+1})-(b_{i+1,k}-b_{i,k})\right)B_{i}^{n-1}(r)B_{j}^{m+1}(s)
+\]
+Dit houdt in dat het B\'ezier-oppervlakt raakt aan het B\'ezier-controlenet in de vier hoekpunten.
+\end{ei}
+
+\subsection{Evaluatie van een punt op het B\'ezier-oppervlak}
+Een punt op een B\'ezier-oppervlak kan evenzeer effici\"ent berekend worden als volgt.
+\begin{enumerate}
+\item Bepaal de $m+1$ punten $d_k^{*}$ met het algoritme van de Casteljau.\footnote{Zie \ref{de_casteljau}.}
+\[
+d_{i}= \sum_{j=0}^{n}b_{i,j}B_{j}^{m}(s)
+\]
+\item Evalueer nu het algoritme van de Casteljau opnieuw op het resultaat om $x(r,s)$ te bekomen.
+\[
+x(r,s) = \sum_{i=0}^{m}d_{i}B_{i}^{n}(r)
+\]
+\end{enumerate}
+Dit uitgebreid algoritme heeft een complexiteit van $O(mn^2)$. Dat houdt in dat we zonder meer de rollen van $m$ en $n$ kunnen omwisselen om een betere complexiteit te bekomen wanneer $n>m$ geldt.
+
+\subsection{Graadverhoging}
+We kunnen het algoritme van de Casteljau ook gebruiken om de graad van het B\'ezier-oppervlak te verhogen in \'e\'en richting.
+We moeten hiervoor het algoritme $m+1$ keer uitvoeren om de punten $d_{j}(s(v_i))$ te berekenen. Deze punten vormen dan de nieuwe randpunten voor het B\'ezier-controlenet.
+
+\subsection{Samengestelde B\'ezier-oppervlakken}
+Stel dat we twee B\'ezier-oppervlakte-segmenten berekend hebben met aaneensluitende parameterruimtes $[u_0,u_1]\times[v_0,v_1]$ en $[u_1,u_2]\times[v_0,v_1]$. We leggen dan een aantal voorwaarden op zodat de segmenten enigsinds continu aansluiten.
+
+\subsection*{$C^{0}$ continu\"iteit}
+$C^{0}$ continu\"iteit houdt in dat de randen van de B\'ezier-controlenetten overeenkomen.
+\[
+b_{n,j}^{(1)} = b_{0,j}^{(1)}
+\]
+Visueel kan u het zich voorstellen als twee lakens die aan dezelfde wasdraad zijn gehangen.
+
+\subsection*{$C^{1}$ continu\"iteit}
+$C^{1}$ continu\"iteit vereist dat de buitenste $2$ punten op het controlenet colineair zijn, met een specifieke verhouding ertussen.
+\[
+\frac{1}{\Delta u_0}(b_{n,k}^{(1)}-b_{n-1,k}^{(1)}) = \frac{1}{\Delta u_1}(b_{1,k}^{(1)}-b_{0,k}^{(1)})
+\]
+Volledige $C^{1}$ continu\"iteit, in plaats van enkel \'e\'en richting, vereist dat de draaivectoren in de hoekpunten gelijk zijn. Dit betekent dat er, rond de hoekpunten, nog $8$ punten niet meer vrij gekozen kunnen worden.
+
+
+\section{Spline-oppervlakken}
+Tenslotte kunnen we evenzeer B-splines gebruiken als basisfuncties.
+\[
+\phi_{i}(u) = N_{i}^{n}(u)
+\]
+Op deze manier kunnen we een spline-oppervlak defini\"eren.
+\begin{de}
+\textbf{B-Spline-oppervlak}
+\[
+s(u,v) = \sum_{i=-n}^{p}\sum_{j=-m}^{q}p_{i,j}N_{i}^{n}(u)M_{j}^{m}(v)
+\]
+\end{de}
+\begin{ei}
+Het verband tussen de punten op het B-spline-oppervlak en de `de Boor punten' is affien invariant.
+\begin{proof}
+Deze eigenschap volgt rechtstreeks uit de overeenkomstige eigenschap van B-spline-curven.\footnote{Zie eigenschap \ref{spline_affien_invariant} van B-spline-curven.} Elk punt op het B-spline-oppervlak is namelijk nog steeds een affiene combinatie van punten.\footnote{Zie definitie \ref{affiene_combinatie}.}
+\end{proof}
+\end{ei}
+
+\begin{ei}
+Elk punt op het B-spline-oppervlak ligt binnen de convex omhullende veelhoek van het B-spline-controlenet.
+\begin{proof}
+Ook deze eigenschap volgt rechtstreeks uit de overeenkomstige eigenschap van B-spline-curven.\footnote{Zie eigenschap \ref{splinecurve_in_complex_omhullende} van B-spline-curven.}Elk punt op het B-spline-oppervlak is ook een convexe combinatie van controlepunten.\footnote{Zie eigenschap \ref{combinatie_in_omhullende} van convex omhullende.}
+\end{proof}
+\end{ei}
+
+\begin{ei}
+De verplaatsing van een controlepunt zal enkel een verandering teweeg brengen in $(n+1)\cdot(m+1)$ controlepunten.\footnote{Zie eigenschap \ref{bspline_lokaliteit} van B-splines.}
+\end{ei}
 
 
 \end{document}

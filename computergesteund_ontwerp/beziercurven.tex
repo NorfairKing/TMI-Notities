@@ -220,6 +220,7 @@ De som van alle $B_{i}^{n}(t)$ is $1$.\footnote{Zie eigenschap \ref{bern_eenheid
 \end{ei}
 
 \begin{ei}
+\label{bezier_affien_invariant}
 Het verband tussen de B\'ezier curve en de B\'ezier punten is invariant onder affiene transformaties.
 \begin{proof}
 Zij $L$ een affiene transformatie.
@@ -232,6 +233,7 @@ L(x(t))
 \end{ei}
 
 \begin{ei}
+\label{bezier_in_convex_omhullende}
 Elk punt op een B\'ezier curve light binnen de convex omhullende van de controlepunten.
 \begin{proof}
 Elk punt van de Bezier-curve is een convexe combinatie van de controle punten want elke Bernstein-veelterm is positief. \footnote{Zie eigenschap \ref{bern_positiviteit} van Berstein-veeltermen.} Omdat elk punt op de curve een convexe combinatie is, ligt elk punt binnen de convex omhullende van de controlepunten. \footnote{Zie stelling \ref{combinatie_in_omhullende}.}
@@ -262,6 +264,7 @@ Het aantal snijpunten van een willekeurige rechte (in 2D) of vlak (in 3D) met de
 \end{ei}
 
 \subsection{Evaluatie van een punt op een B\'ezier curve (de Castejau)}
+\label{de_casteljau}
 \begin{st}
 Zij $b_{i}^{[0]} = b_{i}$ en definieer $b_{i}^{[k]}$ recursief als volgt.
 \[
