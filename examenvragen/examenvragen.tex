@@ -1,0 +1,82 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[dutch]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Tom Sydney Kerckhove}
+\title{Examenvragen TMI}
+
+\usepackage{titlesec}
+\newcommand{\partbreak}{\clearpage}
+
+\newcommand{\sectionbreak}{\clearpage}
+
+\renewcommand\thesection{Vraag \arabic{section}}
+\renewcommand\thesubsection{\arabic{section}\arabic{subsection}}
+\begin{document}
+
+\pagebreak
+
+\input{titelpagina}
+
+\part{B\'ezier-curven}
+\iffalse
+\section{Bespreek $C^{2}$ Continu\"iteit.}
+\section{Hoe bekomt men $C^{2}$ continu\"iteit bij samengestelde b\'ezier curven?}
+\section{Geef het algoritm van de Casteljau en bewijs de correctheid ervan.}
+\section{Bespreek de variatieverminderingseigenschap.}
+\section{Wat betekent de variatieverminderingseigenschap voor B\'ezier curven?}
+\section{Wat betekent de variatieverminderingseigenschap voor splines?}
+\section{Bespreek subdivisie en geef de methode.}
+\section{Bespreek graadverhoding, geef het bewijs en leg uit waarvoor het dient.}
+\section{Bespreek tensorproductoppervlakken aan de hand van B\'ezier-oppervlakken.}
+\section{Bereken de tweede partiele afgeleide in de hoekpunten van een B\'ezier-oppervlak, leg uit en geef grafisch weer.}
+\fi
+
+\part{Spline-curven}
+\iffalse
+\section{Bewijs de eenheidspartitieeigenschap van genormaliseerde B-splines.}
+\section{Hoe kan men bij splinecurven punten laten interpoleren door het samennemen van controlepunten? Hoeveel moeten er samenvallen? }
+\section{Hoe kan men bij splines punten laten interpoleren door het samennemen van knooppunten?}
+\section{Geef het algoritm van de Boor en bewijs de correctheid ervan.}
+\section{Hoe kan je ervoor zorgen dat een deel van een spline curve een recht lijnstuk is?}
+\fi
+
+\part{Algemeen}
+\iffalse
+\section{Wat is ``the bounding box quick rejection test'' uit het algoritme om te bepalen of twee rechten elkaar snijden. Geef de twee toepassingen in het algoritme en een implementatie in pseudocode.}
+\section{bespreek het algoritme voor het bepalen van de onderbrug en bovenbrug waarom is de kleinste y-coordinaat een slechte schatting voor het bepalen van de onderbrug?}
+\section{geef een algoritme dat in O(N log N) bewerkingen nagaat of in een vz van N lijnstukken er snijdende lijnstukken in voorkomen}
+\section{Bewijs correctheid van dit algoritme geef beknopt hoe dit algoritme en de gegevensstrukturen moeten aangepast worden om alle snijdingen te vinden}
+\section{geef een algoritme voor de berekening van het VPP van een vz van N punten in O(nlog n) bewerkingen verantwoord de rekencomplexiteit.}
+\section{bespreek graham scan + correctheidsbewijs + toon aan dat dit O(nlogn)bewerkingen gebeurt}
+\section{wanneer is de inpakmethode (jarvis march) efficienter dan de methode van graham (graham scan)}
+\fi
+
+\part{Voronoi diagrammen}
+\iffalse
+\section{Bewijs: ``Een voronoi diagramma van een verzameling S heeft maximaal $2N - 5$ voronoipunten en $3N - 6$ voronoi zijden''}
+\section{Bewijs: ``Een voronoi veelhoek van een punt $p_i$ is begrensd <=> $p_i$ element van $inw(CH(S))$'' Bespreek het nut van deze stelling.}
+\section{Bewijs dat minimale doorloopboom deelverzameling is van de Delaunay triangulatie. Wat is het nut van deze eigenschap?}
+\section{Bewijs: "Twee dichtste buren hebben een gemeenschappelijke voronoi zijde"}
+\section{Geen een strategie en een hoog-niveau algoritme  voor het vinden van de maximale lege cirkel binnen de COV van een verzameling punten.}
+\fi
+
+\part{Nabijheidsproblemen}
+\iffalse
+\section{wat betekent volgende uitspraak: probleem A is ?(N) transformeerbaar tot probleem B? waarvoor kan een dergelijke uitspraak nuttig gebruikt worden + vb}
+\section{wat is een EMDB van een vz punten + verband met Voronoi diagramma van een vz punten?}
+\section{bespreek beknopt hoe een EMDB van een vz punten kan berkend worden in O(nlogn) bewerkingen}
+\part{Fortune}
+\section{Bespreek de event punten in het algoritme van Fortune Welke acties moeten ondernomen worden?}
+\fi
+
+\part{Padplanning}
+\iffalse
+\section{Hoe bepaal je het gebied dat kan bereikt worden door een robotarm met 3 segmenten. Is de volgorde van de stukken belangrijk?}
+\section{Geef en bespreek de minkovski-som met een voorbeeld.}
+\fi
+
+\end{document}
