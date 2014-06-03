@@ -8,7 +8,8 @@
 \usepackage{pdfpages}
 
 \title{Oefenzitting 1}
-\author{Tom Sydney Kerckhove}
+\author{Tom Sydney Kerckhove
+		\\ Verbeterd door Ward Schodts}
 \date{3 maart 2014}
 
 \begin{document}
@@ -56,6 +57,14 @@ n
 \frac{(n-1)!}{(i-1)!(n-i)!}(1-t)^{n-i}t^{i-1} - \frac{(n-1)!}{i!(n-i-1)!}t^i(1-t)^{n-i-1}
 \right)
 \]
+$$
+=
+n
+\left(
+\binom{n-1}{i-1}(1-t)^{n-i}t^{i-1} -
+\binom{n-1}{i}t^i(1-t)^{n-i-1}
+\right)
+$$
 \[
 =
 n
@@ -75,7 +84,7 @@ B^{n-1}_{i-1}(t) - B^{n-1}_{i}(t)
 \Leftrightarrow
 \] 
 \[
-n=0 \wedge B^{n-1}_{i-1}(t) - B^{n-1}_{i}(t) = 0
+n=0 \lor B^{n-1}_{i-1}(t) - B^{n-1}_{i}(t) = 0
 \]
 \[
 B^{n-1}_{i-1}(t) = B^{n-1}_{i}(t)
@@ -90,10 +99,10 @@ B^{n-1}_{i-1}(t) = B^{n-1}_{i}(t)
 i(1-t)=t(n-i) 
 \]
 \[
-i-it-tn+it= i+it =0
+i-it-tn+it= i-nt =0
 \]
 \[
-i=0 \wedge t=-1
+t = \frac{i}{n}
 \]
 
 \section{Vraag 2}
