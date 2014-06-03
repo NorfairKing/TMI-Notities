@@ -135,7 +135,7 @@ B^{n-1}_{i-1}(t) - B^{n-1}_{i}(t)
 \sum_{i=0}^{n-1}
 \vec{b_{i}}B^{n-1}_{i}(t)
 \]
-Verander de index van de eerste sommatie (hoog ze met 1 op)
+Verander de index van de eerste sommatie (hoog ze met 1 op), dit is toegelaten omdat voor $i=0$ de eerste term van de som nul wordt.
 \[
 = n
 \sum_{i=0}^{n-1}
@@ -147,7 +147,7 @@ Verander de index van de eerste sommatie (hoog ze met 1 op)
 \[
 = n
 \sum_{i=0}^{n-1}
-(\vec{b_{i+1}}-\vec{b_{i}})B^{n-1}_{i}(t)
+(\vec{b}_{i+1}-\vec{b}_{i})B^{n-1}_{i}(t)
 \]
 \[
 = n
@@ -166,7 +166,15 @@ De eerste uitdrukking behandelt het curvesegment, de tweede uitdrukking de volle
 
 
 \subsection*{(d)}
-De eerste 3. De tweede afgeleide zegt iets over kromming van de curve.
+$$
+\frac{d^2}{dt^2}\vec{x}(t) = n(n-1)
+\sum_{i=0}^{n-2}\Delta\vec{b_{i}}B^{n-2}_{i}(t)
+$$
+$$
+\frac{d^2}{dt^2}\vec{x}(t)_{|t=1} = n(n-1)
+(\vec{b}_n - 2\vec{b}_{n-1} + \vec{b}_{n-1})
+$$
+De laatste 3, de andere termen worden nul. De tweede afgeleide zegt iets over kromming van de curve.
 
 \section{Vraag 3}
 Zij:
