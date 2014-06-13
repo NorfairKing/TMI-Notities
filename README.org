@@ -5,7 +5,7 @@ Notities voor Toepassingen van meetkunde in informatica
    - Oefenzittingen 2014
    - [[http://intexration.jonasdevlieghere.com:8000/pdf/NorfairKing/TMI-Notities/examenvragen][Examenvragen]]
 ** PDF
-   Omdat niet iedereen zin heeft om de repository te clonen en de pdf zelf te compileren is er InTeXgration toegevoegd aan dit project.
+   Omdat niet iedereen zin heeft om de repository te clonen en de pdf zelf te compileren is er InTeXration toegevoegd aan dit project.
    Bedankt, Jonas Devlieghere, voor de toegang!
    
 ** Verdere Informatie
