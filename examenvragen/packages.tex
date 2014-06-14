@@ -1,0 +1,87 @@
+\usepackage[dutch]{babel}
+\usepackage{listings}
+
+% Voor algoritmes
+\usepackage{algorithm2e}
+
+\usepackage{listings}
+\lstset{ %
+  language=Java,               	  % the language of the code
+  basicstyle=\footnotesize,       % the size of the fonts that are used for the code
+  numbers=left,                   % where to put the line-numbers
+  stepnumber=1,                   % the step between two line-numbers. If it's 1, each line
+                                  % will be numbered
+  numbersep=5pt,                  % how far the line-numbers are from the code
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  frame=single,                   % adds a frame around the code
+  tabsize=2,                      % sets default tabsize to 2 spaces
+  captionpos=b,                   % sets the caption-position to bottom
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  title=\lstname,                 % show the filename of files included with \lstinputlisting;
+}
+
+% Voor todo's
+\usepackage{todonotes}
+
+% Voor wiskunde
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+% Voor urls
+\usepackage{hyperref}
+
+% svg
+\usepackage[clean,pdf]{svg}
+\setsvg{svgpath = illustraties/}
+\setsvg{inkscape = inkscape -z -D}
+
+
+% Om het totaal aantal pagina's te tellen
+\usepackage{lastpage}
+\usepackage{afterpage}
+
+% Voor tekeningen
+\usepackage{tikz}
+\usetikzlibrary{decorations}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+
+% Nog tekeningen
+\usepackage{pgfplots}
+
+% SVG tekeningen
+\usepackage{svg}
+
+% Om figuren op de juiste plaats te krijgen
+\usepackage{float}
+
+% Om de marges aan te passen
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+
+\usepackage{titlesec}
+\usepackage{subfiles}
+\usepackage{multicol}
+\usepackage{wrapfig}
+\usepackage{pdfpages}
+
+% Voor headers en footers
+\usepackage{fancyhdr}
+% fancy verbatim
+\usepackage{fancyvrb}
+% program listings
+\usepackage{listings}
+% clickable TOC
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}

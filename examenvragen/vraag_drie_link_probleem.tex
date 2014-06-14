@@ -1,0 +1,76 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+
+% Index, x, y, r
+\def\circle[#1,#2,#3,#4] {
+  % The middlepoint
+  \coordinate (C#1) at (#2,#3);
+
+  % The circle
+  \draw[thick,color=black] (C#1) circle (#4);
+  
+}
+
+\section{Drie linken}
+\subsection{Generisch}
+\subsubsection{Opgave}
+Gegeven een robotarm met drie segmenten. De segmenten hebben een respectievelijke lengte van $l_1$, $l_2$ en $l_3$. Bepaal de optimale manier om een punt $p$ op een afstand $l$ van de `schouder' van de robot te bereiken.
+
+\subsubsection{Antwoord}
+Elk drie linken $(l_1,l_2,l_3)$ kan herleid worden tot \'e\'en van de volgende twee linken problemen.
+\begin{itemize}
+\item $(l_1+l_2,l_3)$: Geen knik in het gewricht $j_1$ tussen de eerste twee segmenten $l_1$ en $l_2$.
+\item $(l_1,l_2+l_3)$: Geen knik in het gewricht $j_2$ tussen de laatste twee segmenten $l_2$ en $l_3$.
+\item $(l_2,l_3)$: Twee knikken, maar we kunnen de hoek in het eerste gewricht $j_0$ vrij kiezen. Gebruik het eindpunt van het eerste segment als nieuwe oorsprong.
+\end{itemize}
+Een twee linken $(s_1,s_2)$ probleem met punt $p$ valt in constante tijd op te lossen als volgt.
+\begin{enumerate}
+\item Teken een cirkel $c_1$ met straal $s_1$ in de oorsprong.
+\item Teken een cirkel $c_2$ met straal $s_2$ in $p$.
+\item Bereken de snijpunten $i$ van de twee cirkels $c_1$ en $c_2$. Elk snijpunt $i$ is een mogelijke locatie voor de knik. 
+\end{enumerate}
+
+\begin{figure}[H]
+  \centering
+  \resizebox {0.3\textwidth} {!} {
+    \begin{tikzpicture}[scale=1.5]
+      % grid
+      \draw[very thin,color=lightgray] (0,0) grid (3,3);
+      \draw [<->,thick] (0,3) node (yaxis) [left] {Y} |- (3,0) node (xaxis) [right] {X};
+      
+      \circle[1,1,1.5,1]
+      \circle[2,2,2,1]    
+
+	  % The point
+  	\draw[fill,color=black] (C1) circle (1.5pt) 
+  	node[left, yshift=-10pt, color=black] {$O$};
+  	\draw[fill,color=black] (C2) circle (1.5pt) 
+  	node[left, yshift=-10pt, color=black] {$p$};
+  
+  	\coordinate (j1) at (1.129190075645217, 2.491619848709566);
+  	\draw[fill,color=black] (j1) circle (1.5pt) 
+  	node[left, yshift=10pt, color=black] {$s_1$};
+  	
+  	\draw[dashed] (C1) -- (j1)
+  	node[left, yshift=-15pt, xshift=-5pt, color=black] {$s_1$};
+  	
+  	\draw[dashed] (j1) -- (C2)
+  	node[left, yshift=0pt, xshift=-15pt, color=black] {$s_1$};
+      
+    \end{tikzpicture}
+  }
+\end{figure}
+
+\subsection{Voorbeeld}
+\subsubsection{Opgave}
+Gegeven een robotarm met drie segmenten. De segmenten hebben een respectievelijke lengte van $30$, $20$ en $40$. Bepaal de optimale manier om een punt $p$ op een afstand $45$ van de `schouder' van de robot te bereiken.
+
+
+\subsubsection{Antwoord}
+We herleiden dit probleem tot een twee linken probleem van de eerste soort $(l_1+l_2,l_3)$.
+Het twee linken probleem $(50,40)$ kunnen we eenvoudig per constructie oplossen. Teken een cirkel met straal $50$ rond de oorsprong en een cirkel met straal $40$ rond $p$. Duid de snijpunten aan.
+
+
+
+\end{document}

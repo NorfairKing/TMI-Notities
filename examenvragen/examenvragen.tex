@@ -1,10 +1,8 @@
 \documentclass[12pt,a4paper]{article}
 \usepackage[latin1]{inputenc}
-\usepackage[dutch]{babel}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\input{packages}
+
 \author{Tom Sydney Kerckhove}
 \title{Examenvragen TMI}
 
@@ -14,7 +12,7 @@
 \newcommand{\sectionbreak}{\clearpage}
 
 \renewcommand\thesection{Vraag \arabic{section}}
-\renewcommand\thesubsection{\arabic{section}\arabic{subsection}}
+\renewcommand\thesubsection{V \arabic{section}}
 \begin{document}
 
 \pagebreak
@@ -80,13 +78,10 @@
 \fi
 \fi
 
-\iffalse
 \part{Oefeningen}
-\section{3 Link probleem}
-Gegeven een 3 link probleem L1 = 150 L2 = 75 L3 = 40 Los op voor een punt P dat op 180 cm van de schouder ligt.  Optimaal = het minste aantal knikken.
-\subsection{Generisch}
-\subsection{Voorbeeld}
+\subfile{vraag_drie_link_probleem}
 
+\iffalse
 \section{Snijpunten van Cirkels}
 Maak een hoog-niveau algoritme voor alle snijdingen van een verzameling cirkels. 
 
