@@ -1,0 +1,24 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+
+
+\section{Alle snijpunten van cirkels}
+\subsection{Opgave}
+Gegeven een verzameling cirkels $C$. Geef een algoritme om alle snijpunten te vinden van alle snijdende cirkels in deze verzameling.\footnote{Gelijke cirkels hebben (zogezegd) geen snijpunten.}
+
+\subsection{Antwoord}
+We kunnen dit probleem na\"ief oplossen in $O(n^2)$ tijd. Geef dit zeker als je niets beter weet! We kunnen het echter ook oplossen in $O((N+S)\log(N))$ met een sweep-line algoritme en een intervalboom.
+
+\begin{enumerate}
+\item Definieer voor elke cirkel twee event points. Een toevoegpunt met als co\"ordinaat het meest linkse punt van de cirkel en een verwijderpunt met als co\"ordinaat het meest rechtse punt van de cirkel.
+\item Sorteer de cirkels volgens $x$ co\"ordinaat en volgens $y$ co\"ordinaat.
+\item Overloop de event points.
+\begin{itemize}
+\item Bij een toevoegpunt, berekende snijpunten van de cirkel met alle cirkels in de status die in hetzelfde interval op de y-as liggen en voeg de cirkel vervolgens toe aan de status.
+\item Bij een verwijderpunt, verwijder de cirkel uit de status.
+\end{itemize}
+\end{enumerate}
+Na het overlopen van deze $2N$ event points zijn alle snijpunten gevonden. Verwijder eventueel nog dubbels achteraf.
+
+\end{document}
