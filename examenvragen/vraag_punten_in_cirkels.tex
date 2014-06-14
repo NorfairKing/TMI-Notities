@@ -1,0 +1,14 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+
+\section{Punten in Cirkels}
+\subsection{Opgave}
+Gegeven $C$ cirkels $c_i$ die elkaar niet overlappen met gegeven middelpunten $m_i$ en $r_i$. Gegeven bovendien $P$ punten $p_i$. Elk punt ligt in precies \'e\'en cirkel.
+Ontwerp een algoritme om voor elk punt te bepalen in welke cirkel het ligt. 
+
+\subsection{Antwoord}
+We kunnen een algoritme beschrijven dat dit probleem oplost in $O((C+P)\log(C+P))$. Uiteraard is het opnieuw een sweepline algoritme.
+Gebruik de uiterst linker- en rechterpunten van elke cirkel als event points. Noem het linkerpunt een toevoegpunt en het rechterpunt een verwijderpunt. Elk punt $p_i$ gebruiken we ook als event point. Sorteer de event points volgens $x$ en daarna volgens $y$ co\"ordinaat. Dit kan in $O((C+P)\log(C+P))$ tijd. Voor elk event point mag het verwerken dus maximum $O(\log(C+P))$ tijd kosten. Dit kan inderdaad! Houd de status gesorteerd volgens $y$ co\"ordinaat. Op deze manier kan de juiste cirkel gevonden worden voor elk punt $p_i$ in $\log(C)$ tijd. Wanneer alle event points overlopen zijn is voor elk punt de juiste cirkel gevongen.
+ 
+\end{document}
