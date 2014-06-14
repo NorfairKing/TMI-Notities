@@ -1,0 +1,16 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+
+
+\section{Overlappende Rechthoeken}
+\subsection{Opgave}
+Gegeven een verzameling rechthoeken als een koppel van linkeronder-hoekpunt en rechterboven-hoekpunt. Ontwerp een algoritme om alle overlappende rechthoeken te vinden in de verzameling.
+
+\subsection{Antwoord}
+De overlappende rechthoek vinden van twee rechthoeken (als deze bestaat) kan in constante tijd en wordt hier niet besproken.
+Om alle overlappende rechthoeken te vinden moeten we dus elk paar rechthoeken nakijken die een overlappende rechthoek hebben.
+
+We kunnen dit realiseren in $O((N+S)\log(N))$ tijd met een sweepline algoritme. De linkeronder-punten gebruiken we als toevoegpunten en de rechterboven-punten gebruiken we als verwijderpunten. Ga de event points af van links naar rechts (sorteer ze dus eerst volgens $x$-coordinaat). Vergelijk telkens v\'o\'or het toevoegen van een rechthoek deze rechthoek met alle andere rechthoeken in de status die in hetzelfde interval zitten op de $y$-as. Met behulp van een intervalboom bekomen we op deze manier een complexiteit van $O((N+S)\log(N))$ te bekomen.
+
+\end{document}
