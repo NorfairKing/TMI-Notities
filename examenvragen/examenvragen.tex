@@ -79,6 +79,7 @@
 \fi
 
 \part{Oefeningen}
+\subfile{vraag_grootste_oppervlakte}
 \subfile{vraag_overlappende_veelhoeken}
 \subfile{vraag_overlappende_rechthoeken}
 \subfile{vraag_snijpunten_van_cirkels}
@@ -88,22 +89,7 @@
 
 \iffalse
 
-\section{Tegenvoetersparen}
-gegeven punten op cirkel. Vind de driehoek met het grootste oppervlak.
-(opl mbv tegenvoetparen) 
 
-
-Strategie:
-        Doorloop driehoeken met basis 2 opeenvolgende punten; dan met 1 pt. ertussen; ... tot N/2.
-        Voor die voorwaarde op de basis, telkens rondlopen gelijkaardig aan de tegenvoetersparen van het verste-puntenpaar-probleem. => Je kan de tegenvoeter van de vorige gebruiken bij de volgende, ... voor dezelfde basis.
-        onthoud doorheen het algo de grootste driehoek. 
-    Hoog-niveau-algoritme. -> triviaal
-    Complexiteit:
-        sorteer de punten naar stijgende poolhoek :Nlog(N)
-        buitenste lus N/2
-        binnenste lus N
-        allerbinnenste lus: O(1)
-        => totaal O(NlogN + NÂ²) => O(NÂ²) 
 
 
 
