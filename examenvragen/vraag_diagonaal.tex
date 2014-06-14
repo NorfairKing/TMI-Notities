@@ -1,0 +1,13 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+\section{Diagonaal}
+\subsection{Opgave}
+Gegeven een eenvoudige (niet convexe) veelhoek $V = p_1,p_2,\cdots,p_n$. Ontwerp een algoritme om te bepalen of een gegeven lijnstuk $p_i p_{i+2}$ een diagonaal is van de veelhoek $V$.
+Een diagonaal is een lijnstuk $p_ip_j$ dat, op de eindpunten na, volledig in inw(V) ligt.  De hoekpunten van V zijn in tegenwijzerzin gegeven. 
+
+\subsection{Antwoord}
+Een lijnstuk is een diagonaal als het niet snijdt met de zijden van de veelhoek en links ligt van het volgende lijnstuk in tegenwijzerzin. Voor de eerste voorwaarde gaan we eenvoudigweg alle zijden van de veelhoek af. Voor de tweede voorwaarde berekenen we eenvoudigweg een vectorproduct. Dit algoritme werkt in $O(N)$ tijd.
+
+
+\end{document}
