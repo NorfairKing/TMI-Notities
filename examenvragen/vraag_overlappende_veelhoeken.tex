@@ -1,0 +1,17 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+
+\section{Overlappende veelhoeken}
+\subsection{Opgave}
+Ontwerp een algoritme om te bepalen of twee eenvoudige (niet noodzakelijk convexe) veelhoeken overlappen.
+in O((N + M) log (N + M)) bewerkingen 
+
+\subsection{Antwoord}
+Twee veelhoeken overlappen als minstens twee zijden van verschillende veelhoeken snijden. Er is natuurlijk een na\"ief algoritme dat in $O((n+m)^2)$ tijd werkt; Geef dit zeker als je niets beter weet!
+
+Er bestaat echter een $O((N+M)\log(N+M))$ algoritme dat gebruikt maakt van een algoritme dat bepaalt of er snijdende lijnstukken zijn in een verzameling lijnstukken in $O(N\log(N))$ tijd.
+
+Het algoritme om te bepalen of er snijdende lijnstukken zijn in een verzameling lijnstukken werkt in $O(N\log(N))$ We kunnen dit algoritme eenvoudigweg aanpassen om te berekenen of twee eenvoudige veelhoeken overlappen. Wanneer, in het algoritme, de snijpunten worden berekend, moet er eerst nog worden nagekeken of de lijnstukken die bekeken worden bij verschillende veelhoeken horen. 
+
+\end{document}
