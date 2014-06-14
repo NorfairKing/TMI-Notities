@@ -1,0 +1,25 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+
+
+\section{Snijpunten van cirkels}
+\subsection{Opgave}
+Gegeven een verzameling cirkels $C$. Geef een algoritme om te bepalen of er snijpunten zijn tussen de cirkels.
+
+\subsection{Antwoord}
+We kunnen dit probleem na\"ief oplossen in $O(n^2)$ tijd. Geef dit zeker als je niets beter weet! We kunnen het echter ook oplossen in $O(N\log(N))$ met een sweep-line algoritme.
+
+\begin{enumerate}
+\item Definieer voor elke cirkel twee event points. Een toevoegpunt met als co\"ordinaat het meest linkse punt van de cirkel en een verwijderpunt met als co\"ordinaat het meest rechtse punt van de cirkel.
+\item Sorteer de cirkels volgens $x$ co\"ordinaat co\"ordinaat.
+\item Overloop de event points als volgt.
+\begin{itemize}
+\item Bij een toevoegpunt, bereken of er snijpunten zijn van de cirkel met alle cirkels in de status en voeg de cirkel vervolgens toe aan de status.
+\item Bij een verwijderpunt, verwijder de cirkel uit de status.
+\end{itemize}
+\item Stop zodra er snijpunten gevonden zijn.
+\end{enumerate}
+Als er geen snijpunten zijn gevonden voor het algoritme afgelopen is, zijn er geen snijpunten in de verzameling.
+
+\end{document}

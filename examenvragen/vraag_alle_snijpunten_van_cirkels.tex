@@ -13,9 +13,9 @@ We kunnen dit probleem na\"ief oplossen in $O(n^2)$ tijd. Geef dit zeker als je 
 \begin{enumerate}
 \item Definieer voor elke cirkel twee event points. Een toevoegpunt met als co\"ordinaat het meest linkse punt van de cirkel en een verwijderpunt met als co\"ordinaat het meest rechtse punt van de cirkel.
 \item Sorteer de cirkels volgens $x$ co\"ordinaat en volgens $y$ co\"ordinaat.
-\item Overloop de event points.
+\item Overloop de event points als volgt.
 \begin{itemize}
-\item Bij een toevoegpunt, berekende snijpunten van de cirkel met alle cirkels in de status die in hetzelfde interval op de y-as liggen en voeg de cirkel vervolgens toe aan de status.
+\item Bij een toevoegpunt, bereken de snijpunten van de cirkel met alle cirkels in de status die in hetzelfde interval op de y-as liggen en voeg de cirkel vervolgens toe aan de status.
 \item Bij een verwijderpunt, verwijder de cirkel uit de status.
 \end{itemize}
 \end{enumerate}
