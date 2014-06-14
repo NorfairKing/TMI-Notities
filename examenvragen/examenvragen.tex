@@ -21,6 +21,7 @@
 
 \input{titelpagina}
 
+\iffalse
 \part{B\'ezier-curven}
 \iffalse
 \section{Bespreek $C^{2}$ Continu\"iteit.}
@@ -46,7 +47,7 @@
 
 \part{Algemeen}
 \iffalse
-\section{Wat is ``the bounding box quick rejection test'' uit het algoritme om te bepalen of twee rechten elkaar snijden. Geef de twee toepassingen in het algoritme en een implementatie in pseudocode.}
+\section{Wat is ``the bounding box quick rejection test'' uit het algoritme om te bepalen of twee rechten elkaar snijden. Geef de twee toepassingen in het algoritme en een implementatie in pseudocode.}https://www.youtube.com/watch?v=HvwMtWkfkJ8 
 \section{bespreek het algoritme voor het bepalen van de onderbrug en bovenbrug waarom is de kleinste y-coordinaat een slechte schatting voor het bepalen van de onderbrug?}
 \section{geef een algoritme dat in O(N log N) bewerkingen nagaat of in een vz van N lijnstukken er snijdende lijnstukken in voorkomen}
 \section{Bewijs correctheid van dit algoritme geef beknopt hoe dit algoritme en de gegevensstrukturen moeten aangepast worden om alle snijdingen te vinden}
@@ -62,6 +63,7 @@
 \section{Bewijs dat minimale doorloopboom deelverzameling is van de Delaunay triangulatie. Wat is het nut van deze eigenschap?}
 \section{Bewijs: "Twee dichtste buren hebben een gemeenschappelijke voronoi zijde"}
 \section{Geen een strategie en een hoog-niveau algoritme  voor het vinden van de maximale lege cirkel binnen de COV van een verzameling punten.}
+\section{Bespreek de event punten in het algoritme van Fortune Welke acties moeten ondernomen worden?}
 \fi
 
 \part{Nabijheidsproblemen}
@@ -69,8 +71,6 @@
 \section{wat betekent volgende uitspraak: probleem A is ?(N) transformeerbaar tot probleem B? waarvoor kan een dergelijke uitspraak nuttig gebruikt worden + vb}
 \section{wat is een EMDB van een vz punten + verband met Voronoi diagramma van een vz punten?}
 \section{bespreek beknopt hoe een EMDB van een vz punten kan berkend worden in O(nlogn) bewerkingen}
-\part{Fortune}
-\section{Bespreek de event punten in het algoritme van Fortune Welke acties moeten ondernomen worden?}
 \fi
 
 \part{Padplanning}
@@ -78,5 +78,69 @@
 \section{Hoe bepaal je het gebied dat kan bereikt worden door een robotarm met 3 segmenten. Is de volgorde van de stukken belangrijk?}
 \section{Geef en bespreek de minkovski-som met een voorbeeld.}
 \fi
+\fi
+
+\iffalse
+\part{Oefeningen}
+\section{3 Link probleem}
+Gegeven een 3 link probleem L1 = 150 L2 = 75 L3 = 40 Los op voor een punt P dat op 180 cm van de schouder ligt.  Optimaal = het minste aantal knikken.
+\subsection{Generisch}
+\subsection{Voorbeeld}
+
+\section{Snijpunten van Cirkels}
+Maak een hoog-niveau algoritme voor alle snijdingen van een verzameling cirkels. 
+
+n cirkels, elk bepaald door middelpunt pi en straal ri
+bedenk een strategie om na te gaan of er cirkels snijden + algo
+
+\section{Minowski Som}
+een minkowski-som tekenen 
+
+\section{Tegenvoetersparen}
+gegeven punten op cirkel. Vind de driehoek met het grootste oppervlak.
+(opl mbv tegenvoetparen) 
+
+
+Strategie:
+        Doorloop driehoeken met basis 2 opeenvolgende punten; dan met 1 pt. ertussen; ... tot N/2.
+        Voor die voorwaarde op de basis, telkens rondlopen gelijkaardig aan de tegenvoetersparen van het verste-puntenpaar-probleem. => Je kan de tegenvoeter van de vorige gebruiken bij de volgende, ... voor dezelfde basis.
+        onthoud doorheen het algo de grootste driehoek. 
+    Hoog-niveau-algoritme. -> triviaal
+    Complexiteit:
+        sorteer de punten naar stijgende poolhoek :Nlog(N)
+        buitenste lus N/2
+        binnenste lus N
+        allerbinnenste lus: O(1)
+        => totaal O(NlogN + NÂ²) => O(NÂ²) 
+
+
+
+
+\section{Overlappende veelhoeken}
+bespreek of 2 eenvoudige veelhoeken geheel of gedeeltelijk overlappen (uitleg + hoog niveau algo)
+in O((N + M) log (N + M)) bewerkingen 
+
+\section{Zichtbare lijnstukken}
+1 punt gegeven en allemaal lijnstukken (niet snijdende) rond dat punt
+schrijf algo om te controleren of je een rechte kunt tekenen vanuit het gegeven punt tot al die rechten
+(maw: welke rechten zijn zichtbaar voor dat punt) 
+
+\section{Diagonaal van veelhoek}
+gegeven een eenvoudige veelhoek
+bepaal of pi, pi+2 een diagonaal is van die veelhoek in O(n) 
+
+\section{Punten in Cirkels}
+Gegeven, p cirkels die elkaar niet overlappen, met gegeven middelpunten m en stralen r.
+Ook gegeven: n punten p. Elk punt ligt in 1 cirkel.
+Bedenk een algoritme dat in O(np lg(np)) kan bepalen welke punten in welke cirkels liggen.
+Je moet geen rekening houden met randgevallen, om het algoritme iets simpeler te houden.
+Tip: bv doorlooplijnalgoritme 
+
+\section{Overlappende Rechthoeken}
+gegeven een aantal vierhoeken met zijn linkeronder-hoekpunt en zijn rechteboven-hoekpunt nagaan of ze geheel of gedeeltelijk overlappen (uitleg + hoog niveau algo)in O(nlog (n)) bewerkingen. 
+
+
+\fi
+
 
 \end{document}
