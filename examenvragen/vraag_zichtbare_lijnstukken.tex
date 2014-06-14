@@ -1,0 +1,25 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+
+\section{Zichtbare lijnstukken}
+\subsection{Opgave}
+Gegeven een punt $P$ en $N$ lijnstukken $l_i$ die onderling niet snijden. Ontwerp een algoritme om alle zichtbare lijnstukken te vinden.
+
+\subsection{Antwoord}
+We kunnen dit realiseren in $O(N\log N)$ tijd met behulp van een sweepline algoritme.
+
+Gebruik de eindpunten van de lijnstukken als event points.
+Sorteer de event points volgens stijgende poolhoek.
+Noem het eerste event point een toevoegpunt en het laatste een verwijderpunt.
+Omdat het sorteren al $O(N\log N)$ tijd kost, moet het overlopen van de event points in maximum $O(\log N)$ tijd kunnen gebeuren per punt.
+Dit kan inderdaad. We moeten hiervoor eerst een totale ordening defini\"eren van de lijnstukken in de status. We ordenen de lijnstukken volgens afstand tot $P$ van het toevoegpunt
+Dit kan in $O(\log N)$ tijd gebeuren met een priority queue omdat die ordening niet verandert.
+De status is een gebalanceerde binaire zoekboom gesorteerd op de afstand van het snijpunt met de sweepline tot $P$.
+Hou bovendien een voorlopige resultaten-lijst $R$ bij.
+Bij elk event point, voeg het toe aan $R$ als het zichtbaar is.
+Dit doen we in constante tijd door te bekenen of het lijnstuk tussen $P$ en het toevoegpunt snijdt met het meest linkse lijnstuk in de status. 
+Wanneer alle event points overlopen zijn zitten alle zichtbare event points in $R$. Wanneer zowel het begin als het eindpunt van een lijnstuk in $R$ zitten, noemen we het lijnstuk zichtbaar. 
+
+
+\end{document}
