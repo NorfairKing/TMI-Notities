@@ -1,0 +1,24 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+\section{Tranformeerbaarheid}
+\subsection{Opgave}
+Wat betekent de volgende zin? ``Probleem $A$ is $\tau(N)$ transformeerbaar tot probleem $B$. Waarvoor kan dergelijke uitspraak nuttig zijn? Geef een voorbeeld van $N$ transformeerbaarheid. 
+
+\subsection{Antwoord}
+Als probleem $A$ $\tau(N)$ transformeerbaar is tot probleem $B$ houdt dit het volgende in.
+\begin{enumerate}
+\item De invoer van probleem $A$ kan omgevormd worden tot geschikte invoer voor probleem $B$.
+\item Probleem $B$ kan opgelost worden met een gekend algoritme.
+\item Uit de uitvoer voor probleem $B$ kan de oplossing van probleem $A$ afgeleid worden.
+\item De eerste en de derde stap samen, kosten $O(\tau(N))$ tijd.
+\end{enumerate}
+Transformeerbaarheid is nuttig om een ondergrens te vinden voor de complexiteit van een probleem.
+Stel bijvoorbeeld dat $A$ $\tau(N)$ transformeerbaar is tot probleem $B$.
+\[
+A \overset{\tau(N)}{\rightarrow} B
+\]
+Stel bijvoorbeeld dat je weet dat probleem $A$ minstens $O(R(N))$ tijd vergt, dan houdt dit in dat $O(R(N)-\tau(N))$ een ondergrens is voor de complexiteit van $B$.
+
+Als voorbeeld kiezen we voor probleem $A$ het (vergelijkings)sorteren van $N$ getallen en voor probleem $B$ het vinden van de complex omhullende van $N$ punten. (vergelijkings)Sorteren heeft een ondergrens van $O(N\log N)$. We transformeren het sorteerprobleem als volgt om naar het convex-omhullende probleem. Zij $x_1,\cdots, x_n$ de te sorteren getallen, definieer dan de punten $y_i = (x_i,x_i^2)$ en zoek hiervan de convex omhullende. Loop de convex omhullende af in tegenwijzerzin om de gesorteerde getallen te bekomen. Het sorteren van getallen is dus $N$ transformeerbaar naar het vinden van de convex omhullende. Hieruit volgt dat er een ondergrens is voor de complexiteit van het vinden van een convex omhullende: $O(N\log N - N) = O(N\log N)$.\footnote{Merk op dat tranformeerbaarheid niet symmetrisch is.}
+\end{document}
