@@ -19,11 +19,12 @@
 
 \input{titelpagina}
 
-\iffalse
+
+
 \part{B\'ezier-curven}
+\subfile{vraag_c2_continuiteit}
+
 \iffalse
-\section{Bespreek $C^{2}$ Continu\"iteit.}
-\section{Hoe bekomt men $C^{2}$ continu\"iteit bij samengestelde b\'ezier curven?}
 \section{Geef het algoritm van de Casteljau en bewijs de correctheid ervan.}
 \section{Bespreek de variatieverminderingseigenschap.}
 \section{Wat betekent de variatieverminderingseigenschap voor B\'ezier curven?}
@@ -34,17 +35,16 @@
 \section{Bereken de tweede partiele afgeleide in de hoekpunten van een B\'ezier-oppervlak, leg uit en geef grafisch weer.}
 \fi
 
-\part{Spline-curven}
 \iffalse
+\part{Spline-curven}
 \section{Bewijs de eenheidspartitieeigenschap van genormaliseerde B-splines.}
 \section{Hoe kan men bij splinecurven punten laten interpoleren door het samennemen van controlepunten? Hoeveel moeten er samenvallen? }
 \section{Hoe kan men bij splines punten laten interpoleren door het samennemen van knooppunten?}
 \section{Geef het algoritm van de Boor en bewijs de correctheid ervan.}
 \section{Hoe kan je ervoor zorgen dat een deel van een spline curve een recht lijnstuk is?}
 \fi
-
-\part{Algemeen}
 \iffalse
+\part{Algemeen}
 \section{Wat is ``the bounding box quick rejection test'' uit het algoritme om te bepalen of twee rechten elkaar snijden. Geef de twee toepassingen in het algoritme en een implementatie in pseudocode.}https://www.youtube.com/watch?v=HvwMtWkfkJ8 
 \section{bespreek het algoritme voor het bepalen van de onderbrug en bovenbrug waarom is de kleinste y-coordinaat een slechte schatting voor het bepalen van de onderbrug?}
 \section{geef een algoritme dat in O(N log N) bewerkingen nagaat of in een vz van N lijnstukken er snijdende lijnstukken in voorkomen}
@@ -54,8 +54,8 @@
 \section{wanneer is de inpakmethode (jarvis march) efficienter dan de methode van graham (graham scan)}
 \fi
 
-\part{Voronoi diagrammen}
 \iffalse
+\part{Voronoi diagrammen}
 \section{Bewijs: ``Een voronoi diagramma van een verzameling S heeft maximaal $2N - 5$ voronoipunten en $3N - 6$ voronoi zijden''}
 \section{Bewijs: ``Een voronoi veelhoek van een punt $p_i$ is begrensd <=> $p_i$ element van $inw(CH(S))$'' Bespreek het nut van deze stelling.}
 \section{Bewijs dat minimale doorloopboom deelverzameling is van de Delaunay triangulatie. Wat is het nut van deze eigenschap?}
@@ -64,19 +64,20 @@
 \section{Bespreek de event punten in het algoritme van Fortune Welke acties moeten ondernomen worden?}
 \fi
 
-\part{Nabijheidsproblemen}
 \iffalse
+\part{Nabijheidsproblemen}
 \section{wat betekent volgende uitspraak: probleem A is ?(N) transformeerbaar tot probleem B? waarvoor kan een dergelijke uitspraak nuttig gebruikt worden + vb}
 \section{wat is een EMDB van een vz punten + verband met Voronoi diagramma van een vz punten?}
 \section{bespreek beknopt hoe een EMDB van een vz punten kan berkend worden in O(nlogn) bewerkingen}
 \fi
 
-\part{Padplanning}
+
 \iffalse
+\part{Padplanning}
 \section{Hoe bepaal je het gebied dat kan bereikt worden door een robotarm met 3 segmenten. Is de volgorde van de stukken belangrijk?}
 \section{Geef en bespreek de minkovski-som met een voorbeeld.}
 \fi
-\fi
+
 
 \part{Oefeningen}
 \subfile{vraag_diagonaal}

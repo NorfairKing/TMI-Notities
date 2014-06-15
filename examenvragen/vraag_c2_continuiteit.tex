@@ -1,0 +1,66 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+\section{Diagonaal}
+\subsection{Opgave}
+Bespreek $C^{2}$-Continu\"iteit voor samengestelde B\'ezier-curven.
+
+\subsection{Antwoord}
+Gegeven twee B\'ezier-curvesegementen $x$ en $y$. Zowel $x$ als $y$ moeten van graad groter dan twee zijn om $C^{2}$ continu\"iteit mogelijkheid te maken.
+\[
+x(t(u)) = \sum_{i=0}^{n}a_{i}B_{i}^{n}(t)\ \text{ en }\ 
+y(t(u)) = \sum_{i=0}^{m}b_{i}B_{i}^{n}(t)
+\]
+$C^{0}$-continu\"iteit bekomen we als het eerste kunt van $y$ gelijk is aan het laatste punt van $x$. 
+\[
+a_n = b_0
+\]
+$C^{1}$-continu\"iteit eist dat de eerste afgeleide van de curvesegmenten aan elkaar gelijk is in het verbindingspunt. 
+\[
+n\frac{a_{n}-a_{n-1}}{\Delta u_0} = m\frac{b_1-b_0}{\Delta u_1}
+\]
+Voor $C^{2}$-continu\"iteit moeten de eerste twee afgeleiden van de curvesegmenten aan elkaar gelijk zijn in het verbindingspunt.
+Zij $x$ gedefinieerd over $[u_0,u_1]$ en $y$ over $[u_1,u_2]$ met $t(u) = \frac{u-u_i}{u_{i+1}-u_i}$.
+\[
+\frac{d^2}{du^2}x(t(u)) = \frac{n(n-1)}{(\Delta u_0)^2}\sum_{i=0}^{n-2}\Delta^2a_iB_{i}^{n-2}(t)
+\]
+\[
+\frac{d^2}{du^2}y(t(u)) = \frac{m(m-1)}{(\Delta u_1)^2}\sum_{i=0}^{m-2}\Delta^2b_iB_{i}^{m-2}(t)
+\]
+We eisen voor de curvesegmenten de volgende gelijkheid.
+\[
+\left.\frac{n(n-1)}{(\Delta u_0)^2}\sum_{i=0}^{n-2}\Delta^2a_iB_{i}^{n-2}(t(u))\right|_{u=u_1}
+=
+\left.\frac{m(m-1)}{(\Delta u_1)^2}\sum_{i=0}^{m-2}\Delta^2b_iB_{i}^{m-2}(t(u))\right|_{u=u_1}
+\]
+\[
+\frac{n(n-1)}{(\Delta u_0)^2}\sum_{i=0}^{n-2}\Delta^2a_iB_{i}^{n-2}(1)
+=
+\frac{m(m-1)}{(\Delta u_1)^2}\sum_{i=0}^{m-2}\Delta^2b_iB_{i}^{m-2}(0)
+\]
+\[
+\frac{n(n-1)}{(\Delta u_0)^2}(a_{n}-2a_{n-1}+a_{n-2})
+=
+\frac{m(m-1)}{(\Delta u_1)^2}(b_{2}-2b_{1}+b_{0})
+\]
+We kunnen hier stoppen, maar we kunnen nog verder gaan met enkele aannames.
+Ten eerste kunnen we aannemen dat $n$ en $m$ gelijk zijn. We verkrijgen dan volgende eisen.
+\[
+\frac{a_{n}-a_{n-1}}{\Delta u_0} = \frac{b_1-b_0}{\Delta u_1}
+\]
+\[
+\frac{a_{n}-2a_{n-1}+a_{n-2}}{(\Delta u_0)^2}
+=
+\frac{b_{2}-2b_{1}+b_{0}}{(\Delta u_1)^2}
+\]
+Vervolgens kunnen we nog aannemen dat $\Delta u_0$ en $\Delta u_1$ gelijk zijn. De vereenvoudigde eisen zijn dan de volgenden.
+\[
+a_{n}-a_{n-1} = b_1-b_0
+\]
+\[
+-2a_{n-1}+a_{n-2}
+=
+b_{2}-2b_{1}
+\]
+
+\end{document}
