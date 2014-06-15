@@ -1,0 +1,25 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+\section{Robotarm}
+\subsection{Opgave}
+Hoe bepaal je het gebied dat kan bereikt worden door een robotarm met 3 segmenten. Is de volgorde van de stukken belangrijk?
+
+\subsection{Antwoord}
+Het gebied dat een robotarm kan bereiken is steeds donutvormig of schijfvormig, en wordt berekend met behulp van een Minowski som.
+De Minowski som $A\oplus B$ van twee verzamelingen  $A$ en $B$ is de volgende verzameling.
+\[
+\left\{
+a + b\ |\ a \in A, b \in B
+\right\}
+\]
+Het bereikbare gebied van een robotarm met \'e\'en segment van lengte $l$ is een cirkel met straal $l$ rond de `schouder'. Het bereikbare gebied van een robotarm met twee segmenten van lengte $l_1$ en $l_2$ respectievelijk is de Minowski som van de twee cirkels. Deze som is donut- of schijfvormig.
+Het bereikbare gebied van een robotarm met drie segmenten van lengte $l_1$, $l_2$ en $l_3$ respectievelijk is de Minowski som van het bereikbare gebied van de eerste twee segmenten met de cirkel van het laatste segment. Anders gezegd is het de volgende verzameling.
+\[
+\left\{
+a + b + c\ |\ a \in C_1, b \in C_2, c\in C_3
+\right\}
+\]
+Het is eenvoudig te zien dat de volgorde van de segmenten niet uitmaakt. Eenderzijds omdat de optelling associatief is, anderzijds is het ook eenvoudig te zien als we alle mogelijke configuraties van de segmenten tekenen om \'e\'en specifiek punt te bereiken.
+
+\end{document}
