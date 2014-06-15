@@ -13,8 +13,9 @@ Er zijn twee soorten event points in het algoritme van Fortune.
 Wanner de sweepline voorbij een site komt, wordt er een nieuw stuk parabool toegevoegd aan de kustlijn. In het begin is dit simpelweg een recht lijnstuk, daarna wordt het wel degelijk een parabool.
 
 \item Circle events
-Circle event worden dynamisch toegevoegd. Een circle event houdt in dat de sites van drie opeenvolgende parabolen van de kustlijn een cirkel determineren, die op zijn einde komt. Op het middelpunt van een cirkel komt een Voronoi punt, en op het moment dat dit toegevoegd wordt, verdwijnt er ook een parabool uit de kustlijn. 
+Circle event worden dynamisch toegevoegd. Een circle event houdt in dat de sites van drie opeenvolgende parabolen van de kustlijn een cirkel determineren, die op zijn einde komt. Op het middelpunt van een cirkel komt een Voronoi punt, en op het moment dat dit toegevoegd wordt, verdwijnt er ook een parabool uit de kustlijn.
+Merk op dat een circle event ongeldig wordt als de cirkel niet leeg is.
 \end{itemize}
-Beide event point kunnen behandeld worden in $O(\log(N))$ tijd. Op deze manier is er dus $O(N\log(N))$ tijd nodig voor het berekenen van het Voronoi diagram.
+Beide event points kunnen behandeld worden in $O(\log(N))$ tijd. Op deze manier is er dus $O(N\log(N))$ tijd nodig voor het berekenen van het Voronoi diagram.
 
 \end{document}
