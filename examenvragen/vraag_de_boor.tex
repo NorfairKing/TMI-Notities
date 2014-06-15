@@ -1,0 +1,112 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+\section{Het algoritme van De Casteljau}
+\subsection{Opgave}
+Geef het algoritme van de Boor en bewijs de correctheid ervan.
+
+\subsection{Antwoord}
+
+Gegeven een curve $s(u)$ gedefinie\"erd over een interval $u_0,u_p$. 
+\[
+s(u) = \sum_{i=-n}^{p-1}d_iN_{i}^{n}(u)
+\]
+Gevraagd is het punt op $s$ dat overeen komt met $u\in [u_l,u_{l+1})$. Het punt $s(u)$ hangt af van $n$ `de Boor punten' $d_{l-n},\cdots,d_{l}$. De andere `de Boor punten' spelen geen rol.\footnote{Zie eigenschap \ref{bspline_lokaliteit} van B-splines.}
+\[
+s(u) = \sum_{i=l-n}^{l}d_{i}N_{i}^{n}(u)
+\]
+$s(u)$ is $d_{l}^{[k]}$ waarbij $d_{l}^{[k]}$ als volgt gedefinieerd is.
+\[
+d_{i}^{[k]}
+= (1-\alpha_{k,i})d_{i-1}^{[k-1]}
++ \alpha_{k,i}d_{i}^{[k-1]}
+\text{ met }
+\alpha_{k,i} = \frac{u-u_i}{u_{i+n+1-k}-u_{i}}
+\]
+
+\begin{proof}
+\[
+s(u)
+= \sum_{i=-n}^{p-1}d_iN_{i}^{n}(u)
+\underset{u \in [u_l,u_{l+1})}{=}
+\sum_{i=l-n}^{l}d_iN_{i}^{n}(u)
+\]
+\[
+=
+\sum_{i=l-n}^{l}d_i
+\left(
+\frac{u-u_i}{u_{i+n}-u_i}N_i^{n-1}(u) + 
+\frac{u_{i+n+1}-u}{u_{i+n+1}-u_{i+1}}N_{i+1}^{n-1}(u)
+\right)
+\]
+Splits de sommatie.
+\[
+=
+\sum_{i=l-n}^{l}d_i
+\frac{u-u_i}{u_{i+n}-u_i}N_i^{n-1}(u) + 
+\sum_{i=l-n}^{l}d_i
+\frac{u_{i+n+1}-u}{u_{i+n+1}-u_{i+1}}N_{i+1}^{n-1}(u)
+\]
+De eerste en de laatste term in deze zijn nul.\footnote{Zie eigenschap \ref{bspline_lokaliteit} van B-splines.}
+\[
+=
+\sum_{i=l-n+1}^{l}d_i
+\frac{u-u_i}{u_{i+n}-u_i}N_i^{n-1}(u) + 
+\sum_{i=l-n}^{l-1}d_i
+\frac{u_{i+n+1}-u}{u_{i+n+1}-u_{i+1}}N_{i+1}^{n-1}(u)
+\]
+De tweede som in bovenstaande uitdrukking valt te herschrijven als volgt.
+\[
+\sum_{i=l-n}^{l-1}d_i
+\frac{u_{i+n+1}-u}{u_{i+n+1}-u_{i+1}}N_{i+1}^{n-1}(u)
+=
+\sum_{i=l-n+1}^{l}d_{i-1}
+\frac{u_{i+n}-u}{u_{i+n}-u_{i}}N_{i}^{n-1}(u)
+\]
+We kunnen dit dus vervangen in de originele vergelijking om verder te gaan.
+\[
+=
+\sum_{i=l-n+1}^{l}d_i
+\frac{u-u_i}{u_{i+n}-u_i}N_i^{n-1}(u) + 
+\sum_{i=l-n+1}^{l}d_{i-1}
+\frac{u_{i+n}-u}{u_{i+n}-u_{i}}N_{i}^{n-1}(u)
+\]
+\[
+s(u)
+=
+\sum_{i=l-n+1}^{l}
+N_i^{n-1}(u)
+\left(
+d_{i-1}
+\frac{u-u_i}{u_{i+n}-u_i} +
+d_i
+\frac{u_{i+n}-u}{u_{i+n}-u_{i}}
+\right)
+\]
+\[
+s(u)
+= \sum_{i=l-n+1}^{l}
+d_{i}^{[1]}
+N_i^{n-1}(u)
+\]
+Bovenstaan proces kunnen we herhalen om de volgende uitdrukking te krijgen.
+\[
+s(u)
+= \sum_{i=l-n+2}^{l}
+d_{i}^{[2]}
+N_i^{n-2}(u)
+\]
+Na $j$ iteraties bekomen we dan volgende uitdrukking ($j\le n$)
+\[
+s(u)
+= \sum_{i=l-n+j}^{l}
+d_{i}^{[j]}
+N_i^{n-j}(u)
+\]
+Na $n$ iteraties bekomen we dan hetgeen te bewijzen viel.
+\[
+s(u) = \sum_{i=l}^{l}d_{i}^{[n]}N_{i}^{0}(u) = d_{i}^{[n]}
+\]
+\end{proof}
+
+\end{document}
