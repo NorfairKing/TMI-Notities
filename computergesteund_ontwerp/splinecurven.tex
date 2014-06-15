@@ -33,7 +33,7 @@ u \not\in [u_i,u_{i+1}) \Rightarrow N_{i}^{0}(u) = 0
 \begin{ei}\textbf{Lokaliteit}
 \label{bspline_lokaliteit}
 \[
-u \not\in [u_i,u_{i+n+1}] \Rightarrow N_{i}^{n}(u) = 0
+u \not\in [u_i,u_{i+n+1}) \Rightarrow N_{i}^{n}(u) = 0
 \]
 Een B-spline is nul buiten haar lokaal interval $[u_i,u_{i+n+1}]$.
 
@@ -412,7 +412,7 @@ Voor een B-splinecurve van graad $n$:
 \begin{itemize}
 \item $n+1$ knooppunten $u_{i},\cdots,u_{i+n+1}$ bepalen $N_{i}^{n}$.
 \item $d_i$ be\"invloedt $s(u)$ voor $u\in [u_i,u_{i+n+1}]$ (een interval met $n+1$ knooppunten).
-\item $s(u)$ hangt af van $n$ controlepunten $d_{j-n},\cdots,d_{j}$ als $u\in [u_{j},u_{j+1}]$.
+\item $s(u)$ hangt af van $n+1$ controlepunten $d_{j-n},\cdots,d_{j}$ als $u\in [u_{j},u_{j+1}]$.
 \end{itemize}
 \end{document}
 

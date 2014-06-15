@@ -1,0 +1,28 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+\section{Robotarm}
+\subsection{Opgave}
+Hoe kan men bij splinecurven punten laten interpoleren door het samennemen van controlepunten of knooppunten?
+
+\subsection{Antwoord}
+Stel dat de splinecurve $s$ die we bespreken van graad $n$ is, dan heeft ze dus $p+n$ `de Boor punten' en $p+2n+1$ knooppunten.
+
+Als we $n$ (of $n+1$) knooppunten kunnen laten samenvallen interpoleert de curve in een controlepunt. Beschouw de curve op een punt met $u \in [u_l,u_{l+1})$ waarbij we de knooppunten $u_{l-n},u_{l-n+1},\cdots, u_{l-1}$ laten samenvallen.
+\[
+s(u)
+= \sum_{i=-n}^{p-1}d_iN_{i}^{n}(u)
+= \sum_{i=l-n}^{l}d_iN_{i}^{n}(u)
+= d_l
+\]
+Als we $n$ (of $n+1$) controlepunten $d_{l-n},d_{l-n+1},\cdots, d_{l-1}$ laten samenvallen interpoleert de curve in dat samenvallend controlepunt.
+\[
+s(u)
+= \sum_{i=-n}^{p-1}d_iN_{i}^{n}(u)
+= \sum_{i=l-n}^{l}d_iN_{i}^{n}(u)
+= d_i\sum_{i=l-n}^{l}N_{i}^{n}(u)
+= d_{l-1}\left(\sum_{i=l-n}^{l-1}N_{i}^{n}(u)\right) + d_{l}N_{l}^{n}(u)
+\]
+In $u_l$ is deze uitdrukking gelijk aan $d_{l-1}$.
+
+\end{document}
