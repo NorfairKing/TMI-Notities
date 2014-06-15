@@ -1,0 +1,56 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+\section{Graadverhoging}
+\subsection{Opgave}
+Bespreek graadverhoding bij B\'ezier-curven, geef het bewijs en leg uit waarvoor het dient.
+
+\subsection{Antwoord}
+Elke veelterm van graad $n$ kan geschreven worden als een veelterm van graad $n+1$. Er moet dus ook een manier zijn om een B\'eziercurve van graad $n$ te schrijven als een B\'eziercurve van graad $n+1$.
+\[
+\sum_{i=0}^{n}b_iB_{i}^{n}(t) = \sum_{i=0}^{n+1}b_i^*B_{i}^{n+1}(t)
+\]
+De nieuwe controlepunten $b_i^*$ kunnen berekend worden uit de originele controlepunten.
+\[
+b^*_i= \frac{i}{n+1}b_{i-1} + \left(1-\frac{1}{n+1}\right)b_i
+\]
+\begin{proof}
+Let op: niet vanzelfsprekend.
+\[
+x(t)
+= \sum_{i=0}^{n}b_i\binom{n}{i}(1-t)^{n-i}t^{i}
+= \left(\sum_{i=0}^{n}b_i\binom{n}{i}(1-t)^{n-i}t^{i}\right) (t+(1-t))
+\]
+\[
+= \left(\sum_{i=0}^{n}b_i\binom{n}{i}(1-t)^{n-i}t^{i+1}\right)
++ \left(\sum_{i=0}^{n}b_i\binom{n}{i}(1-t)^{n-i+1}t^{i}\right)
+\]
+Verander de index van de eerste term.
+\[
+= \left(\sum_{i=1}^{n+1}b_{i-1}\binom{n}{i-1}(1-t)^{n-i+1}t^{i}\right)
++ \left(\sum_{i=0}^{n}b_i\binom{n}{i}(1-t)^{n-i+1}t^{i}\right)
+\]
+Neem beide sommaties samen. Dit kan omdat we $\binom{n}{-1}$ en $\binom{n}{n+1}$ als nul defini\"eren.
+\[
+= \sum_{i=0}^{n+1}(1-t)^{n-i+1}t^{i} \left(\binom{n}{i-1}b_{i-1} + \binom{n}{i}b_i\right)
+\]
+We halen hier de nieuwe controlepunten uit.
+\[
+\binom{n+1}{i}b_{i}^{*}
+= \binom{n}{i-1}b_{i-1}
++ \binom{n}{i}b_i
+\]
+\[
+\frac{(n+1)!}{i!(n-i+1)!}b_{i}^{*}
+= \frac{n!}{(i-1)!(n-i+1)!} b_{i-1}
++ \frac{n!}{i!(n-i)!}b_i
+\]
+\[
+b_{i}^{*}
+= \frac{i}{n+1} b_{i-1}
++ \left(1-\frac{1}{n+1}\right)b_i
+\]
+\end{proof}
+\noindent Graadverhoging wordt gebruikt om de B\'eziercurve eenvoudig te benaderen omdat de controleveelhoek de curve benadert voor hoge graden.
+
+\end{document}
