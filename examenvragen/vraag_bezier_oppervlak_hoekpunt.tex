@@ -1,0 +1,26 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+\section{Robotarm}
+\subsection{Opgave}
+Bereken de tweede partiele afgeleide in de hoekpunten van een B\'ezier-oppervlak, leg uit en geef grafisch weer.
+
+\subsection{Antwoord}
+De afgeleiden van een B\'ezier-oppervlak zien er als volgt uit.
+\[
+\frac{d}{du}x(r(u),s(v)) = \frac{n}{\Delta u_0}\sum_{i=0}^{n-1}\sum_{j=0}^{m}(b_{i+1,k}-b_{i,k})B_{i}^{n-1}(r)B_{j}^{m}(s)
+\]
+\[
+\frac{d}{dv}x(r(u),s(v)) = \frac{m}{\Delta v_0}\sum_{i=0}^{n}\sum_{j=0}^{m-1}(b_{i,k+1}-b_{i,k})B_{i}^{n}(r)B_{j}^{m-1}(s)
+\]
+\[
+\frac{d^2}{dudv}x(r(u),s(v)) = \frac{nm}{\Delta u_0\Delta v_0}\sum_{i=0}^{n-1}\sum_{j=0}^{m-1}\left((b_{i+1,k+1}-b_{i,k+1})-(b_{i+1,k}-b_{i,k})\right)B_{i}^{n-1}(r)B_{j}^{m+1}(s)
+\]
+In het eerste hoekpunt wordt dit het volgende.
+\[
+\left.\frac{d^2}{dudv}x(r(u),s(v))\right|_{u=u_{0},v=v_{0}} = \frac{nm}{\Delta u_0 \Delta v_0}(b_{1,1}-b_{1,0}-b_{0,1}+b_{0,0})
+\]
+Deze vector geeft weer hoever $b_{1,1}$ uit het vlak, gevormd door $b_{1,0}$, $b_{0,1}$ en $b_{0,0}$, ligt
+
+
+\end{document}

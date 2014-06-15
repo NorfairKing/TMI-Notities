@@ -1,0 +1,27 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+\section{Tensorproductoppervlakken}
+\subsection{Opgave}
+Bespreek tensorproductoppervlakken aan de hand van B\'ezier-oppervlakken.
+
+\subsection{Antwoord}
+We willen driedimensionale interpolerende \textbf{curven} voor \textbf{punten} uitbreiden naar interpolerende \textbf{oppervlakken} voor een \textbf{controlenet}.
+Wanneer we over basisfuncties $\phi$ beschikken voor een curve, kunnen we diezelfde basisfuncties gebruiken voor een oppervlak.
+\[
+x = \sum_{i=0}^{n}p_i\phi_{i}(u) \longrightarrow \sum_{i=0}^{n}\sum_{j=0}^{m}p_{i,j}\phi_{i}(u)\phi_{j}(u)
+\]
+We kunnen er ook voor kiezen om \textbf{Bernstein veeltermen} te gebruiken als basisfuncties. 
+We moeten de parameters dan wel indelen in segmenten met lokale parameters in $[0,1]$.
+\[
+r(u) = \frac{u-u_i}{\Delta u_i} \text{ en } s(v) = \frac{v-v_i}{\Delta v_i}
+\]
+\[
+\phi_{i}(r(u)) = B_{i}^{n}(r)
+\]
+We verkrijgen dan volgend 
+\textbf{B\'ezier-oppervlak}.
+\[
+x(r(u),s(v)) = \sum_{i=0}^{k}\sum_{j=0}^{m}b_{i,j}B_{i}^{n}(r)B_{j}^{m}(s)
+\]
+\end{document}
