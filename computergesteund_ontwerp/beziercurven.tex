@@ -531,13 +531,17 @@ b_{i}^{*}
 \end{st}
 
 \section{Opsplitsing}
-Gegeven een B\'ezier curve van graad $n$, willen we deze opsplitsen in twee nieuwe curven van graad $n$ met elk $n+1$ controlepunten $d_i$ en $e_i$ respectievelijk. Zij $t$ de parameter voor de originele curve met $t \in [0,1]$. Noem $c$ het punt in het parameter interval van $t$ waar we de curve splitsen. We krijgen dan twee curven met parameter $s$ en $r$, respectievelijk . $s$ en $r$ zitten dan in de intervallen $[0,c]$ en $[c,1]$ respectievelijk.
-Gegeven $t$ kunnen we nu $s$ en $r$ bepalen.
+Gegeven een B\'ezier curve van graad $n$, willen we deze opsplitsen in twee nieuwe curven van graad $n$ met elk $n+1$ controlepunten $d_i$ en $e_i$ respectievelijk.
+Zij $t$ de parameter voor de originele curve met $t \in [0,1]$. 
+Noem $c$ het punt in het parameter interval van $t$ waar we de curve splitsen.
+We krijgen dan twee curven met parameter $s$ en $r$, respectievelijk. $s$ en $r$ moeten beiden in het interval $[0,1]$ zitten opdat de uitdrukking voor de B\'ezier-curven zinvol is.
+Wanneer $t$ in $[0,c]$ zit, moet dit een waarde voor $s$ geven tussen $0$ en $1$. Wanneer $t$ in $[c,1]$ zit, moet dit een waarde geven voor $r$ tussen $0$ en $1$.
+Gegeven $t$ kunnen we nu $s$ en $r$ bepalen als volgt.
 \[
 \left\{
 \begin{array}{c l}
 s(t) &= \frac{t}{c}\\
-r(t) &= c + \frac{(1-t)}{c}\\
+r(t) &= \frac{t-c}{1-c}\\
 \end{array}
 \right.
 \]
@@ -589,20 +593,6 @@ d_0 = b_0 =b_0^{[0]} \text{ en } e_n = b_n = b_{n}^{n}
 \]
 \[
 d_1 = (1-c)b_0+cb_1 = b_1^{[1]}
-\]
-
-\item
-\[
-\frac{dr}{dt}n\Delta d_{n-1} = n\Delta b_{n-1}
-\]
-\[
--\frac{n}{c}(e_n-e_{n-1}) = n(b_{n}-b_{n-1})
-\]
-\[
--\frac{1}{c}(b_{n}-e_{n-1}) = b_{n} - b_{n-1}
-\]
-\[
-e_{n-1} = (c-1)b_{n} - b_{n-1} = b_{n-1}^{n-1}
 \]
 
 \end{itemize}

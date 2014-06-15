@@ -6,7 +6,99 @@
 Bespreek subdivisie en geef de methode.
 
 \subsection{Antwoord}
+Gegeven een B\'ezier curve van graad $n$, willen we deze opsplitsen in twee nieuwe curven van graad $n$ met elk $n+1$ controlepunten $d_i$ en $e_i$ respectievelijk.
+Zij $t$ de parameter voor de originele curve met $t \in [0,1]$. 
+Noem $c$ het punt in het parameter interval van $t$ waar we de curve splitsen.
+We krijgen dan twee curven met parameter $s$ en $r$, respectievelijk. $s$ en $r$ moeten beiden in het interval $[0,1]$ zitten opdat de uitdrukking voor de B\'ezier-curven zinvol is.
+Wanneer $t$ in $[0,c]$ zit, moet dit een waarde voor $s$ geven tussen $0$ en $1$. Wanneer $t$ in $[c,1]$ zit, moet dit een waarde geven voor $r$ tussen $0$ en $1$.
+Gegeven $t$ kunnen we nu $s$ en $r$ bepalen als volgt.
+\[
+\left\{
+\begin{array}{c l}
+s(t) &= \frac{t}{c}\\
+r(t) &= \frac{t-c}{1-c}\\
+\end{array}
+\right.
+\]
+We zoeken nu de nieuwe controlepunten $d_i$ en $e_i$ voor de twee nieuwe curven. $v(s(t))$ en $w(r(t))$ zien er dan als volgt uit.
+\[
+\left\{
+\begin{array}{c c}
+v(s(t)) &= \sum_{i=0}^{n}d_iB^{n}_{i}(s)\\
+w(r(t)) &= \sum_{i=0}^{n}e_iB^{n}_{i}(r)
+\end{array}
+\right.
+\]
+We kunnen de $d_i$ en $e_i$ eenvoudig berekenen uit het algoritme van de Casteljau voor evaluatie van $x(c)$ als volgt.
+\[
+\forall i: d_i = b_{i}^{[i]}\ \text{ en }\ \forall i: e_i = b_{n-i}^{[n-i]}
+\]
+\begin{proof}
+Vermist $v(s(t))$ (en $w(r(t))$) deel uitmaken van dezelfde unieke veeltermcurve van graad $n$, zijn alle afgeleiden van $v(s(t))$ en $x(t)$ naar $t$ aan elkaar gelijk in $t=0$. Bovendien zijn alle afgeleiden van $w(r(t))$ en $x(t)$ naar $t$ gelijk aan elkaar in $t=1$.
+\[
+k = 0,\cdots,n:\
+\left.\ \frac{d^{k}}{dt^{k}}v(s(t))\ \right|_{t=0} = \left.\  \frac{d^{k}}{dt^{k}}x(t)\ \right|_{t=0} 
+\] 
+\[
+k = 0,\cdots,n:\
+\left.\ \frac{d^{k}}{dt^{k}}w(r(t))\ \right|_{t=1} = \left.\  \frac{d^{k}}{dt^{k}}x(t)\ \right|_{t=1} 
+\] 
 
+\begin{itemize}
+\item $k=0$:
+\[
+d_0 = b_0 =b_0^{[0]} \text{ en } e_n = b_n = b_{n}^{n}
+\]
+
+\item $k=1$:
+\[
+\frac{d}{dt}v(s(0)) = \frac{d}{dt}x(0) \text{ en } \frac{d}{dt}w(r(1)) = \frac{d}{dt}x(1)
+\]
+\begin{itemize}
+\item
+\[
+\frac{ds}{dt}n\Delta d_0 = n\Delta b_0
+\]
+\[
+\frac{n}{c}(d_1-d_0) = n(b_1-b_0)
+\]
+\[
+\frac{1}{c}(d_1-b_0) = b_1-b_0
+\]
+\[
+d_1 = (1-c)b_0+cb_1 = b_1^{[1]}
+\]
+
+\end{itemize}
+
+\item $k=j$:
+\begin{itemize}
+\item
+\[
+\frac{d^{j}}{dt^{j}}v(s(0)) = \frac{d^{j}}{dt^{j}}x(0)
+\]
+\[
+\frac{d^{j}s}{dt^{j}}\frac{n!}{c^j(n-j)!}\Delta^{j}d_i
+= \frac{n!}{(n-j)!}\Delta^{j}b_i
+\]
+\[
+d_{j} = \sum_{i=0}^j{j \choose i}(1-c)^{j-i}c^ib_i= b_j^{[j]}
+\]
+
+\item
+\[
+\frac{d^{j}}{dt^{j}}w(r(1)) = \frac{d^{j}}{dt^{j}}x(1)
+\]
+\[
+\frac{d^{j}r}{dt^{j}}\frac{n!}{c^j(n-j)!}\Delta^{j}e_i
+= \frac{n!}{(n-j)!}\Delta^{j}b_i
+\]
+\[
+e_{j} = -\sum_{i=0}^j{j \choose i}(c-1)^{j-i}c^ib_k= b_{n-j}^{[n-j]}
+\]
+\end{itemize}
+\end{itemize}
+\end{proof}
 
 
 
