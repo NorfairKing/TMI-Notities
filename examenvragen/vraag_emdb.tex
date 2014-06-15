@@ -1,0 +1,18 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+
+\section{EMDB}
+\subsection{Opgave}
+Wat is een EMDB van een verzameling punten? Wat is het verband tussen de EMDB en het Voronoi diagram van een verzameling punten?
+Bespreek beknopt hoe een EMDB van een verzameling kan berekend worden in $O(N\log (N))$ tijd.
+
+\subsection{Antwoord}
+EMDB staat voor Euclidisch Minimale DoorloopBoom. Het is een Minimaal opspannende boom gebaseerd op de euclidische afstand als booggewicht.
+
+De EMDB van een verzameling punten is een deelgrafe van de Delaunay triangulatie van die verzameling punten. De Delaunay triangulatie is natuurlijk de duale van het Voronoi diagram.
+
+We kunnen een euclidisch minimaal opspannende boom berekenen in $O(N\log(N))$ tijd met het algoritme van Prim of Kruskal (gekend vanuit fundamenten van de informatica) uitgevoerd op de Delaunay triangulatie.
+
+
+\end{document}
