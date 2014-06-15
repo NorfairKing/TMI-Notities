@@ -1,0 +1,19 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+\section{Robotarm}
+\subsection{Opgave}
+Geef een algoritme dat in $O(N log N)$ tijd nagaat of in een verzameling van N lijnstukken er onderling snijdende lijnstukken voorkomen.
+Geef beknopt weer hoe dit algoritme en de gegevensstrukturen moeten aangepast worden om alle snijpunten te vinden van de lijnstukken.
+
+\subsection{Antwoord}
+Dit is een sweepline algoritme.
+Gebruik de begin- en eindpunten van de lijnstukken als event points.
+Sorteer de event points volgens stijgende $x$-co\"ordinaat.
+Noem het linker event point het toevoegpunt van een lijnstuk, en het rechter een verwijderpunt.
+Houdt de status geordend op stijgende $y$-co\"ordinaat.
+Kijk bij toevoeging van een lijnstuk na of het lijnstuk snijdt met de boven- en onderliggende lijnstukken. Kijk bij verwijdering na of de boven- en onderliggende lijnstukken snijden. Stop wanneer er een snijding gevonden is. Het sorteren kost $O(N\log(N))$ tijd. Het overlopen van de lijnstukken kost $O(1)$ of $O(\log (N))$ tijd, afhankelijk van de gegevensstructuur die we gebruiken.
+
+Om het algoritme aan te passen om alle snijpunten te vinden moeten we ten eerste inzien dat de ordening volgens de $y$-as op een bepaalde $x$-locatie niet absoluut is. De ordening verandert wanneer twee lijnstukken snijden. Elke keer we een snijpunt vinden, moeten we dit ook toevoegen aan de event points. Op dat punt moeten de lijnstukken namelijk verwisseld worden van plaats, en elk nagegeken op snijpunten met de boven- en onderburen.
+Het sorteren van de punten kost nog steeds $O(N\log(N))$ tijd. Het overlopen van een event point kost $O(\log(N))$ tijd. In totaal heeft het algoritme dus $O((N+S)\log(N))$ tijd nodig, waarbij $S$ het aantal snijpunten is.
+\end{document}
