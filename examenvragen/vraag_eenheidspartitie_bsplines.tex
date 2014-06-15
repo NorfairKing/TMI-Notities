@@ -1,0 +1,103 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+
+\section{Eenheidspartitie splines}
+\subsection{Opgave}
+Bewijs de eenheidspartitie eigenschap van genormaliseerde B-splines.
+\[
+\forall u \in [u_0,u_p)\ :\
+\sum_{i=-\infty}^{\infty}N_{i}^{n}(u)
+= \sum_{i=-n}^{p-1}N_{i}^{n}(u)
+= 1
+\]
+
+\subsection{Antwoord}
+\begin{proof}Bewijs door inductie.\\
+\begin{enumerate}
+\item De bewering geldt voor $n=0$. (Basis)\\
+Inderdaad, voor elk interval $u_j,u_{j+1}$ is er precies \'e\'en $N_{i}^{0}$ die gelijk is aan \'e\'en terwijl de andere nul zijn.
+\[
+u \in [u_0,u_p) \Rightarrow
+\sum_{i=0}^{p-1}N_{i}^{0}(u)
+= 1
+\]
+\item De bewering geldt voor $n=k$. (Inductiehyposhese)
+\[
+\forall u \in [u_0,u_p)\ :\
+\sum_{i=-k}^{p-1}N_{i}^{k}(u)
+= 1
+\]
+\item De bewering geldt voor $n=k+1$. (Inductiestap)\\
+We bewijzen nu dat als de bewering geldt voor een bepaalde $n=k$, de bewering dan ook geldt voor $n=k+1$.
+We bewijzen dus dat uit de inductiehypothese volgt dat de volgende bewering geldt.
+\[
+\forall u \in [u_0,u_p) \Rightarrow
+\sum_{i=-k-1}^{p-1}N_{i}^{k+1}(u)
+= 1
+\]
+Schrijf het rechter lid uit met behulp van de recursiebetrekking voor B-splines.
+\[
+\sum_{i=-k-1}^{p-1}N_{i}^{k+1}(u)
+= \sum_{i=-k-1}^{p-1}
+\left(
+\frac{u-u_i}{u_{i+k+1}-u_i}					N_{i}^{k}(u)
++ \frac{u_{i+k+2}-u}{u_{i+k+2}-u_{i+1}}			N_{i+1}^{k}(u)
+\right)
+\]
+Splits de sommatie
+\[
+=
+\sum_{i=-k-1}^{p-1}
+\frac{u-u_i}{u_{i+k+1}-u_i}					N_{i}^{k}(u)
++ 
+\sum_{i=-k-1}^{p-1}
+\frac{u_{i+k+2}-u}{u_{i+k+2}-u_{i+1}}			N_{i+1}^{k}(u)
+\]
+In deze uitdrukking zijn de eerste en de laatste term beide nul
+\[
+=
+\sum_{i=-k}^{p-1}
+\frac{u-u_i}{u_{i+k+1}-u_i}					N_{i}^{k}(u)
++ 
+\sum_{i=-k-1}^{p-2}
+\frac{u_{i+k+2}-u}{u_{i+k+2}-u_{i+1}}			N_{i+1}^{k}(u)
+\]
+De tweede som kan herschreven worden door de index aan te passen als volgt.
+\[
+\sum_{i=-k-1}^{p-2}
+\frac{u_{i+k+2}-u}{u_{i+k+2}-u_{i+1}}			N_{i+1}^{k}(u)
+=
+\sum_{i=-k}^{p-1}
+\frac{u_{i+k+1}-u}{u_{i+k+1}-u_{i}}			N_{i}^{k}(u)
+\]
+We vervangen dit nu zodat we verder gaan met de volgende uitdrukking.
+\[
+=
+\sum_{i=-k}^{p-1}
+\frac{u-u_i}{u_{i+k+1}-u_i}					N_{i}^{k}(u)
++ 
+\sum_{i=-k}^{p-1}
+\frac{u_{i+k+1}-u}{u_{i+k+1}-u_{i}}			N_{i}^{k}(u)
+\]
+\[
+=
+\sum_{i=-k}^{p-1}
+\left(
+\frac{u-u_i}{u_{i+k+1}-u_i}					N_{i}^{k}(u)
++ 
+\frac{u_{i+k+1}-u}{u_{i+k+1}-u_{i}}			N_{i}^{k}(u)
+\right)
+\]
+\[
+=
+\sum_{i=-k}^{p-1}
+\frac{u-u_i + u_{i+k+1}-u}{u_{i+k+1}-u_{i}} N_{i}^{k}(u)
+=
+\sum_{i=-k}^{p-1}
+N_{i}^{k}(u)
+\]
+Uit de inductiehypothese volgt precies dat deze uitdrukking gelijk is aan \'e\'en. Hiermee is de stelling bewezen.
+\end{enumerate}
+\end{proof}
+\end{document}
