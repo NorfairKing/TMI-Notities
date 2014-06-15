@@ -1,0 +1,21 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+\section{Robotarm}
+\subsection{Opgave}
+Bespreek de variatieverminderingseigenschap, zowel voor B\'ezier curven als voor Splinecurven.
+
+\subsection{Antwoord}
+De variatieverminderingseigenschap zegt het volgende.
+\begin{center}
+Het aantal snijpunten van een willekeurige rechte (in 2D, of vlak in 3D) met de curve is kleiner of gelijk aan het aantal snijpunte nvan die rechte (of vlak) met de controleveelhoek. 
+\end{center}
+In mensentaal staat er dit.
+\begin{center}
+De curve wiebelt minder dan de controleveelhoek.
+\end{center}
+\begin{proof}
+Beschouw een rechte die de controleveelhoek in $k$ punten snijdt met $k\ge 0$. Bij elke graadverhoging (B\'ezier-curven) of elke toevoeging van een knoop- en controlepunt (Splinecurven) zal het aantal snijpunten van de rechte met de nieuwe controleveelhoek ofwel gelijk blijven ofwel dalen. Dit is makkelijk te zien op een figuur, van de controleveelhoeken worden telkens `hoekjes' afgesneden. Omdat de controleveelhoek convergeert naar de curve geldt de variatieverminderingseigenschap.
+\end{proof}
+
+\end{document}
