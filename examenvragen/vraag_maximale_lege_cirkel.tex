@@ -1,0 +1,13 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+\section{Maximale lege cirkel}
+\subsection{Opgave}
+Gegeven een verzameling punten en de convex omhullende van die punten. Ontwerp een algoritme om de grootste lege cirkel binnen de convex omhullende te vinden.
+
+\subsection{Antwoord}
+Construeer het Voronoi diagram van de punten. Ga nu elk Voronoi punt af dat binnen de convex omhullende ligt. In elk Voronoi punt kan een cirkel getekend worden, rakend aan drie sites. Kies uit al deze cirkels de grootste die binnen de gegeven convex omhullende ligt. Dit algoritme werkt in $O(N\log(N))$ tijd.
+
+
+
+\end{document}
