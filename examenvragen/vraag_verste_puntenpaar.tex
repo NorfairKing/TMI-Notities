@@ -1,0 +1,16 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+\section{Diagonaal}
+\subsection{Opgave}
+Gegeven een verzameling van $N$ punten. Ontwerp een algoritme om te berekenen welk paar punten het verst uit elkaar liggen.
+
+\subsection{Antwoord}
+Een naief algoritme werkt natuurlijk in $O(N^2)$ tijd. We kunnen de complexiteit echter verlagen tot $O(N\log(N))$ als volgt.
+We berekenen de convex omhullende van de verzameling punten in $O(N\log(N))$.
+Daarna berekenen we alle tegenvoetersparen in $O(N)$ tijd.
+Tenslotte overlopen we de tegenvoetersparen om het verste puntenpaar te vinden in $O(N)$. In totaal heeft dit algoritme $O(N\log(N))$ tijd nodig.
+
+Dit algoritme is correct omdat het verste puntenpaar steeds op de convex omhullende ligt. We maken bovendien gebruik van het feit dat we alle tegenvoetersparen kunnen vinden in $O(N)$ tijd.
+
+\end{document}
