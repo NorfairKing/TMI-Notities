@@ -1,0 +1,103 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+\section{Het algoritme van De Casteljau}
+\subsection{Opgave}
+Geef het algoritme van De Casteljau en bewijs de correctheid ervan.
+
+\subsection{Antwoord}
+Zij $b_{i}^{[0]} = b_{i}$ en definieer $b_{i}^{[k]}$ recursief als volgt.
+\[
+b_{i}^{[k]}
+=
+(1-t)b_{i-1}^{[k-1]} + tb_{i}^{[k-1]}
+\]
+Nu geldt volgende bewering.
+\[
+x = b_{n}^{[n]} = \sum_{i=0}^{n}b_iB_{i}^{n}(t)
+\]
+De B\'ezier curve kan dus recursief berekend worden.
+\begin{proof}
+\[
+x(t) = \sum_{i=0}^{n}b_iB_{i}^{n}(t)
+\]
+Gebruik de recursiebetrekking voor bernstein-veeltermen.
+\[
+= \sum_{i=0}^{n}b_i
+\left( 
+(1-t)B^{n-1}_{i}(t) + tB^{n-1}_{i-1}(t)
+\right)
+= 
+\sum_{i=0}^{n}b_i
+(1-t)B^{n-1}_{i}(t) + 
+\sum_{i=0}^{n}b_it
+B^{n-1}_{i-1}(t)
+\]
+De eerste en laatste term van deze uitdrukking kunnen we weglaten ($B_{i}^{n} = 0$ als $i < 0$ of $i > n$).
+\[
+= 
+\sum_{i=0}^{n-1}b_i
+(1-t)B^{n-1}_{i}(t) + 
+\sum_{i=1}^{n}b_it
+B^{n-1}_{i-1}(t)
+\]
+Merk op dat alle $b_i$ gelijk zijn aan $b_i^{[0]}$. We proberen ze nu zo te schrijven dat we er $b_i^{[1]}$ van kunnen maken. Vervang de $i$ in de eerste term door $j=i+1$ en hernoem daarna $j$ naar $i$. In feite schuiven we de sommatie-index $1$ \'e\'enheid op.
+\[
+= 
+\sum_{i=1}^{n}b_{i-1}
+(1-t)B^{n-1}_{i-1}(t) + 
+\sum_{i=1}^{n}b_it
+B^{n-1}_{i-1}(t)
+\]
+Nu zien we dat de sommaties dezelfde zijn. We kunnen deze dus buiten brengen omdat de optelling commutatief is.
+\[
+= 
+\sum_{i=1}^{n}
+\left(
+b_{i-1}(1-t)B^{n-1}_{i-1}(t)
++ 
+b_itB^{n-1}_{i-1}(t)
+\right)
+\]
+\[
+= 
+\sum_{i=1}^{n}
+B^{n-1}_{i-1}(t)
+\left(
+(1-t)b_{i-1}
++ 
+tb_i
+\right)
+\]
+Kijk nu naar de zojuist gedefini\"eerde recursiebetrekking. We kunnen $(1-t)b_{i-1} + tb_i = (1-t)b_{i-1}^{[0]} + tb_i^{[0]}$ vervangen door $b_{i}^{[1]}$
+\[
+= 
+\sum_{i=1}^{n}
+B^{n-1}_{i-1}(t)
+b_{i}^{[1]}
+\]
+Als we dit proces nog eens herhalen krijgen we de volgende uitdrukking.
+\[
+= 
+\sum_{i=2}^{n}
+B^{n-2}_{i-2}(t)
+b_{i}^{[2]}
+\]
+In de $j$-de iteratie ziet het nieuwe rechterlid er als volgt uit.
+\[
+= 
+\sum_{i=j}^{n}
+B^{n-j}_{i-j}(t)
+b_{i}^{[j]}
+\]
+Dit proces kunnen we $n$ (eindig en zelfs een lineair aantal) keer uitvoeren tot we volgende uitdrukking bekomen.
+\[
+\sum_{i=n}^{n}
+B^{0}_{0}(t)
+b_{i}^{[n]}
+= b_{n}^{[n]}
+\]
+\end{proof}
+\noindent Deze bewering geeft een algoritme om een punt op de B\'ezier-curve recursief te berekenen. De index in superscript tussen vierkante haakjes heeft betrekking tot de iteratie waarin dit punt zich bevindt.
+
+\end{document}
