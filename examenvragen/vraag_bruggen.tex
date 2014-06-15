@@ -1,0 +1,15 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+\section{Diagonaal}
+\subsection{Opgave}
+Bespreek het algoritme voor het bepalen van de onderbrug en bovenbrug. Waarom is de kleinste $y$-co\"ordinaat een slechte schatting voor het bepalen van de onderbrug?
+
+\subsection{Antwoord}
+Gegeven twee verzamelingen met disjuncte convex omhullenden, zoeken we de onderbrug. We beginnen met een schatting, en passen dan de eindpunten aan als volgt. Pas het eindpunt aan tot de brug een raaklijn is aan de rechter convex omhullende, pas dan het beginpunt aan tot de brug een raaklijn is aan de linker convex omhullende. herbegin deze procedure tot het lijnstuk een raaklijn is aan beide convex omhullenden. Als schatting kiezen we doorgaans de punten met de kleinste $x$-co\"ordinaten van elke verzameling.
+
+De punten met de kleinste $y$-co\"ordinaat van elke verzameling zou een slechte schatting zijn. Het zou kunnen dat de schatting meteen een onderbrug geeft, maar als dit niet het geval is, moeten meestal alle punten van de convex omhullenden afgegeaan worden.
+
+
+
+\end{document}
