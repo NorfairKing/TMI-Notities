@@ -1,0 +1,37 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+
+\section{Voronoi punten en zijden}
+\subsection{Opgave}
+Bewijs: ``Een voronoi diagramma met $N$ sites heeft maximaal $2N - 5$ voronoipunten en $3N - 6$ voronoi zijden''
+
+\subsection{Antwoord}
+\begin{proof}
+We bewijzen dit aan de hand van de duaal: de Delaunay-triangulatie.
+Een Delaunay-triangulatie is een vlakke verbonden grafe met als knooppunten de Voronoi sites en bogen die de voronoi-zijden `voorstellen'.
+
+In deze triangulatie geldt voor elk knooppunt dat de graad groter is dan, of gelijk aan drie omdat elke Voronoi-veelhoek drie of meer zijden heeft.
+Over vlakke grafen weten we een aantal dingen.
+\[
+V-E+F=2
+\]
+De som van de graden van alle gebieden is gelijk aan $2E$, en de graad van elk gebied is groter dan of gelijk aan drie.
+\[
+2E \ge 3F
+\]
+\[
+F = 2-V+E \wedge 2E \ge 3F \Rightarrow E \le 3V+6
+\]
+Gebruiken we dit nu opnieuw, dan krijgen we de tweede ongelijkheid.
+\[
+E =V+F-2 \wedge E \le 3V+6 \Rightarrow F\le 2V-4
+\]
+Deze twee ongelijkheden zijn precies wat we nodig hadden.
+\[
+E \le 3V-6 \text{ en } F \le 2V-4
+\]
+Hierin is $V$ het aantal Delaunay knooppunten, of nog, het aantal Voronoi sites, $E$ het aantal Delaunay bogen, of nog, het aantal Voronoi zijden en $F$ het totaal aantal Delaunay gebieden. Bij $F$ wordt ook nog het onbegrensde gebied meegerekend. $F-1$ is dus het aantal Voronoi gebieden. 
+\end{proof}
+
+\end{document}
