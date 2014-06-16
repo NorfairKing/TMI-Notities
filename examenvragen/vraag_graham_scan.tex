@@ -1,0 +1,19 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+\section{Graham scan}
+\subsection{Opgave}
+Bespreek het Graham scan algoritme.
+
+\subsection{Antwoord}
+Het Graham scan algoritme voor het berekenen van de convex omhullende van een verzameling punten werkt als volgt.
+\begin{enumerate}
+\item Sorteer de punten volgens stijgende poolhoek.
+\item Ga de punten \'e\'en voor \'e\'en af, en voeg het punt enkel toe als het geen rechter draai maakt ten opzichte van het vorige punt.
+\item Wanneer alle punten overlopen zijn, is de gehele convex omhullende gevonden.
+\end{enumerate}
+Het Graham scan algoritme vindt enkel punten op de convex omhullende en vindt ze allemaal. Het sorteren van de punten volgens poolhoek kost $O(N\log(N))$ tijd. Daarna worden alle punten \'e\'en voor \'e\'en overlopen in $O(1)$ tijd.
+
+
+
+\end{document}
