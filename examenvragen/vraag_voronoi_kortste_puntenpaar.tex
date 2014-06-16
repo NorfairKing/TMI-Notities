@@ -1,0 +1,13 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+\section{Voronoi dichtste buren}
+\subsection{Opgave}
+Bewijs: "Twee dichtste buren hebben een gemeenschappelijke Voronoi zijde"
+
+\subsection{Antwoord}
+\begin{proof}
+Stel dat $p_ip_j$ een dichtste puntenpaar is van een verzameling punten. Beschouw het snijpunt $v$ van de middelloodlijn $MLL(p_i,p_j)$ van $p_i$ en $p_j$ en het lijnstuk door $p_i$ en $p_j$ $p_ip_j$. Nu moet $p_i$ op de rand van de Voronoi veelhoek liggen van $p_i$ en $p_j$. $v$ ligt niet in het inwendige van \'e\'en van de Voronoi veelhoeken want dan zou $v$ dichter bij $p_i$ liggen dan bij een andere site, maar $v$ ligt op gelijke afstand van $p_i$ en $p_j$. $v$ kan ook niet buiten de Voronoi veelhoek liggen, want dan zou er een ander punt $p_k$ dichter bij $p_i$ liggen dan $p_j$.
+\end{proof}
+
+\end{document}
