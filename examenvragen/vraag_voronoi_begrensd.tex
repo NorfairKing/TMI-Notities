@@ -1,0 +1,20 @@
+\documentclass[examenvragen.tex]{subfiles}
+
+\begin{document}
+\section{Begrenzin van een Voronoi veelhoek}
+\subsection{Opgave}
+Bewijs: ``Een Voronoi veelhoek van een punt $p_i$ is begrensd als en slechts als $p_i$ element van $inw(CH(S))$.''
+
+\subsection{Antwoord}
+\begin{proof}
+Bewijs van een equivalentie.
+\begin{itemize}
+\item $\Rightarrow$\\
+$p_i$ is een hoekpunt van de convex omhullende van de sites. Beschouw nu een raaklijn aan de convex omhullende door $p_i$ zodat alle andere sites aan \'e\'en kant van die rechte liggen. Alle punten aan de andere kant van die rechte liggen dichter bij $p_i$ dan bij elke andere site. De Voronoi veelhoek van $p_i$ kan dus onmogelijk begrensd zijn.
+
+\item $\Leftarrow$\\
+Omdat $p_i$ in het inwendige zit is het geen hoekpunt van de convex omhullende. Er bestaan dus drie punten $p_1$, $p_2$ en $p_3$ rond $p_i$ zodat $p_i$ in het inwendige ligt van $\Delta p_1p_2p_3$. Beschouw nu de middelloodlijnen $MLL(p_i,p_j), j \in \{1,2,3\}$. Deze middelloodlijnen kunnen niet paarsgewijs evenwijdig zijn. Ze snijden elkaar dus in drie verschillende punten, die een begrensde driehoek $\Delta abc$ vormen. Deze driehoek is de doorsnede van drie halfvlakken. Deze drie halfvlakken behoren tot de $N-1$ halfvlakken van het Voronoi diagram. De Voronoi veelhoek van het punt $p_i$ is dus begrensd. 
+\end{itemize}
+\end{proof}
+
+\end{document}
