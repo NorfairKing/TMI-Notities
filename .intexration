@@ -3,11 +3,11 @@
     {
       "name": "computergesteund_ontwerp_van_curven_en_oppervlakken",
       "dir": "/computergesteund_ontwerp",
-      "bib": "computergesteund_ontwerp_van_curven_en_oppervlakken.bib",
+      "bib": "computergesteund_ontwerp_van_curven_en_oppervlakken.bib"
     },
     {
       "name": "examenvragen",
-      "dir": "/examenvragen",
+      "dir": "/examenvragen"
     }
   ]
 }
