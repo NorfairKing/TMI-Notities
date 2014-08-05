@@ -1,9 +1,9 @@
 * TMI-Notities
 Notities voor Toepassingen van meetkunde in informatica
 ** Inhoud
-   - [[http://intexration.jonasdevlieghere.com:8000/pdf/NorfairKing/TMI-Notities/computergesteund_ontwerp_van_curven_en_oppervlakken][Computergestuurd ontwerp van curven en oppervlakken]]
+   - [[http://intexration.com/file/NorfairKing/TMI-Notities/computergesteund_ontwerp_van_curven_en_oppervlakken/pdf][Computergestuurd ontwerp van curven en oppervlakken]]
+   - [[http://intexration.com/file/NorfairKing/TMI-Notities/examenvragen][Examenvragen]]
    - Oefenzittingen 2014
-   - [[http://intexration.jonasdevlieghere.com:8000/pdf/NorfairKing/TMI-Notities/examenvragen][Examenvragen]]
 ** PDF
    Omdat niet iedereen zin heeft om de repository te clonen en de pdf zelf te compileren is er InTeXration toegevoegd aan dit project.
    Bedankt, Jonas Devlieghere, voor de toegang!
