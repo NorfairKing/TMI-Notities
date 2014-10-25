@@ -1,6 +1,12 @@
 * TMI-Notities
 Notities voor Toepassingen van meetkunde in informatica
-   
+
+** Inhoud
+
+- Computergestuurd ontwerp van curven en oppervlakken
+- Examenvragen
+- Oefenzittingen 2014
+
 ** Verdere Informatie
    Voor een samenvatting van _heel_ de cursus verwijzen we naar de [[http://www.scribd.com/doc/87272338/Samenvatting-Toepassingen-van-de-Meetkunde-in-de-Informatica][tekst van Willem van Onsem.]]
    
